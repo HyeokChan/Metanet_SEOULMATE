@@ -29,6 +29,7 @@ public class BoardController {
 		return "/board/read";
 	}
 	
+	
 	@GetMapping("/updateform")
 	public String updateform(){
 		return "/board/updateform";
