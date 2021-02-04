@@ -7,5 +7,7 @@ import com.meta.seoul.map.vo.Board;
 public interface BoardDao {
 
 	List<Board> list();
+
+	void writePost(Board board);
 	
 }

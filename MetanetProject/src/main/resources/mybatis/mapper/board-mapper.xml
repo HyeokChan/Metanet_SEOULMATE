@@ -32,4 +32,8 @@
 		select POST_CODE,POST_TITLE,POST_CONTENT,POST_LOVE,POST_COUNT,WRITE_DATE,MODIFY_DATE,USER_CODE,REGION_CODE,REGION_NAME,REGION_GB from board order by POST_CODE DESC
 	</select>
 	
+	<insert id="write" parameterType="com.meta.seoul.map.vo.Board">
+		insert into board(POST_CODE,POST_TITLE,POST_CONTENT,REGION_CODE,REGION_NAME,REGION_GB) values(Board_SEQ.nextval,#{post_title},#{post_content},#{region_code},'강남구',#{region_gb})
+	</insert>
+	
 </mapper>

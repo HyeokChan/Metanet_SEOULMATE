@@ -21,4 +21,10 @@ public class BoardServiceImpl implements BoardService{
 		return boardDao.list();
 	}
 
+	@Override
+	public void writePost(Board board) {
+		
+		boardDao.writePost(board);
+	}
+
 }

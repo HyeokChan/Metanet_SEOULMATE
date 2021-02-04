@@ -45,9 +45,9 @@
 	 -->
 	<bean id="dataSource2" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"></property>
-		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:XE"></property>
-				<property name="username" value="scott" />
-				<property name="password" value="tiger" />
+		<property name="url" value="jdbc:oracle:thin:@awsoradb.c5p23sev1bdi.ap-northeast-2.rds.amazonaws.com:1521:ORCL"></property>
+				<property name="username" value="sysdba" />
+				<property name="password" value="gurcks258" />
 		
 		<property name="maxTotal" value="20"></property>
 		<property name="maxIdle" value="10"></property>

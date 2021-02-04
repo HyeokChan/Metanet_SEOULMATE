@@ -8,4 +8,6 @@ public interface BoardService {
 
 	List<Board> listAll();
 
+	void writePost(Board board);
+
 }
