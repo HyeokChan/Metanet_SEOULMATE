@@ -50,4 +50,6 @@ public class BoardController {
 		return "/board/delete";
 	}
 	
+	
+	
 }
