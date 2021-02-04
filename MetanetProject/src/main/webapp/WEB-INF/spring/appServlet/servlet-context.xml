@@ -21,6 +21,8 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	
+	
 	<!-- 
 		문제점 : 모든 annotation 등록이 servlet-context.xml에 된다는 것
 		- 원하는 파일로 자동으로 나눠서 등록되도록 구분할 필요가 있다
