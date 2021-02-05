@@ -12,7 +12,7 @@ jQuery('#region_gb').change(function(){
 	var state = jQuery('#region_gb option:selected').val();
 	if( state == 'option2'){
 		jQuery('#region_code').show();
-	}else{
+	}else{  
 		jQuery('#region_code').hide();
 	}
 });

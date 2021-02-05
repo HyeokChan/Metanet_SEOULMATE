@@ -28,6 +28,7 @@ public class Board {
 	private int post_code;//게시물코드
 	private String post_title; //게시물 제목
 	private String post_content; //게시물 내용
+	private int post_count; //조회수
 	private int post_love;//좋아요
 	private Date write_date;//작성일
 	private Date modify_date;//변경일

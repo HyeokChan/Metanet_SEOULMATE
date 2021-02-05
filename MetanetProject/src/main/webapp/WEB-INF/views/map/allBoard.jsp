@@ -99,6 +99,21 @@ line-height: 35px;
 #local{
 #margin-top:100px;
 }
+#container{
+position: absolute;
+width: 500px;
+height: 37px;
+left: 400px;
+top: 200px;
+}
+
+#paging{
+position: absolute;
+width: 500px;
+height: 37px;
+left: 400px;
+top: 600px;
+}
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -110,6 +125,12 @@ line-height: 35px;
 			$("ul",this).slideToggle("fast");
 		});
 	});
+</script>
+<script>
+	function selChange(){
+		var sel = document.getElementById('cntPerPage').value;
+		location.href = "${pageContext.request.contextPath}/map/allBoard?nowPage=${paging.nowPage}&cntPerPage="+sel;
+	}
 </script>
 </head>
 <body>
@@ -141,5 +162,57 @@ line-height: 35px;
 		<img id="polygon" src="<c:url value="/resources/images/Polygon.png"/>" alt="삼각형">
 	<hr id="horizon2">
 	</div>
+	
+	<div style="float: right;">
+		<select id="cntPerPage" name="sel" onchange="selChange()">
+			<option value="5"
+				<c:if test="${paging.cntPerPage == 5}">selected</c:if>>5줄 보기</option>
+			<option value="10"
+				<c:if test="${paging.cntPerPage == 10}">selected</c:if>>10줄 보기</option>
+			<option value="15"
+				<c:if test="${paging.cntPerPage == 15}">selected</c:if>>15줄 보기</option>
+			<option value="20"
+				<c:if test="${paging.cntPerPage == 20}">selected</c:if>>20줄 보기</option>
+		</select>
+	</div> <!-- 옵션선택 끝 -->
+	
+	<div id="container">
+	<table>
+	<c:forEach var="list" items="${list}">
+	<tr>
+	<td><c:out value="${list.post_code}"/></td>
+	<td ><a href="${pageContext.request.contextPath}/map/readPost?post_code=${list.post_code}"><c:out value="${list.post_title}"/></a></td>
+	<td><c:out value="${list.post_content}"/></td>
+	<td><c:out value="${list.post_love}"/></td>
+	<td><c:out value="${list.write_date}"/></td>
+	<td><c:out value="${list.modify_date}"/></td>
+	<td><c:out value="${list.user_code}"/></td>
+	<td><c:out value="${list.region_code}"/></td>
+	<td><c:out value="${list.region_name}"/></td>
+	<td><c:out value="${list.region_gb}"/></td>
+	</tr>
+	</c:forEach>
+	</table>
+	
+	</div>
+	<div id="paging" style="display : block; text-align : center;">
+		<c:if test="${paging.startPage != 1 }">
+			<a href="${pageContext.request.contextPath}/map/allBoard?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>	
+		</c:if>
+		<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="p">
+			<c:choose>
+				<c:when test="${ p == paging.nowPage}">
+					<b>${p}</b>
+				</c:when>
+				<c:when test="${p != paging.nowPage}">
+					<a href="${pageContext.request.contextPath}/map/allBoard?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+				</c:when>
+			</c:choose>
+		</c:forEach>
+		<c:if test="${paging.endPage != paging.lastPage}">
+			<a href="${pageContext.request.contextPath}/map/allBoard?nowPage=${paging.endPage +1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+		</c:if>
+	</div>
+	
 </body>
 </html>

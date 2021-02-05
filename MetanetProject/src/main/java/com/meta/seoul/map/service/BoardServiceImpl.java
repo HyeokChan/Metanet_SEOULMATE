@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.meta.seoul.map.repository.BoardDao;
 import com.meta.seoul.map.vo.Board;
+import com.meta.seoul.map.vo.Paging;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -15,16 +16,27 @@ public class BoardServiceImpl implements BoardService{
 	BoardDao boardDao;
 	
 	@Override
-	public List<Board> listAll() {
-	
-		
-		return boardDao.list();
-	}
-
-	@Override
 	public void writePost(Board board) {
 		
 		boardDao.writePost(board);
+	}
+
+	@Override
+	public List<Board> listAll(Paging paging) {
+		
+		return boardDao.list(paging);
+	}
+
+	@Override
+	public int countBoard() {
+	
+		return boardDao.countBoard();
+	}
+
+	@Override
+	public Board read(int post_code) {
+		
+		return boardDao.read(post_code);
 	}
 
 }

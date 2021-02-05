@@ -28,12 +28,36 @@
 	-->
 	
 	<!-- 전체 게시글 조회 -->
-	<select id="list" resultType="com.meta.seoul.map.vo.Board">
-		select POST_CODE,POST_TITLE,POST_CONTENT,POST_LOVE,POST_COUNT,WRITE_DATE,MODIFY_DATE,USER_CODE,REGION_CODE,REGION_NAME,REGION_GB from board order by POST_CODE DESC
+	<select id="countBoard" resultType="int">
+	select count(*) from board
+	</select>
+	
+	<select id="list" parameterType="com.meta.seoul.map.vo.Board" resultType="com.meta.seoul.map.vo.Board">
+	select *
+    from (
+        SELECT ROWNUM RN,A.POST_CODE,A.POST_TITLE,A.POST_CONTENT,A.POST_LOVE,A.POST_COUNT,A.WRITE_DATE,A.MODIFY_DATE,A.USER_CODE,A.REGION_CODE,A.REGION_NAME,A.REGION_GB
+        FROM (SELECT * FROM BOARD) A
+    ) 
+    WHERE RN BETWEEN #{start} AND #{end}
+    order by POST_CODE DESC
 	</select>
 	
 	<insert id="write" parameterType="com.meta.seoul.map.vo.Board">
 		insert into board(POST_CODE,POST_TITLE,POST_CONTENT,REGION_CODE,REGION_NAME,REGION_GB) values(Board_SEQ.nextval,#{post_title},#{post_content},#{region_code},'강남구',#{region_gb})
 	</insert>
 	
+	<select id="read" parameterType="int" resultType="com.meta.seoul.map.vo.Board">
+		select post_code,
+			   post_title,
+			   post_love,
+			   post_count,
+			   write_date,
+			   modify_date,
+			   user_code,
+			   region_code,
+			   region_name,
+			   region_gb
+		from board
+		where post_code = #{post_code}	   
+	</select>
 </mapper>
