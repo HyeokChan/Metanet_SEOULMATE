@@ -14,6 +14,7 @@
 	 -->
 	<typeAliases>
 		<!-- <typeAlias type="클래스 전체 경로" alias="별칭"/> -->
+		<typeAlias type="com.meta.seoul.member.domain.MemberDTO" alias="MemberDTO"/>
 		
 	</typeAliases>
 
