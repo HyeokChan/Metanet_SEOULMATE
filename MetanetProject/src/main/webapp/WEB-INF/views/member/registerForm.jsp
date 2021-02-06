@@ -6,7 +6,7 @@
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member.css">
 <title>SEOUL MATE Register</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> <!-- jQuery사용을 명시 -->
-<script src="${pageContext.request.contextPath}/resources/js/member.js"></script> 
+<script src="${pageContext.request.contextPath}/resources/js/member.js"></script>
 </head>
 <body>
    <div class="back">
@@ -22,7 +22,7 @@
             <input class="blueButton" type="button" id="registerForm_btn" name="registerForm_btn" value="가입 등록" style="width:432; height:76; left:37; top:576">
             <!-- jQuery에서 처리하려면 submit -> button 으로 바꿔야 한다. -->
          </form>
-         <button class="blueButton" id="registerForm_cancel" name="registerForm_cancel" style="width:432; height:76; left:37; top:676">취소</button>
+         <button class="blueButton" id="registerForm_cancel" name="registerForm_cancel" style="width:432; height:76; left:37; top:676" onClick="history.go(-1)">취소</button>
       </div>
    </div>
 </body>

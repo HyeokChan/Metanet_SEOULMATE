@@ -15,5 +15,20 @@ public class MemberServiceImpl implements MemberService {
 	public void insertMember(MemberDTO dto) {
 		memberDAO.insertMember(dto);
 	}
+	@Override
+	public int checkId(String user_id) {
+		int cnt;
+		cnt = memberDAO.checkId(user_id);
+		return cnt;
+	}
+	
+	@Override
+	public int checkLogin(MemberDTO dto) {
+		int check=0;
+		check = memberDAO.checkLogin(dto);
+		return check;
+	}
+	
+	
 
 }

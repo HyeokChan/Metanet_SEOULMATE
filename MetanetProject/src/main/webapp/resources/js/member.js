@@ -31,8 +31,39 @@ $(function(){
 			$("#registerForm_pwd2").focus();
 			return;
 		}
+		
 		$("#registerForm").submit(); /*=> 컨트롤러로 인해 register.jsp 실행*/
-	});
+	})
 	
+	$("#registerForm_id").on("blur", function(){
+		var user_id = $("#registerForm_id").val();
+		$.ajax({
+			type : "post",
+			url : "checkId",
+			data : {user_id : user_id},
+			success : function(data){
+				if(data!=0){
+					$("#registerForm_id").val("");
+					$("#registerForm_id").focus();
+					alert("이미 사용중인 계정 ID입니다.");
+				}
+			}
+		})
+	})
 	
+	$("#login_btn").on("click", function(){
+		if($("#login_id").val()==""){
+			alert("계정 ID를 입력해주세요.");
+			$("#login_id").focus();
+			return;
+		}
+		if($("#login_pwd").val()==""){
+			alert("비밀번호를 입력해주세요.");
+			$("#login_pwd").focus();
+			return;
+		}
+		$("#loginForm").submit();
+	})
 });
+
+
