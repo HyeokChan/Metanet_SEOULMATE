@@ -17,20 +17,16 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	@Override
 	public int checkId(String user_id) {
-		int cnt;
-		cnt = sqlSession.selectOne("member.checkId", user_id);
-		return cnt;
+		return sqlSession.selectOne("member.checkId", user_id);
 	}
 	@Override
-	public int checkLogin(MemberDTO dto) {
-		int check=0;
-		String temp = sqlSession.selectOne("member.checkLogin", dto);
-		System.out.println(temp);
-		if(dto.getUser_pwd().equals(temp)){
-			check=1;
+	public String checkLogin(MemberDTO dto) {
+		String checkedPwd="";
+		try{
+			checkedPwd = sqlSession.selectOne("member.checkLogin", dto);
+		}catch(Exception e){
+			checkedPwd = "";
 		}
-		
-		return check;
+		return checkedPwd; 
 	}
-
 }

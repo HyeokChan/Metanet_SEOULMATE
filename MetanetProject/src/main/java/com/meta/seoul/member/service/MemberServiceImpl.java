@@ -17,16 +17,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 	@Override
 	public int checkId(String user_id) {
-		int cnt;
-		cnt = memberDAO.checkId(user_id);
-		return cnt;
+		return memberDAO.checkId(user_id);
 	}
 	
 	@Override
-	public int checkLogin(MemberDTO dto) {
-		int check=0;
-		check = memberDAO.checkLogin(dto);
-		return check;
+	public String checkLogin(MemberDTO dto) {
+		return memberDAO.checkLogin(dto);
 	}
 	
 	

@@ -55,17 +55,15 @@ public class MemberController {
 	@ResponseBody
 	@PostMapping("/checkId")
 	public int checkId(String user_id){
-		int cnt;
-		cnt = memberService.checkId(user_id);
-		return cnt;	
+		return memberService.checkId(user_id);	
 	}
 	
 	// 로그인 기능
 	@RequestMapping(value="/loginStart", method={RequestMethod.GET, RequestMethod.POST})
 	public String loginStart(MemberDTO dto){
 		System.out.println(dto.getUser_id()+","+dto.getUser_pwd());
-		if(memberService.checkLogin(dto)!=0){
-			return "/member/temp";	
+		if(memberService.checkLogin(dto).equals(dto.getUser_pwd())){
+			return "/member/temp";
 		}
 		else{
 			return "/member/login";
