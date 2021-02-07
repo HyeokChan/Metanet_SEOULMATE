@@ -10,7 +10,16 @@
 		SELECT COUNT(*) FROM MEMBER WHERE USER_ID=#{user_id}
 	</select>
 	
-	<select id="checkLogin" parameterType="MemberDTO">
+	<select id="checkLogin" parameterType="MemberDTO" resultType="String">
 		SELECT USER_PWD FROM MEMBER WHERE USER_ID=#{user_id}
 	</select>
+	
+	<select id="findId" parameterType="MemberDTO" resultType="String">
+		SELECT USER_ID FROM MEMBER WHERE USER_NAME=#{user_name} AND USER_TEL=#{user_tel} AND USER_EMAIL=#{user_email}
+	</select>
+	
+	<select id="findPwd" parameterType="MemberDTO" resultType="String">
+		SELECT USER_PWD FROM MEMBER WHERE USER_ID=#{user_id} AND USER_NAME=#{user_name} AND USER_TEL=#{user_tel} AND USER_EMAIL=#{user_email}
+	</select>
+	
 </mapper>

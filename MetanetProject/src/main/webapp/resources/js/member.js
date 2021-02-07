@@ -64,6 +64,49 @@ $(function(){
 		}
 		$("#loginForm").submit();
 	})
+	
+	$("#findIdForm_btn").on("click", function(){
+		if($("#findIdForm_name").val()==""){
+			alert("이름을 입력해주세요.");
+			$("#findIdForm_name").focus();
+			return;
+		}
+		if($("#findIdForm_tel").val()==""){
+			alert("전화번호를 입력해주세요.");
+			$("#findIdForm_tel").focus();
+			return;
+		}
+		if($("#findIdForm_email").val()==""){
+			alert("이메일을 입력해주세요.");
+			$("#findIdForm_email").focus();
+			return;
+		}
+		$("#findIdForm").submit();
+	})
+	
+	$("#findPwdForm_btn").on("click", function(){
+		if($("#findPwdForm_id").val()==""){
+			alert("계정ID를 입력해주세요.");
+			$("#findPwdForm_id").focus();
+			return;
+		}
+		if($("#findPwdForm_name").val()==""){
+			alert("이름을 입력해주세요.");
+			$("#findPwdForm_name").focus();
+			return;
+		}
+		if($("#findPwdForm_tel").val()==""){
+			alert("전화번호를 입력해주세요.");
+			$("#findPwdForm_tel").focus();
+			return;
+		}
+		if($("#findPwdForm_email").val()==""){
+			alert("이메일을 입력해주세요.");
+			$("#findPwdForm_email").focus();
+			return;
+		}
+		$("#findPwdForm").submit();
+	})
 });
 
 

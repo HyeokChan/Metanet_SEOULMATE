@@ -6,4 +6,7 @@ public interface MemberService {
 	public void insertMember(MemberDTO dto);
 	public int checkId(String user_id);
 	public String checkLogin(MemberDTO dto);
+	public String findId(MemberDTO dto);
+	public String findPwd(MemberDTO dto);
+
 }

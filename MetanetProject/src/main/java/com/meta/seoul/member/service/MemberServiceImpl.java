@@ -24,7 +24,15 @@ public class MemberServiceImpl implements MemberService {
 	public String checkLogin(MemberDTO dto) {
 		return memberDAO.checkLogin(dto);
 	}
+	@Override
+	public String findId(MemberDTO dto) {
+		
+		return memberDAO.findId(dto);
+	}
+	@Override
+	public String findPwd(MemberDTO dto) {
+		return memberDAO.findPwd(dto);
+	}
 	
 	
-
 }
