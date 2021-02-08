@@ -1,14 +1,18 @@
 package com.meta.seoul.member;
 
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -67,24 +71,54 @@ public class MemberController {
 
 	// 로그인 기능
 	@RequestMapping(value = "/loginStart", method = { RequestMethod.GET, RequestMethod.POST })
-	public String loginStart(MemberDTO dto) {
+	public String loginStart(MemberDTO dto, HttpSession httpSession){
+		if (memberService.checkLogin(dto)!=null && memberService.checkLogin(dto).equals(dto.getUser_pwd())) {
+			httpSession.setAttribute("loginCheck",true);
+			httpSession.setAttribute("user_id", dto.getUser_id());
+			return "/member/temp";
+		}
+		else{
+			return "/member/login";
+		}
+	}
+	// 로그아웃 기능
+	@RequestMapping("logoutStart")
+	public String logoutStart(HttpSession httpSession){
+		httpSession.setAttribute("loginCheck",null);
+		httpSession.setAttribute("user_id", null);
+		return "/member/login";
+	}
+	
+	
+	/*@RequestMapping(value = "/loginStart", method = { RequestMethod.GET, RequestMethod.POST })
+	public String loginStart(MemberDTO dto ) {
 		System.out.println(dto.getUser_id() + "," + dto.getUser_pwd());
 		if (memberService.checkLogin(dto).equals(dto.getUser_pwd())) {
 			return "/member/temp";
 		} else {
 			return "/member/login";
 		}
-
-	}
-
+	}*/
 	
+	String findedIds = "";
 	@RequestMapping(value = "/findIdStart")
 	public String sendMail(MemberDTO dto) {
 		System.out.println(dto.getUser_name());
 		System.out.println(dto.getUser_tel());
 		System.out.println(dto.getUser_email());
-		String tempId = memberService.findId(dto);
-		System.out.println("찾은 ID:"+tempId);
+		 
+		List<MemberDTO> tempIds = memberService.findIds(dto);
+		
+		
+		for(int i=0; i<tempIds.size();i++){
+			if(i!=tempIds.size()-1){
+				findedIds = findedIds + tempIds.get(i).getUser_id()+", "; 
+			}
+			else if(i==tempIds.size()-1){
+				findedIds = findedIds + tempIds.get(i).getUser_id();
+			}
+		}
+		System.out.println(findedIds);
 		
 		final MimeMessagePreparator preparator = new MimeMessagePreparator() {
 			@Override
@@ -93,15 +127,16 @@ public class MemberController {
 				helper.setFrom("SEOUL MATE <qpjiq123@gmail.com>");
 				helper.setTo(dto.getUser_email());
 				helper.setSubject("SEOUL MATE 계정ID 찾기");
-				if(tempId==null){
+				if(tempIds.size()==0){
 					helper.setText(dto.getUser_name()+"님의 계정ID를 찾지 못했습니다.", true);
 				}
 				else{
-					helper.setText(dto.getUser_name()+"님의 계정ID는 "+tempId+" 입니다.", true);
+					helper.setText(dto.getUser_name()+"님의 계정ID는 "+findedIds+" 입니다.", true);
 				}
 			}
 		};
 		mailSender.send(preparator);
+		
 		return "redirect:/member/login";
 	}
 	
@@ -115,7 +150,7 @@ public class MemberController {
 		System.out.println(dto.getUser_email());
 		
 		String tempPwd = memberService.findPwd(dto);
-		System.out.println("찾은 ID:"+tempPwd);
+		System.out.println("찾은 비밀번호:"+tempPwd);
 		
 		final MimeMessagePreparator preparator = new MimeMessagePreparator() {
 			@Override
@@ -135,6 +170,12 @@ public class MemberController {
 		};
 		mailSender.send(preparator);
 		return "redirect:/member/login";
+	}
+	
+	// 회원가입 화면
+	@GetMapping("/temp2")
+	public String temp2() {
+		return "/member/temp2";
 	}
 	
 

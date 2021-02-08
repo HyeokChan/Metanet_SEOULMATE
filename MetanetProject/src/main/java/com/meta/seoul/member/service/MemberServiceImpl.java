@@ -1,5 +1,7 @@
 package com.meta.seoul.member.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -32,6 +34,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String findPwd(MemberDTO dto) {
 		return memberDAO.findPwd(dto);
+	}
+	@Override
+	public List<MemberDTO> findIds(MemberDTO dto) {
+		
+		return memberDAO.findIds(dto);
 	}
 	
 	
