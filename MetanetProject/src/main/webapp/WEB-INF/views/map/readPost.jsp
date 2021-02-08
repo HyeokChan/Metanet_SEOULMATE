@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +18,7 @@
     z-index: 0;
     background: #fafafa;
     box-sizing: border-box;
-    height: 930px;
+    height: 1000px;
 	}
 	
 	#containerLogo{
@@ -57,6 +58,150 @@
 	
 	border: 1px solid rgba(0, 0, 0, 0.5);
 	}
+	#title_info{
+	position: absolute;
+    width: 1417px;
+    height: 104px;
+    left: 7px;
+    top: 100px;
+    background: #F0E9E9;
+	}
+	#post_title{
+	position: absolute;
+    width: 411px;
+    height: 38px;
+    left: 50px;
+    top: 10px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 35px;
+    color: #524A4A;
+	}
+	#writer{
+	
+	position: absolute;
+    width: 152px;
+    height: 31px;
+    left: 180px;
+    top: 60px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 25px;
+    line-height: 29px;
+    color: #000000;
+	}
+	#write_date{
+	position: absolute;
+    width: 137px;
+    height: 32px;
+    left: 220px;
+    top: 60px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 25px;
+    line-height: 29px;
+    color: rgba(0, 0, 0, 0.5);
+	}
+	#post_love{
+	position: absolute;
+    width: 93px;
+    height: 36px;
+    left: 1180px;
+    top: 60px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #000000;
+	}
+	#post_count{
+	position: absolute;
+    width: 150px;
+    height: 36px;
+    left: 1180px;
+    top: 30px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #000000;
+	}
+	#lovePost{
+	position: absolute;
+    width: 91px;
+    height: 87px;
+    left: 1300px;
+    top: 10px;
+	}
+	#post_code2{
+	position: absolute;
+	top: 0px;
+	width: 32px;
+	height: 23px;
+	left: 0px;
+	
+	background: #C4C4C4;
+	
+	text-align: center;
+	
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 20px;
+	}
+	#post_content{
+	position: absolute;
+	width: 1252px;
+	height: 120px;
+	left: 30px;
+	top: 606px;
+	
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 30px;
+	line-height: 35px;
+	
+	color: #000000;
+	}
+	#reply{
+	position: absolute;
+    width: 1480px;
+    height: 219px;
+    left: 30px;
+    top: 690px;
+    background: #F0E9E9
+	}
+	#reply_content{
+	position: absolute;
+    width: 1365px;
+    height: 82px;
+    left: 30px;
+    top: 30px;
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    box-sizing: border-box;
+    border-radius: 4px;
+	}
+	#btn{
+	position: absolute;
+    width: 500px;
+    height: 36px;
+    left: 1100px;
+    top: 920px;
+	}
 </style>
 </head>
 <body>
@@ -64,26 +209,40 @@
 <section class="contents">
 	<article>
 	<span id="containerLogo">글 상세보기</span>
+	<span id="region_name"><c:out value="${read.region_name}"></c:out></span><br><br>
 	<hr id="horizon4">
 	<form method="POST" name="readForm">
-	글 번호 : <input type="text" name="post_code" value="${read.post_code}" readonly="readonly"><br><br>
-	<span>글 제목 : <c:out value="${read.post_title}"></c:out></span><br><br>
-	<span>글 내용 : <c:out value="${read.post_content}"></c:out></span><br><br>
-	<span>좋아요 : <c:out value="${read.post_love}"></c:out></span>
-	&nbsp;&nbsp;&nbsp;<button type="button" class="love_btn">♥</button><br><br>
-	<span>조회수 : <c:out value="${read.post_count}"></c:out></span><br><br>
-	<span>작성날짜 : <c:out value="${read.write_date}"></c:out></span><br><br>
-	<span id="region_name"><c:out value="${read.region_name}"></c:out></span><br><br>
+	<input type="hidden" name="post_code" value="${read.post_code}" id="post_code" readonly="readonly">
+	<div id="title_info">
+	<span id="post_title">글 제목 : <c:out value="${read.post_title}"></c:out></span><br><br>
+	<span id="post_code2" ><c:out value="${read.post_code}" /><br><br></span>
+	<span id="writer"><c:out value="${read.user_code}"/> | </span>
+	<span id="write_date"><fmt:formatDate value="${read.write_date}" pattern="yyyy-MM-dd"/></span>
+	<span id="post_count">조회수 : <c:out value="${read.post_count}"></c:out></span><br><br>
+	<span id="post_love">좋아요 : <c:out value="${read.post_love}"></c:out></span>
+	<img src="<c:url value="/resources/images/loveButton.png"/>" alt="좋아요" id="lovePost" style="cursor:pointer" class="love_btn">
+	</div>
+	<div id="content">
+	<span id="post_content">글 내용 : <c:out value="${read.post_content}"></c:out></span><br><br>
+	
+	</div>
+	
+	<div id="reply">
+		<textarea id="reply_content" placeholder="댓글을 입력하세요" style="resize: none;"></textarea>
+	</div>
+	
 	</form>
 	
 	<form method="POST" name="deleteForm">
-	<input type="text" name="post_code" value="${read.post_code}" id="post_code" readonly="readonly">
+	<input type="hidden" name="post_code" value="${read.post_code}" id="post_code" readonly="readonly">
 	
 	</form>
-	
-	<button type="submit" class="delete_btn">삭제</button>
-	<button type="submit" class="update_btn">수정</button>
-	<button type="submit" class="allBoard_btn">글 목록</button>
+	<div id="btn">
+	<img src="<c:url value="/resources/images/modifyBtn.png"/>" alt="수정" id="modifyPost" style="cursor:pointer" class="update_btn">
+	<img src="<c:url value="/resources/images/deleteBtn.png"/>" alt="삭제" id="deletePost" style="cursor:pointer" class="delete_btn">
+	<img src="<c:url value="/resources/images/shareBtn.png"/>" alt="공유" id="sharePost" style="cursor:pointer">
+	<img src="<c:url value="/resources/images/listBtn.png"/>" alt="목록" id="listPost" style="cursor:pointer" class="allBoard_btn">
+	</div>
 	</article>
 </section>
 <script>
