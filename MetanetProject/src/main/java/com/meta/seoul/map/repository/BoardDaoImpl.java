@@ -36,7 +36,29 @@ public class BoardDaoImpl implements BoardDao{
 	@Override
 	public Board read(int post_code) {
 		
+		sqlSession.update("board.updateCount",post_code);
+		
 		return sqlSession.selectOne("board.read", post_code);
 	}
+
+	@Override
+	public void deletePost(int post_code) {
+		
+		sqlSession.delete("board.delete", post_code);
+	}
+
+	@Override
+	public void updatePost(Board board) {
+
+		sqlSession.update("board.update", board);
+	}
+
+	@Override
+	public void updateLove(int post_code) {
+		
+		sqlSession.update("board.updateLove",post_code);
+	}
+
+	
 
 }

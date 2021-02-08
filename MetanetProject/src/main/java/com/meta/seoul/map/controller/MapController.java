@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.meta.seoul.map.service.BoardService;
 import com.meta.seoul.map.vo.Board;
@@ -34,11 +35,11 @@ public class MapController {
 		
 		if(nowPage == null && cntPerPage == null){
 			nowPage = "1";
-			cntPerPage = "5";
+			cntPerPage = "3";
 		}else if(nowPage == null){
 			nowPage = "1";
 		}else if(cntPerPage== null){
-			cntPerPage = "5";
+			cntPerPage = "3";
 		}
 		
 		paging = new Paging(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
@@ -72,10 +73,51 @@ public class MapController {
 		return "/map/readPost";
 	}
 	
-	@GetMapping("/deletePost")
+	@PostMapping("/deletePost")
 	public String deletePost(Model model, Board board, @RequestParam("post_code")int post_code){
-		return "";
+		
+		model.addAttribute("read",boardService.read(post_code));
+		
+		boardService.deletePost(post_code);
+		
+		return "redirect:allBoard";
 	}
+	
+	@GetMapping("/deletePost")
+	public String deletePost(Model model, @RequestParam("post_code")int post_code){
+		
+		model.addAttribute("read",boardService.read(post_code));
+		
+		return "/map/deletePost";
+	}
+	//글 수정
+	@GetMapping("/updatePost")
+	public String updatePost(Model model,Board board){
+		
+		model.addAttribute("read",boardService.read(board.getPost_code()));
+		
+		return "/map/updatePost";
+	}
+	
+	@PostMapping("/updatePost")
+	public String updatePost(Model model,Board board, @RequestParam("post_code")int post_code){
+		
+		model.addAttribute("read",boardService.read(post_code));
+		
+		boardService.updatePost(board);
+		
+		return "redirect:allBoard";
+	}
+	
+	@GetMapping("/lovePost")
+	public String lovePost(Board board,@RequestParam("post_code")int post_code,RedirectAttributes redirect){
+		
+		boardService.updateLove(post_code);
+		
+		redirect.addAttribute("post_code",post_code);
+		return "redirect:readPost";
+	}
+	
 	
 	
 }
