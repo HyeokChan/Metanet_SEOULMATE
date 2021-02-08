@@ -16,7 +16,7 @@
             <input class="userInput" type="text" id="findPwdForm_name" name="user_name" style="width:432; height:65; left:37; top:176" placeholder="이름">
             <input class="userInput" type="tel" id="findPwdForm_tel" name="user_tel" style="width:432; height:65; left:37; top:255" placeholder="전화번호 (~제외)">
             <input class="userInput" type="email" id="findPwdForm_email" name="user_email" style="width:432; height:65; left:37; top:332" placeholder="이메일">
-            <input class="blueButton" type="button" id="findPwdForm_btn" value="인증 이메일 발송" style="width:432; height:76; left:37; top:445">
+            <input class="blueButton" type="button" id="findPwdForm_btn" value="이메일 발송" style="width:432; height:76; left:37; top:445">
          </form>
          <button class="blueButton" style="width:432; height:76; left:37; top:540" onClick="history.go(-1)">취소</button>
       </div>

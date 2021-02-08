@@ -7,6 +7,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> <!-- jQuery사용을 명시 -->
 <script src="${pageContext.request.contextPath}/resources/js/member.js"></script>
 <title>SEOUL MATE Login</title>
+
 </head>
 <body>
    <div class="back">
