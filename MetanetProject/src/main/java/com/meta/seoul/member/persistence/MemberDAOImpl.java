@@ -48,6 +48,11 @@ public class MemberDAOImpl implements MemberDAO {
 		System.out.println("dao ID:"+findedPwd);
 		return findedPwd;
 	}
+	@Override
+	public List<MemberDTO> findIds(MemberDTO dto) {
+		
+		return sqlSession.selectList("member.findIds", dto);
+	}
 	
 	
 	
