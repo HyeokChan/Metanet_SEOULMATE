@@ -1,5 +1,6 @@
 package com.meta.seoul.member;
 
+
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
 
@@ -82,7 +83,6 @@ public class MemberController {
 		System.out.println(dto.getUser_name());
 		System.out.println(dto.getUser_tel());
 		System.out.println(dto.getUser_email());
-		
 		String tempId = memberService.findId(dto);
 		System.out.println("찾은 ID:"+tempId);
 		
