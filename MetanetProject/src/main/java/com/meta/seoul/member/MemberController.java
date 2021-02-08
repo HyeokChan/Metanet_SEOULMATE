@@ -93,7 +93,12 @@ public class MemberController {
 				helper.setFrom("SEOUL MATE <qpjiq123@gmail.com>");
 				helper.setTo(dto.getUser_email());
 				helper.setSubject("SEOUL MATE 계정ID 찾기");
-				helper.setText(dto.getUser_name()+"님의 계정ID는 "+tempId+" 입니다.", true);
+				if(tempId==null){
+					helper.setText(dto.getUser_name()+"님의 계정ID를 찾지 못했습니다.", true);
+				}
+				else{
+					helper.setText(dto.getUser_name()+"님의 계정ID는 "+tempId+" 입니다.", true);
+				}
 			}
 		};
 		mailSender.send(preparator);
@@ -119,7 +124,13 @@ public class MemberController {
 				helper.setFrom("SEOUL MATE <qpjiq123@gmail.com>");
 				helper.setTo(dto.getUser_email());
 				helper.setSubject("SEOUL MATE 비밀번호 찾기");
-				helper.setText(dto.getUser_name()+"님의 비밀번호는 "+tempPwd+" 입니다.", true);
+				if(tempPwd==null){
+					helper.setText(dto.getUser_name()+"님의 비밀번호를 찾지 못했습니다.", true);
+				}
+				else{
+					helper.setText(dto.getUser_name()+"님의 비밀번호는 "+tempPwd+" 입니다.", true);
+				}
+				
 			}
 		};
 		mailSender.send(preparator);
