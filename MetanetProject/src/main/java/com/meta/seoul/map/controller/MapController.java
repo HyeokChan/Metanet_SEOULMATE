@@ -88,7 +88,7 @@ public class MapController {
 		
 		boardService.writePost(board);
 		
-		return "/map/writePost";
+		return "redirect: allBoard";
 	}
 	
 	//글 읽기 get
@@ -127,7 +127,21 @@ public class MapController {
 	}
 	
 	@PostMapping("/updatePost")
-	public String updatePost(Model model,Board board, @RequestParam("post_code")int post_code){
+	public String updatePost(Model model,Board board, @RequestParam("post_code")int post_code, MultipartFile file) throws IOException{
+		
+		String imgUploadPath = uploadPath + File.separator + "imgUpload";
+		System.out.println("file 정보 "+file);
+		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+		String fileName = null;
+		
+		if(file != null){
+			fileName = UploadFileUtils.fileUpload(imgUploadPath,file.getOriginalFilename(),file.getBytes(), ymdPath);
+		}else {
+			fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+		}
+		
+		board.setBoardImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+		board.setThumbImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" +File.separator + "s_" + fileName);
 		
 		model.addAttribute("read",boardService.read(post_code));
 		
