@@ -33,6 +33,8 @@ public class Board {
 	private Date write_date;//작성일
 	private Date modify_date;//변경일
 	private int user_code;//사용자코드
+	private String user_id;//사용자아이디
+	private String user_name;//사용자명
 	private int region_code;//지역코드
 	private String region_name; //지역이름
 	private int region_gb;//강북여부

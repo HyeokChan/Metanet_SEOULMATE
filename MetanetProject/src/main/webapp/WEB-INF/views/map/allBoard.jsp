@@ -349,6 +349,13 @@ position: absolute;
 }
 #writePost:hover{ background:#eee; }
 
+#thumbImg{
+position: absolute;
+    width: 300px;
+    height: 230px;
+    left: 30px;
+    top: 0px;
+}
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -459,10 +466,10 @@ position: absolute;
 	<span id="post_love"><c:out value="${list.post_love}"/></span></td>
 	<td id="writer_date">작성일지 : <fmt:formatDate value="${list.write_date}" pattern="yyyy-MM-dd"/></td>
 	<!--<td><c:out value="${list.modify_date}"/></td> -->
-	<td id="writer">작성자: <c:out value="${list.user_code}"/></td>
+	<td id="writer">작성자: <c:out value="${list.user_id}"/></td>
 	<!--<td><c:out value="${list.region_code}"/></td> -->
 	<td id="region_name"><c:out value="${list.region_name}"/></td>
-	<td id="thumbImg"><img src="${pageContext.request.contextPath}/resources/${list.thumbImg}"></td>
+	<td ><img src="${pageContext.request.contextPath}/resources/${list.thumbImg}" id="thumbImg"></td>
 	<!--<td><c:out value="${list.region_gb}"/></td> -->
 	</tr>
 	</table>

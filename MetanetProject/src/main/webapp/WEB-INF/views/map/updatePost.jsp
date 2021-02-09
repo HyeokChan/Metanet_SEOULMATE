@@ -98,7 +98,7 @@
     color: #524A4A;
 	}
 	#post_title{
-		position: absolute;
+	position: absolute;
     width: 1000px;
     height: 38px;
     left: 30px;
@@ -156,12 +156,19 @@
     left: 100px;
     top: 680px;
 	}
-	#fileUpload2{
+	#gdsImg{
 	position: absolute;
     width: 300px;
     height: 37px;
     left: 270px;
-    top: 640px;
+    top: 515px;
+	}
+	.select_img{
+	position: absolute;
+    width: 200px;
+    height: 30px;
+    left: 650px;
+    top: 250px;
 	}
 	#deleteUpdate{
 	position: absolute;
@@ -182,32 +189,53 @@
 	<hr id="horizon4">
 
 		<div id="modifyContent">
-				<form method="POST" name="readForm">
+				<form method="POST" name="readForm" enctype="multipart/form-data">
 				<input type="hidden" name="post_code" value="${read.post_code}" id="post_code" readonly="readonly">
-					<span id="local1">게시판 지역선택(대분류) : </span> <select name="region_gb"
-						id="region_gb" onchange="categoryChange(this)"
-						class="selectpicker">
+					<span id="local1">게시판 지역선택(대분류) : </span> 
+					<select name="region_gb" id="region_gb" onchange="categoryChange(this)" class="selectpicker">
+						<option value="none">강남/강북 선택</option>
 						<option value="0">강남</option>
 						<option value="1">강북</option>
-					</select><br> <span id="local2">게시판 지역선택(소분류) : </span> <select
-						id="good">
+					</select><br> <span id="local2">게시판 지역선택(소분류) : </span> 
+					<select id="good">
 						<option>구를 선택해 주세요</option>
-					</select> <span id="post_code3">글 번호 <c:out value="${read.post_code}"></c:out></span><br>
-					<br> <span id="post_title">글 제목 <input type="text"
-						name="post_title" value="${read.post_title}"></span> <span
-						id="post_content">글 내용 : </span>
+					</select>
+					<span id="post_code3">글 번호 <c:out value="${read.post_code}"></c:out></span><br>
+					    <span id="post_title">글 제목 <input type="text" name="post_title" value="${read.post_title}"></span> 
+						<span id="post_content">글 내용 : </span>
 					<textarea cols="50" rows="10" name="post_content" id="text_area"><c:out value="${read.post_content}"></c:out></textarea>
 					<img id="upload"
-						src="<c:url value="/resources/images/Vector.png"/>" alt="벡터"><span
-						id="imgUpload">이미지 업로드</span>
+						src="<c:url value="/resources/images/Vector.png"/>" alt="벡터">
+						<span id="imgUpload">이미지 업로드</span>
+					<div class="inputArea">
+	
+	<input type="file" id="gdsImg" name="file"/>
+	<div class="select_img"><img src="" /></div>
+	
+	<script>
+	$("#gdsImg").change(function(){
+		if(this.files && this.files[0]){
+			var reader = new FileReader;
+			reader.onload = function(data){
+				$(".select_img img").attr("src",data.target.result).width(500);
+			}
+			reader.readAsDataURL(this.files[0]);
+		}
+	});
+	
+	</script>
+	
+
+</div>
 					
 				</form>
 			</div>
+	
 			
 <form method="POST" name="deleteForm">
 <input type="hidden" name="post_code" value="${read.post_code}" id="post_code" readonly="readonly">
 <!--<img src="<c:url value="/resources/images/file.png"/>" alt="파일추가" id="fileUpload" style="cursor:pointer" class="file_btn" > -->
-<input type="file" id="fileUpload2">
+
 </form>
 
 <div id="deleteUpdate">
