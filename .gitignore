@@ -99,6 +99,5 @@ hs_err_pid*
 .classpath
 .project
 bin/
-target/**
 target/
 pom.properties
