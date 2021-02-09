@@ -1,5 +1,11 @@
 package com.meta.seoul.map.controller;
 
+
+import java.io.File;
+import java.io.IOException;
+
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,9 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.meta.seoul.map.service.BoardService;
+import com.meta.seoul.map.utils.UploadFileUtils;
 import com.meta.seoul.map.vo.Board;
 import com.meta.seoul.map.vo.Paging;
 
@@ -19,6 +27,10 @@ public class MapController {
 
 	@Autowired
 	BoardService boardService;
+	
+	@Resource(name="uploadPath")
+	private String uploadPath;
+	
 	
 	//메인으로
 	@GetMapping("/main")
@@ -57,8 +69,23 @@ public class MapController {
 	}
 	//글 작성 post
 	@PostMapping("/writePost")
-	public String writePost(Model model,Board board){
+	public String writePost(Model model,Board board,MultipartFile file) throws IOException{
 		System.out.println("board정보 "+board);
+		
+		String imgUploadPath = uploadPath + File.separator + "imgUpload";
+		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+		String fileName = null;
+		
+		if(file != null){
+			fileName = UploadFileUtils.fileUpload(imgUploadPath,file.getOriginalFilename(),file.getBytes(), ymdPath);
+		}else {
+			fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+		}
+		
+		board.setBoardImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+		board.setThumbImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" +File.separator + "s_" + fileName);
+		
+		
 		boardService.writePost(board);
 		
 		return "/map/writePost";
