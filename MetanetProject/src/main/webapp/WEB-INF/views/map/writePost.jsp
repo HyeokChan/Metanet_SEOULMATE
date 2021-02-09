@@ -193,13 +193,13 @@ jQuery('#region_gb').change(function(){
 			<form action="writePost" method="POST" enctype="multipart/form-data" name="readForm">
 			
 				<span id="local1">게시판 지역선택(대분류) : </span> 
-					<select name="region_gb" id="region_gb" onchange="categoryChange(this)" class="selectpicker">
+					<select name="region_gb" id="region_gb" onchange="categoryChange(this)" class="selectpicker" name="region_gb">
 						<option value="none">강남/강북 선택</option>
 						<option value="0">강남</option>
 						<option value="1">강북</option>
 					</select>
 					<span id="local2">게시판 지역선택(소분류) : </span>
-					<select id="good">
+					<select id="good" name="region_name">
 						<option>구를 선택해 주세요</option>
 					</select>
 
