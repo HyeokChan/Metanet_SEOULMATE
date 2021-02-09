@@ -224,6 +224,15 @@
 	</div>
 	<div id="content">
 	<span id="post_content">글 내용 : <c:out value="${read.post_content}"></c:out></span><br><br>
+	<div class="inputArea">
+	<label for="gdsImg">이미지</label>
+	<p>원본 이미지</p>
+	<img src="${read.boardImg}"/>
+	
+	<p>썸네일</p>
+	<img src="C:\Users\JMKIM\Documents\workspace-final\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MetanetProject\resources${read.thumbImg}"/>
+
+	</div>
 	
 	</div>
 	

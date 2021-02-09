@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,9 +17,14 @@ jQuery('#region_gb').change(function(){
 		jQuery('#region_code').hide();
 	}
 });
+
+
 </script>
+<style>
+.select_img img{ margin:20px 0;}
+</style>
 <body>
-<form action="writePost" method="POST">
+<form action="writePost" method="POST" enctype="multipart/form-data">
 게시판지역 선택(대분류) : 
 			<select name="region_gb" id="region_gb">
 			<option value="0">강남</option>
@@ -42,10 +48,31 @@ jQuery('#region_gb').change(function(){
 			<option value="13">광진구</option>
 			</select><br>
 
-		
-작성자 : <input type="text" name="name" id="name"><br>
+<c:if test="${sessionScope.loginCheck eq true}">		
+작성자 :<input type="text" value="${sessionScope.user_id}" name="user_id" readonly="readonly"><br>
+</c:if>
 제목 : <input type="text" name="post_title" id="title"><br>
 내용 : <input type="text" name="post_content" id="content"><br>
+
+<div class="inputArea">
+	<label for="gdsImg">이미지</label>
+	<input type="file" id="gdsImg" name="file"/>
+	<div class="select_img"><img src="" /></div>
+	
+	<script>
+	$("#gdsImg").change(function(){
+		if(this.files && this.files[0]){
+			var reader = new FileReader;
+			reader.onload = function(data){
+				$(".select_img img").attr("src",data.target.result).width(500);
+			}
+			reader.readAsDataURL(this.files[0]);
+		}
+	});
+	</script>
+	
+	<%=request.getRealPath("/") %>
+</div>
 <button type="submit" id="submitButton" class="btn">글쓰기</button>
 </form>
 </body>

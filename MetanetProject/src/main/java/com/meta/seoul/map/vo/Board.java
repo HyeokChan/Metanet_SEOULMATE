@@ -36,4 +36,6 @@ public class Board {
 	private int region_code;//지역코드
 	private String region_name; //지역이름
 	private int region_gb;//강북여부
+	private String boardImg;
+	private String thumbImg;
 }
