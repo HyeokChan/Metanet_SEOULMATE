@@ -68,7 +68,7 @@
 	}
 	#post_title{
 	position: absolute;
-    width: 411px;
+    width: 700px;
     height: 38px;
     left: 50px;
     top: 10px;
@@ -80,11 +80,10 @@
     color: #524A4A;
 	}
 	#writer{
-	
 	position: absolute;
     width: 152px;
     height: 31px;
-    left: 180px;
+    left: 1000px;
     top: 60px;
     font-family: Roboto;
     font-style: normal;
@@ -97,7 +96,7 @@
 	position: absolute;
     width: 137px;
     height: 32px;
-    left: 220px;
+    left: 1040px;
     top: 60px;
     font-family: Roboto;
     font-style: normal;
@@ -203,8 +202,11 @@
     top: 920px;
 	}
 	.oriImg{
-	width:500px;
-	height:auto;
+	position: absolute;
+    width: 400px;
+    height: 300px;
+    left: 30px;
+    top: 230px;
 	}
 </style>
 </head>
@@ -229,12 +231,8 @@
 	<div id="content">
 	<span id="post_content">글 내용 : <c:out value="${read.post_content}"></c:out></span><br><br>
 	<div class="inputArea">
-	<label for="gdsImg">이미지</label>
-	<p>원본 이미지</p>
 	<img src="${pageContext.request.contextPath}/resources/${read.boardImg}" class="oriImg"/>
-	
-	<p>썸네일</p>
-	<img src="${pageContext.request.contextPath}/resources/${read.thumbImg}" class="thumbImg"/>
+
 
 	</div>
 	

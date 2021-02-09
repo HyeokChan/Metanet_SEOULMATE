@@ -33,17 +33,18 @@
 	</select>
 	
 	<select id="list" parameterType="com.meta.seoul.map.vo.Board" resultType="com.meta.seoul.map.vo.Board">
-	select *
+    	select RN,POST_CODE,POST_TITLE,POST_CONTENT,POST_LOVE,POST_COUNT,WRITE_DATE,MODIFY_DATE,C.USER_CODE,REGION_CODE,REGION_NAME,REGION_GB,BOARDIMG,THUMBIMG,m.USER_ID,m.USER_NAME
     from (
         SELECT ROWNUM RN,A.POST_CODE,A.POST_TITLE,A.POST_CONTENT,A.POST_LOVE,A.POST_COUNT,A.WRITE_DATE,A.MODIFY_DATE,A.USER_CODE,A.REGION_CODE,A.REGION_NAME,A.REGION_GB,A.BOARDIMG,A.THUMBIMG
-        FROM (SELECT * FROM BOARD) A
-    ) 
+         FROM (SELECT * FROM BOARD) A
+    ) c
+    join member m on c.user_code = m.user_code
     WHERE RN BETWEEN #{start} AND #{end}
     order by POST_CODE DESC
 	</select>
 	
 	<insert id="write" parameterType="com.meta.seoul.map.vo.Board">
-		insert into board(POST_CODE,POST_TITLE,POST_CONTENT,REGION_CODE,REGION_NAME,REGION_GB,BOARDIMG,THUMBIMG) values(Board_SEQ.nextval,#{post_title},#{post_content},#{region_code},'강남구',#{region_gb},#{boardImg},#{thumbImg})
+		insert into board(POST_CODE,POST_TITLE,POST_CONTENT,REGION_CODE,REGION_NAME,REGION_GB,BOARDIMG,THUMBIMG,USER_CODE) values(Board_SEQ.nextval,#{post_title},#{post_content},#{region_code},'강남구',#{region_gb},#{boardImg},#{thumbImg},#{user_code})
 	</insert>
 	
 	<select id="read" parameterType="int" resultType="com.meta.seoul.map.vo.Board">
@@ -69,7 +70,7 @@
 	</delete>
 	
 	<update id="update" parameterType="com.meta.seoul.map.vo.Board">
-		update board set post_title=#{post_title},post_content=#{post_content},modify_date=sysdate where post_code=#{post_code}
+		update board set post_title=#{post_title},post_content=#{post_content},modify_date=sysdate,thumbImg=#{thumbImg},boardImg=#{boardImg} where post_code=#{post_code}
 	</update>
 	
 	<update id="updateCount" parameterType="int">
