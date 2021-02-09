@@ -44,7 +44,7 @@
 	</select>
 	
 	<insert id="write" parameterType="com.meta.seoul.map.vo.Board">
-		insert into board(POST_CODE,POST_TITLE,POST_CONTENT,REGION_CODE,REGION_NAME,REGION_GB,BOARDIMG,THUMBIMG,USER_CODE) values(Board_SEQ.nextval,#{post_title},#{post_content},#{region_code},'강남구',#{region_gb},#{boardImg},#{thumbImg},#{user_code})
+		insert into board(POST_CODE,POST_TITLE,POST_CONTENT,REGION_CODE,REGION_NAME,REGION_GB,BOARDIMG,THUMBIMG,USER_CODE) values(Board_SEQ.nextval,#{post_title},#{post_content},#{region_code},#{region_name},#{region_gb},#{boardImg},#{thumbImg},#{user_code})
 	</insert>
 	
 	<select id="read" parameterType="int" resultType="com.meta.seoul.map.vo.Board">
