@@ -12,9 +12,14 @@ public interface BoardDao {
 	public List<Board> list(Paging paging);
 	//게시물 작성
 	public void writePost(Board board);
-	
+	//게시물 상세 조회
 	public Board read(int post_code);
-	
-	
+	//게시물 삭제
+	public void deletePost(int post_code);
+	//게시글 수정
+	public void updatePost(Board board);
+	//게시글 좋아요
+	public void updateLove(int post_code);
+
 	
 }

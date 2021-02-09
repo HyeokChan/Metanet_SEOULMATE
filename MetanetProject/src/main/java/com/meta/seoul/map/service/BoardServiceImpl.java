@@ -39,4 +39,22 @@ public class BoardServiceImpl implements BoardService{
 		return boardDao.read(post_code);
 	}
 
+	@Override
+	public void deletePost(int post_code) {
+		
+		boardDao.deletePost(post_code);
+	}
+
+	@Override
+	public void updatePost(Board board) {
+		
+		boardDao.updatePost(board);
+	}
+
+	@Override
+	public void updateLove(int post_code) {
+		
+		boardDao.updateLove(post_code);
+	}
+
 }

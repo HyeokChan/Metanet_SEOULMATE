@@ -60,4 +60,22 @@
 		from board
 		where post_code = #{post_code}	   
 	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete from board where post_code=#{post_code}
+	</delete>
+	
+	<update id="update" parameterType="com.meta.seoul.map.vo.Board">
+		update board set post_title=#{post_title},post_content=#{post_content},modify_date=sysdate where post_code=#{post_code}
+	</update>
+	
+	<update id="updateCount" parameterType="int">
+		update board set post_count=post_count+1 where post_code=#{post_code}
+	</update>
+	
+	<update id="updateLove" parameterType="int">
+	update board set post_love=post_love+1 where post_code=#{post_code}
+	</update>
+	
+	
 </mapper>
