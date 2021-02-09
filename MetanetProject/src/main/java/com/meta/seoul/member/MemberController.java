@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,41 +74,40 @@ public class MemberController {
 	// 로그인 기능
 	@RequestMapping(value = "/loginStart", method = { RequestMethod.GET, RequestMethod.POST })
 	public String loginStart(MemberDTO dto, HttpSession httpSession){
-		if (memberService.checkLogin(dto)!=null && memberService.checkLogin(dto).equals(dto.getUser_pwd())) {
+		MemberDTO result=memberService.checkLogin(dto);
+		if (result!=null && result.getUser_pwd().equals(dto.getUser_pwd())) {
 			httpSession.setAttribute("loginCheck",true);
-			httpSession.setAttribute("user_id", dto.getUser_id());
-			return "/member/temp";
+			httpSession.setAttribute("user_code", result.getUser_code());
+			httpSession.setAttribute("user_id", result.getUser_id());
+			httpSession.setAttribute("user_pwd", result.getUser_pwd());
+			httpSession.setAttribute("user_email", result.getUser_email());
+			httpSession.setAttribute("user_name", result.getUser_name());
+			httpSession.setAttribute("user_tel", result.getUser_tel());
+			return "redirect:/map/main";
 		}
 		else{
-			return "/member/login";
+			return "redirect:/member/login";
 		}
 	}
+	
 	// 로그아웃 기능
-	@RequestMapping("logoutStart")
+	@RequestMapping("/logoutStart")
 	public String logoutStart(HttpSession httpSession){
 		httpSession.setAttribute("loginCheck",null);
+		httpSession.setAttribute("user_code", null);
 		httpSession.setAttribute("user_id", null);
-		return "/member/login";
+		httpSession.setAttribute("user_pwd", null);
+		httpSession.setAttribute("user_email", null);
+		httpSession.setAttribute("user_name", null);
+		httpSession.setAttribute("user_tel", null);
+		
+		return "redirect:/member/login";
 	}
 	
-	
-	/*@RequestMapping(value = "/loginStart", method = { RequestMethod.GET, RequestMethod.POST })
-	public String loginStart(MemberDTO dto ) {
-		System.out.println(dto.getUser_id() + "," + dto.getUser_pwd());
-		if (memberService.checkLogin(dto).equals(dto.getUser_pwd())) {
-			return "/member/temp";
-		} else {
-			return "/member/login";
-		}
-	}*/
 	
 	String findedIds = "";
 	@RequestMapping(value = "/findIdStart")
 	public String sendMail(MemberDTO dto) {
-		System.out.println(dto.getUser_name());
-		System.out.println(dto.getUser_tel());
-		System.out.println(dto.getUser_email());
-		 
 		List<MemberDTO> tempIds = memberService.findIds(dto);
 		
 		
@@ -144,11 +145,6 @@ public class MemberController {
 	
 	@RequestMapping(value = "/findPwdStart")
 	public String sendMail2(MemberDTO dto) {
-		System.out.println(dto.getUser_id());
-		System.out.println(dto.getUser_name());
-		System.out.println(dto.getUser_tel());
-		System.out.println(dto.getUser_email());
-		
 		String tempPwd = memberService.findPwd(dto);
 		System.out.println("찾은 비밀번호:"+tempPwd);
 		
@@ -172,12 +168,39 @@ public class MemberController {
 		return "redirect:/member/login";
 	}
 	
-	// 회원가입 화면
-	@GetMapping("/temp2")
-	public String temp2() {
-		return "/member/temp2";
+	// 내 정보 수정
+	@GetMapping("/infoModiForm")
+	public String infoModiForm() {	
+		return "/member/infoModiForm";
 	}
 	
-
-
+	@PostMapping("/infoModi")
+	public String infoModi(MemberDTO dto, HttpSession httpSession) {
+		memberService.updateMember(dto);
+		httpSession.setAttribute("loginCheck",null);
+		httpSession.setAttribute("user_code", null);
+		httpSession.setAttribute("user_id", null);
+		httpSession.setAttribute("user_pwd", null);
+		httpSession.setAttribute("user_email", null);
+		httpSession.setAttribute("user_name", null);
+		httpSession.setAttribute("user_tel", null);
+		
+		return "redirect:/member/login";
+	}
+	
+	@PostMapping("/infoDel")
+	public String infoDel(MemberDTO dto, HttpSession httpSession) {
+		memberService.deleteMember(dto);
+		httpSession.setAttribute("loginCheck",null);
+		httpSession.setAttribute("user_code", null);
+		httpSession.setAttribute("user_id", null);
+		httpSession.setAttribute("user_pwd", null);
+		httpSession.setAttribute("user_email", null);
+		httpSession.setAttribute("user_name", null);
+		httpSession.setAttribute("user_tel", null);
+		
+		return "redirect:/member/login";
+	}
+	
 }
+

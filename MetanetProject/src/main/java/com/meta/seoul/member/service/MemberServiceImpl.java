@@ -23,7 +23,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public String checkLogin(MemberDTO dto) {
+	public MemberDTO checkLogin(MemberDTO dto) {
 		return memberDAO.checkLogin(dto);
 	}
 	@Override
@@ -39,6 +39,16 @@ public class MemberServiceImpl implements MemberService {
 	public List<MemberDTO> findIds(MemberDTO dto) {
 		
 		return memberDAO.findIds(dto);
+	}
+	@Override
+	public void updateMember(MemberDTO dto) {
+		memberDAO.updateMember(dto);
+		
+	}
+	@Override
+	public void deleteMember(MemberDTO dto) {
+		memberDAO.deleteMember(dto);
+		
 	}
 	
 	

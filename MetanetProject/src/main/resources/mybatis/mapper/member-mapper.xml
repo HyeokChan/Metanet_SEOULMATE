@@ -10,8 +10,8 @@
 		SELECT COUNT(*) FROM MEMBER WHERE USER_ID=#{user_id}
 	</select>
 	
-	<select id="checkLogin" parameterType="MemberDTO" resultType="String">
-		SELECT USER_PWD FROM MEMBER WHERE USER_ID=#{user_id}
+	<select id="checkLogin" parameterType="MemberDTO" resultType="MemberDTO">
+		SELECT USER_CODE, USER_ID, USER_PWD, USER_EMAIL, USER_NAME, USER_TEL FROM MEMBER WHERE USER_ID=#{user_id}
 	</select>
 	
 	<select id="findId" parameterType="MemberDTO" resultType="String">
@@ -26,5 +26,11 @@
 		SELECT USER_ID FROM MEMBER WHERE USER_NAME=#{user_name} AND USER_TEL=#{user_tel} AND USER_EMAIL=#{user_email}
 	</select>
 	
+	<update id="updateMember" parameterType="MemberDTO">
+		UPDATE MEMBER SET USER_ID=#{user_id}, USER_NAME=#{user_name}, USER_TEL=#{user_tel}, USER_EMAIL=#{user_email}, USER_PWD=#{user_pwd} WHERE USER_CODE=#{user_code} 
+	</update>
 	
+	<delete id="deleteMember" parameterType="MemberDTO">
+		DELETE FROM MEMBER WHERE USER_CODE=#{user_code} 
+	</delete>
 </mapper>
