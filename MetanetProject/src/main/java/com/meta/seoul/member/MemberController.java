@@ -74,7 +74,6 @@ public class MemberController {
 	// 로그인 기능
 	@RequestMapping(value = "/loginStart", method = { RequestMethod.GET, RequestMethod.POST })
 	public String loginStart(MemberDTO dto, HttpSession httpSession){
-		int user_code;
 		MemberDTO result=memberService.checkLogin(dto);
 		if (result!=null && result.getUser_pwd().equals(dto.getUser_pwd())) {
 			httpSession.setAttribute("loginCheck",true);
@@ -109,10 +108,6 @@ public class MemberController {
 	String findedIds = "";
 	@RequestMapping(value = "/findIdStart")
 	public String sendMail(MemberDTO dto) {
-		System.out.println(dto.getUser_name());
-		System.out.println(dto.getUser_tel());
-		System.out.println(dto.getUser_email());
-		 
 		List<MemberDTO> tempIds = memberService.findIds(dto);
 		
 		
@@ -150,11 +145,6 @@ public class MemberController {
 	
 	@RequestMapping(value = "/findPwdStart")
 	public String sendMail2(MemberDTO dto) {
-		System.out.println(dto.getUser_id());
-		System.out.println(dto.getUser_name());
-		System.out.println(dto.getUser_tel());
-		System.out.println(dto.getUser_email());
-		
 		String tempPwd = memberService.findPwd(dto);
 		System.out.println("찾은 비밀번호:"+tempPwd);
 		
@@ -186,7 +176,6 @@ public class MemberController {
 	
 	@PostMapping("/infoModi")
 	public String infoModi(MemberDTO dto, HttpSession httpSession) {
-		//System.out.println(dto.getUser_code());
 		memberService.updateMember(dto);
 		httpSession.setAttribute("loginCheck",null);
 		httpSession.setAttribute("user_code", null);
