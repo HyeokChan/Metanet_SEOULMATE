@@ -202,6 +202,10 @@
     left: 1100px;
     top: 920px;
 	}
+	.oriImg{
+	width:500px;
+	height:auto;
+	}
 </style>
 </head>
 <body>
@@ -227,10 +231,10 @@
 	<div class="inputArea">
 	<label for="gdsImg">이미지</label>
 	<p>원본 이미지</p>
-	<img src="${read.boardImg}"/>
+	<img src="${pageContext.request.contextPath}/resources/${read.boardImg}" class="oriImg"/>
 	
 	<p>썸네일</p>
-	<img src="C:\Users\JMKIM\Documents\workspace-final\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MetanetProject\resources${read.thumbImg}"/>
+	<img src="${pageContext.request.contextPath}/resources/${read.thumbImg}" class="thumbImg"/>
 
 	</div>
 	

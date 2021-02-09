@@ -462,6 +462,7 @@ position: absolute;
 	<td id="writer">작성자: <c:out value="${list.user_code}"/></td>
 	<!--<td><c:out value="${list.region_code}"/></td> -->
 	<td id="region_name"><c:out value="${list.region_name}"/></td>
+	<td id="thumbImg"><img src="${pageContext.request.contextPath}/resources/${list.thumbImg}"></td>
 	<!--<td><c:out value="${list.region_gb}"/></td> -->
 	</tr>
 	</table>
