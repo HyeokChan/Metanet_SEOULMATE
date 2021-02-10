@@ -18,7 +18,7 @@
             <input class="userInput" id="login_id" name="user_id" type="text" style="width:432; height:65; left:37; top:210" placeholder="계정 ID">
             <input class="userInput" id="login_pwd" name="user_pwd" type="password" style="width:432; height:65; left:37; top:306" placeholder="비밀번호">
             <label class="findSmallText" id="login_find_id" style="width: 120px; height: 23px; left: 184px; top: 401px;">
-               <a href="findIdForm">아이디 찾기</a>
+               <a href="findIdForm">계정ID 찾기</a>
             </label>
             <label class="findSmallText" id="login_find_pwd" style="width: 137px; height: 23px; left: 321px; top: 401px;">
                <a href="findPwdForm">비밀번호 찾기</a>
@@ -30,3 +30,5 @@
    </div>
 </body>
 </html>
+
+<!-- 커밋용 주석 -->

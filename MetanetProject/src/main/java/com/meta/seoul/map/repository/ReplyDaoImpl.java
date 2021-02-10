@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.meta.seoul.map.vo.Paging;
 import com.meta.seoul.map.vo.Reply;
-
 @Repository
 public class ReplyDaoImpl implements ReplyDao{
 
