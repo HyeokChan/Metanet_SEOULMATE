@@ -27,9 +27,13 @@
 		- #{name} : 전달되는 데이터 묶음에서 name이라는 이름을 가진 데이터를 형태에 맞게 채워라(동적 바인딩). name은 변할 수 있음
 	-->
 	<!-- 댓글 삽입 -->
+	<select id="seq" resultType="int">
+		select reply_seq.nextval from dual
+	</select>
+	
 	<insert id="write">
-		insert into reply (reply_code, reply_content, post_code, reply_write_date) 
-		values(reply_seq.nextval,#{reply_content},#{post_code},sysdate)
+		insert into reply (reply_code, reply_content, post_code, reply_write_date,user_code) 
+		values(#{reply_code},#{reply_content},#{post_code},sysdate,#{user_code})
 	</insert>
 	<!-- 댓글 수정 -->
 	<update id="update">
@@ -41,7 +45,7 @@
 	</delete>
 	
 	<select id="list" resultType="com.meta.seoul.map.vo.Reply">
-		select reply_code,reply_content,post_code,reply_write_date,reply_modi_date from reply where post_code =#{post_code}
+		select reply_code,reply_content,post_code,reply_write_date,reply_modi_date from reply where post_code =#{post_code} 
 	</select>
 	
 	<select id="replyCount" resultType="int">

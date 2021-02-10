@@ -18,4 +18,6 @@ public class Reply {
 	private int post_code;
 	private Date reply_write_date;
 	private Date reply_modi_date;
+	private int user_code;
+	
 }

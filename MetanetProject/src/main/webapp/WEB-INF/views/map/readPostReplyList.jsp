@@ -18,7 +18,7 @@
     z-index: 0;
     background: #fafafa;
     box-sizing: border-box;
-    height: 1300px;
+    height: 1000px;
 	}
 	
 	#containerLogo{
@@ -161,31 +161,32 @@
 	font-size: 20px;
 	}
 	#post_content{
-    position: absolute;
-    width: 1252px;
-    height: 120px;
-    left: 30px;
-    top: 550px;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 30px;
-    line-height: 35px;
-    color: #000000;
-
+	position: absolute;
+	width: 1252px;
+	height: 120px;
+	left: 30px;
+	top: 606px;
+	
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 30px;
+	line-height: 35px;
+	
+	color: #000000;
 	}
 	#reply{
 	position: absolute;
     width: 1480px;
-    height: 400px;
+    height: 219px;
     left: 30px;
-    top: 600px;
-    background: #F0E9E9;
+    top: 690px;
+    background: #F0E9E9
 	}
 	#reply_content{
-	   position: absolute;
-    width: 1000px;
-    height: 50px;
+	position: absolute;
+    width: 1365px;
+    height: 82px;
     left: 30px;
     top: 30px;
     background: #FFFFFF;
@@ -193,19 +194,12 @@
     box-sizing: border-box;
     border-radius: 4px;
 	}
-	#listReply{
-	position: absolute;
-    width: 1365px;
-    height: 102px;
-    left: 30px;
-    top: 700px;
-	}
 	#btn{
 	position: absolute;
     width: 500px;
     height: 36px;
     left: 1100px;
-    top: 30px;
+    top: 920px;
 	}
 	.oriImg{
 	position: absolute;
@@ -214,7 +208,6 @@
     left: 30px;
     top: 230px;
 	}
-
 </style>
 </head>
 <body>
@@ -250,36 +243,7 @@
 	<button type="button" id="btnReply">댓글 쓰기</button>
 	</div>
 	
-	<div id="listReply">
-	<c:forEach items="${replyList}" var="replyList">
-		<c:out value="${replyList.reply_code}"/>
-		<c:out value="${replyList.reply_content}"/>
-		<c:out value="${replyList.user_code}"/>
-		<c:out value="${replyList.reply_write_date}"/>
-		<hr><br>
-	</c:forEach>
-	
-	</div>
-	
-	<div id="paging" style="display : block; text-align : center;">
-		<c:if test="${paging.startPage != 1 }">
-			<a href="${pageContext.request.contextPath}/map/readPost?post_code=${post_code}&nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>	
-		</c:if>
-		<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="p">
-			<c:choose>
-				<c:when test="${ p == paging.nowPage}">
-					<b>${p}</b>
-				</c:when>
-				<c:when test="${p != paging.nowPage}">
-					<a href="${pageContext.request.contextPath}/map/readPost?post_code=${post_code}&nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
-				</c:when>
-			</c:choose>
-		</c:forEach>
-		<c:if test="${paging.endPage != paging.lastPage}">
-			<a href="${pageContext.request.contextPath}/map/readPost?post_code=${post_code}&nowPage=${paging.endPage +1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
-		</c:if>
-		<img src="<c:url value="/resources/images/writeButton.png"/>" alt="글쓰기" id="writePost" style="cursor:pointer">
-	</div>
+	<div id="listReply"></div>
 	
 	</form>
 	
@@ -332,12 +296,9 @@
 		
 	})
 	
-	
-
 </script>
-
 <script>
-/*$(function(){
+$(function(){
 	
 	listReply();
 	
@@ -350,7 +311,7 @@
 
 	$.ajax({
 		type : "post",
-		url : "${pageContext.request.contextPath}/reply/replyInsert?post_code=${read.post_code}",
+		url : "/reply/replyInsert",
 		data : params,
 		
 		success: function(data){
@@ -363,7 +324,7 @@
 	function listReply(){
 		$.ajax({
 			type : "get", //get방식으로 전달
-			url : "${pageContext.request.contextPath}/reply/list?post_code=${read.post_code}",
+			url : "/reply/list?post_code=${read.post_code}",
 			success : function(result){ //자료를 보내는 것이 성공했을 때 출력되는 메세지
 				
 				//댓글목록을 실행한 결과를 가져온다.
@@ -372,11 +333,12 @@
 		});
 	}
 	
+	
 	function listReply2(){
 		$.ajax({
 			type: "get",
 			contentType : "application/json",
-			url : "${pageContext.request.contextPath}/reply/list_json?post_code=${read.post_code}",
+			url : "/reply/list_json?post_code=#{read.post_code}",
 			success : function(result){
 				console.log(result);
 				var output = "<table>";
@@ -393,15 +355,14 @@
 					output += "<br>"+repl+"</td></tr>";
 				}
 				output+="</table>";
-				//$("#listReply").html(output);
+				$("#listReply").html(output);
 			}		
 		});
 		
 	}
 	
-	
 });
-*/
+
 </script>
 
 </body>
