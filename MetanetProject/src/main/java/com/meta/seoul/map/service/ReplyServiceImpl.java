@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.meta.seoul.map.repository.ReplyDao;
-import com.meta.seoul.map.vo.Criteria;
+import com.meta.seoul.map.vo.Paging;
 import com.meta.seoul.map.vo.Reply;
 
 @Service
@@ -34,9 +34,9 @@ public class ReplyServiceImpl implements ReplyService{
 	}
 
 	@Override
-	public List<Reply> listReply(int post_code, Criteria cri) {
+	public List<Reply> listReply(int post_code) {
 	
-		return replyDao.listReply(post_code,cri);
+		return replyDao.listReply(post_code);
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import java.util.List;
 import com.meta.seoul.map.vo.Board;
 import com.meta.seoul.map.vo.Paging;
 
+
 public interface BoardDao {
 	//게시물 총갯수
 	public int countBoard();

@@ -3,6 +3,7 @@ package com.meta.seoul.map.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -17,9 +18,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.meta.seoul.map.service.BoardService;
+import com.meta.seoul.map.service.ReplyService;
 import com.meta.seoul.map.utils.UploadFileUtils;
 import com.meta.seoul.map.vo.Board;
 import com.meta.seoul.map.vo.Paging;
+import com.meta.seoul.map.vo.Reply;
 
 @Controller
 @RequestMapping("/map")
@@ -27,6 +30,10 @@ public class MapController {
 
 	@Autowired
 	BoardService boardService;
+	
+	@Autowired
+	private ReplyService replyService;
+	
 	
 	@Resource(name="uploadPath")
 	private String uploadPath;
@@ -93,9 +100,16 @@ public class MapController {
 	
 	//글 읽기 get
 	@GetMapping("/readPost")
-	public String readPost(Model model, Board board,@RequestParam("post_code")int post_code){
+	public String readPost(Model model, Board board,@RequestParam("post_code")int post_code ){
 		
+
 		model.addAttribute("read",boardService.read(post_code));
+		
+		int totalReply = replyService.getReplyCount(post_code);
+			
+		List<Reply> replyList = replyService.listReply(post_code);
+		
+		model.addAttribute("replyList", replyService.listReply(post_code));
 		
 		return "/map/readPost";
 	}
