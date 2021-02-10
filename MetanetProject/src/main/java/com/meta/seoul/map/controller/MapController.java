@@ -109,6 +109,7 @@ public class MapController {
 			
 		List<Reply> replyList = replyService.listReply(post_code);
 		
+		
 		model.addAttribute("replyList", replyService.listReply(post_code));
 		
 		return "/map/readPost";
