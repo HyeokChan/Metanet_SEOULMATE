@@ -296,6 +296,7 @@
 	</article>
 </section>
 <script>
+
 	$(document).ready(function(){
 		
 		var formObj = $("form[name='deleteForm']");
