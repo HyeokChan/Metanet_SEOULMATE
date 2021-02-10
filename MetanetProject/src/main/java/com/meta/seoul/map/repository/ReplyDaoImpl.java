@@ -4,10 +4,11 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.meta.seoul.map.vo.Criteria;
 import com.meta.seoul.map.vo.Reply;
-
+@Repository
 public class ReplyDaoImpl implements ReplyDao{
 
 	
