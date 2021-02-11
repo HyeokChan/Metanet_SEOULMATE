@@ -57,7 +57,6 @@ public class MemberController {
 	}
 
 	// 회원가입 기능
-	// post 사용하기위함
 	@PostMapping("/register")
 	public String register(MemberDTO dto) {
 		memberService.insertMember(dto);
