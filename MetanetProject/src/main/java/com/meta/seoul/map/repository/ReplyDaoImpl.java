@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.meta.seoul.map.vo.Paging;
 import com.meta.seoul.map.vo.Reply;
-
 @Repository
 public class ReplyDaoImpl implements ReplyDao{
 
@@ -18,11 +17,13 @@ public class ReplyDaoImpl implements ReplyDao{
 	SqlSession sqlSession;
 	
 	@Override
-	public void write(Reply reply) {
+	public int write(Reply reply) {
 	
 		int reply_code = sqlSession.selectOne("reply.seq");
 		reply.setReply_code(reply_code);
-		sqlSession.insert("reply.write",reply);
+		int cnt = sqlSession.insert("reply.write",reply);
+		
+		return cnt;
 	}
 
 	@Override

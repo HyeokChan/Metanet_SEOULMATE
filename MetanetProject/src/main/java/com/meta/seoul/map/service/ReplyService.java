@@ -9,7 +9,7 @@ import com.meta.seoul.map.vo.Reply;
 public interface ReplyService {
 	
 	//댓글 작성
-	public void write(Reply reply);
+	public int write(Reply reply);
 	//댓글 수정
 	public void modify(Reply reply);
 	//댓글 삭제

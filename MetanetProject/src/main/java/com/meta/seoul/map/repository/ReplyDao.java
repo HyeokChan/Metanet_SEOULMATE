@@ -8,7 +8,7 @@ import com.meta.seoul.map.vo.Reply;
 
 public interface ReplyDao {
 	//댓글 작성
-	void write(Reply reply);
+	int write(Reply reply);
 	//댓글 수정
 	void update(Reply reply);
 	//댓글 삭제

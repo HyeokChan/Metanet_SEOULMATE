@@ -174,7 +174,7 @@
     color: #000000;
 
 	}
-	#reply{
+	#replyList{
 	position: absolute;
     width: 1480px;
     height: 400px;
@@ -182,7 +182,7 @@
     top: 600px;
     background: #F0E9E9;
 	}
-	#reply_content{
+	.reply{
 	   position: absolute;
     width: 1000px;
     height: 50px;
@@ -245,23 +245,23 @@
 	
 	</div>
 	
-	<div id="reply">
-		<textarea id="reply_content" placeholder="댓글을 입력하세요" style="resize: none;"></textarea>
+	<div id="replyList">
+		<textarea class="reply" placeholder="댓글을 입력하세요" name="reply_content" style="resize: none;"></textarea>
 	<button type="button" id="btnReply">댓글 쓰기</button>
 	</div>
 	
 	<div id="listReply">
 	<c:forEach items="${replyList}" var="replyList">
 		<c:out value="${replyList.reply_code}"/>
-		<c:out value="${replyList.reply_content}"/>
 		<c:out value="${replyList.user_code}"/>
 		<c:out value="${replyList.reply_write_date}"/>
 		<hr><br>
+		<input type="text" class="reply_content" readonly value="${replyList.reply_content}">
 	</c:forEach>
 	
 	</div>
 	
-	<div id="paging" style="display : block; text-align : center;">
+	<!-- <div id="paging" style="display : block; text-align : center;">
 		<c:if test="${paging.startPage != 1 }">
 			<a href="${pageContext.request.contextPath}/map/readPost?post_code=${post_code}&nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>	
 		</c:if>
@@ -278,8 +278,7 @@
 		<c:if test="${paging.endPage != paging.lastPage}">
 			<a href="${pageContext.request.contextPath}/map/readPost?post_code=${post_code}&nowPage=${paging.endPage +1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
 		</c:if>
-		<img src="<c:url value="/resources/images/writeButton.png"/>" alt="글쓰기" id="writePost" style="cursor:pointer">
-	</div>
+		<!--<img src="<c:url value="/resources/images/writeButton.png"/>" alt="글쓰기" id="writePost" style="cursor:pointer"></div>-->
 	
 	</form>
 	
@@ -338,30 +337,41 @@
 </script>
 
 <script>
-/*$(function(){
+
 	
-	listReply();
+	//listReply();
 	
 	$("#btnReply").click(function(){
+	
+		var post_code = $("#post_code").val();
+		var reply_content = $(".reply").val();
 		
-		var reply_content = $("#reply_content").val();
-		var post_code = "${read.post_code}";
-		var params = {"reply_content": reply_content,
-					  "post_code":post_code};
-
 	$.ajax({
-		type : "post",
-		url : "${pageContext.request.contextPath}/reply/replyInsert?post_code=${read.post_code}",
-		data : params,
 		
-		success: function(data){
+		url : "${pageContext.request.contextPath}/reply/replyInsert",
+		type : "post",
+		dataType : "json",
+		data : {
+			post_code : post_code,
+			reply_content : reply_content
+			
+		},
+		
+		success: function(json){
 			alert("댓글이 등록되었습니다.");
-			listReply2();
-			}
+			if(json=="1"){
+				location.href="${pageContext.request.contextPath}/map/readPost?post_code="+post_code;
+			}	
+		
+		},
+		error:function(err){
+			console.log("에러");
+		}
+		
 		});	
 	});
-	
-	function listReply(){
+
+/*	function listReply(){
 		$.ajax({
 			type : "get", //get방식으로 전달
 			url : "${pageContext.request.contextPath}/reply/list?post_code=${read.post_code}",
@@ -401,8 +411,8 @@
 	}
 	
 	
-});
-*/
+});*/
+
 </script>
 
 </body>
