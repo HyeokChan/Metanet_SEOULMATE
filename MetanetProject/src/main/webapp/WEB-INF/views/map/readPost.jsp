@@ -2,301 +2,199 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en" xmlns:padding="http://www.w3.org/1999/xhtml">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<style>
-	.contents{
-	width: calc(100% - 380px);
-    float: left;
-    position: relative;
-    left: 350px;
-    margin-top: 20px;
-    z-index: 0;
-    background: #fafafa;
-    box-sizing: border-box;
-    height: 1300px;
-	}
-	
-	#containerLogo{
-	position: absolute;
-	width: 227px;
-	height: 37px;
-	left: 50px;
-	top: 30px;
-	
-	font-family: Roboto;
-	font-style: normal;
-	font-weight: bold;
-	font-size: 40px;
-	line-height: 47px;
-	
-	color: #524A4A;
-	}
-	#region_name{
-	position: absolute;
-    width: 100px;
-    height: 37px;
-    left: 280px;
-    top: 40px;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 30px;
-    line-height: 35px;
-    color: rgba(0, 0, 0, 0.5);
-	}
-	#horizon4{
-	position: absolute;
-    width: 1500px;
-    height: 0px;
-    left: 30px;
-    top: 80px;
-	
-	border: 1px solid rgba(0, 0, 0, 0.5);
-	}
-	#title_info{
-	position: absolute;
-    width: 1417px;
-    height: 104px;
-    left: 7px;
-    top: 100px;
-    background: #F0E9E9;
-	}
-	#post_title{
-	position: absolute;
-    width: 700px;
-    height: 38px;
-    left: 50px;
-    top: 10px;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 30px;
-    line-height: 35px;
-    color: #524A4A;
-	}
-	#writer{
-	position: absolute;
-    width: 152px;
-    height: 31px;
-    left: 1000px;
-    top: 60px;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 25px;
-    line-height: 29px;
-    color: #000000;
-	}
-	#write_date{
-	position: absolute;
-    width: 137px;
-    height: 32px;
-    left: 1040px;
-    top: 60px;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 25px;
-    line-height: 29px;
-    color: rgba(0, 0, 0, 0.5);
-	}
-	#post_love{
-	position: absolute;
-    width: 93px;
-    height: 36px;
-    left: 1180px;
-    top: 60px;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 18px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    color: #000000;
-	}
-	#post_count{
-	position: absolute;
-    width: 150px;
-    height: 36px;
-    left: 1180px;
-    top: 30px;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 18px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    color: #000000;
-	}
-	#lovePost{
-	position: absolute;
-    width: 91px;
-    height: 87px;
-    left: 1300px;
-    top: 10px;
-	}
-	#post_code2{
-	position: absolute;
-	top: 0px;
-	width: 32px;
-	height: 23px;
-	left: 0px;
-	
-	background: #C4C4C4;
-	
-	text-align: center;
-	
-	font-family: Roboto;
-	font-style: normal;
-	font-weight: bold;
-	font-size: 20px;
-	}
-	#post_content{
-    position: absolute;
-    width: 1252px;
-    height: 120px;
-    left: 30px;
-    top: 550px;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 30px;
-    line-height: 35px;
-    color: #000000;
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	}
-	#replyList{
-	position: absolute;
-    width: 1480px;
-    height: 400px;
-    left: 30px;
-    top: 600px;
-    background: #F0E9E9;
-	}
-	.reply{
-	   position: absolute;
-    width: 1000px;
-    height: 50px;
-    left: 30px;
-    top: 30px;
-    background: #FFFFFF;
-    border: 1px solid #E5E5E5;
-    box-sizing: border-box;
-    border-radius: 4px;
-	}
-	#listReply{
-	position: absolute;
-    width: 1365px;
-    height: 102px;
-    left: 30px;
-    top: 700px;
-	}
-	#btn{
-	position: absolute;
-    width: 500px;
-    height: 36px;
-    left: 1100px;
-    top: 30px;
-	}
-	.oriImg{
-	position: absolute;
-    width: 400px;
-    height: 300px;
-    left: 30px;
-    top: 230px;
-	}
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <!--icon-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-</style>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <title>Hello, world!</title>
+    <style>
+        img { max-width: 100%; height: auto; }
+        .sidebar {
+            margin: 0;
+            padding: 0;
+            width: 200px;
+            background-color: #f1f1f1;
+            position: fixed;
+            height: 100%;
+            overflow: auto;
+        }
+
+        /* Sidebar links */
+        .sidebar a {
+            display: block;
+            color: black;
+            padding: 16px;
+            text-decoration: none;
+        }
+
+        /* Active/current link */
+        .sidebar a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        /* Links on mouse-over */
+        .sidebar a:hover:not(.active) {
+            background-color: #555;
+            color: white;
+        }
+
+        /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+        div.content {
+            margin-left: 200px;
+            padding: 1px 16px;
+            height: 1000px;
+        }
+
+        /* On screens that are less than 700px wide, make the sidebar into a topbar */
+        @media screen and (max-width: 700px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            .sidebar a {float: left;}
+            div.content {margin-left: 0;}
+        }
+
+        /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+        @media screen and (max-width: 400px) {
+            .sidebar a {
+                text-align: center;
+                float: none;
+            }
+        }
+
+
+    </style>
 </head>
 <body>
-<jsp:include page="../menubar.jsp"></jsp:include>
-<section class="contents">
-	<article>
-	<span id="containerLogo">글 상세보기</span>
-	<span id="region_name"><c:out value="${read.region_name}"></c:out></span><br><br>
-	<hr id="horizon4">
-	<form method="POST" name="readForm">
-	<input type="hidden" name="post_code" value="${read.post_code}" id="post_code" readonly="readonly">
-	<div id="title_info">
-	<span id="post_title">글 제목 : <c:out value="${read.post_title}"></c:out></span><br><br>
-	<span id="post_code2" ><c:out value="${read.post_code}" /><br><br></span>
-	<span id="writer"><c:out value="${read.user_code}"/> | </span>
-	<span id="write_date"><fmt:formatDate value="${read.write_date}" pattern="yyyy-MM-dd"/></span>
-	<span id="post_count">조회수 : <c:out value="${read.post_count}"></c:out></span><br><br>
-	<span id="post_love">좋아요 : <c:out value="${read.post_love}"></c:out></span>
-	<img src="<c:url value="/resources/images/loveButton.png"/>" alt="좋아요" id="lovePost" style="cursor:pointer" class="love_btn">
-	</div>
-	<div id="content">
-	<span id="post_content">글 내용 : <c:out value="${read.post_content}"></c:out></span><br><br>
-	<div class="inputArea">
-	<img src="${pageContext.request.contextPath}/resources/${read.boardImg}" class="oriImg"/>
-	
 
-	</div>
+<!--nav-->
+<jsp:include page="../navbar.jsp"></jsp:include>
+
+<!-- The sidebar -->
+<jsp:include page="../sidebar.jsp"></jsp:include>
+
+<!-- Page content -->
+<div class="content" style="margin-top: 90px">
+    <!--container-->
+    <div class="container mt-2">
+        <div class="row">
+            <div class="row mt-2">
+                <div class="col-md-3">
+                    <h1 class="text d-inline-block">게시글 보기</h1>
+                </div>
+                <div class="col-md-2 align-self-center">
+                    <h3 class="text">${read.region_name}</h3>
+                </div>
+                <div class="col-md-4"></div>
+                <div class="col-md-3">
+                    <buttongroup>
+                        <button type="button" class="btn btn-outline-dark mb-4 update_btn" id="modifyPost" class="update_btn">수정</button>
+                        <button type="button" class="btn btn-outline-dark mb-4 delete_btn" id="deletePost" class="delete_btn">삭제</button>
+                        <button type="button" class="btn btn-outline-dark mb-4" id="sharePost">공유</button>
+                        <button type="button" class="btn btn-outline-dark mb-4 allBoard_btn" id="listPost" class="allBoard_btn">목록</button>
+                    </buttongroup>
+
+                </div>
+            </div>
+            <hr>
+            <!--board-->
+            <form method="POST" name="readForm">
+            	<input type="hidden" name="post_code" value="${read.post_code}" id="post_code" readonly="readonly">
+            	<div class="row bg-light" style="height: 100px">
+                	<div class="col-md-10 align-self-center">
+                		<!-- post_code, post_title 합침, id문제시 조정 필요 -->
+                    	<h3 class="text" id="post_code2">No.${read.post_code} ${read.post_title}</h3> <!-- post_code, post_title 합침, id문제시 조정 필요 -->
+                    	<label class="text ms-3" id="writer">${read.user_code}(Writer)</label>
+                    	<label class="text ms-3" id="write_date"><fmt:formatDate value="${read.write_date}" pattern="yyyy.MM.dd"/></label>
+                	</div>
+
+                	<div class="col-md-1 align-self-center">
+                    	<button type="button" class="btn btn-success btn-lg disabled">
+                        	<i class="fa fa-eye" aria-hidden="true"></i>
+                        	<h5 class="text-light d-inline" id="post_count">${read.post_count}</h5>
+                    	</button>
+                	</div>
+
+                	<div class="col-md-1 align-self-center">
+                    	<button type="button" class="btn btn-danger btn-lg love_btn" id="lovePost">
+                        	<i class="fa fa-heart" aria-hidden="true"></i>
+                        	<h5 class="text-light d-inline" id="post_love">${read.post_love}</h5>
+                    	</button>
+                	</div>
+
+            	</div>
+            	<div class="row">
+                	<img src="${pageContext.request.contextPath}/resources/images/test.png" class="mb-5 mt-3" style="max-height: 500px; width: auto"> <!-- 이미지수정필요 -->
+            	</div>
+            	<div class="row mb-5 ms-3" id="post_content">
+                	${read.post_content}
+            	</div>
+
+            	<div class="input-group mb-3">
+                	<input type="text" class="form-control" id="reply_content" placeholder="댓글을 작성해주세요." aria-label="Recipient's username" aria-describedby="button-addon2">
+                	<button type="button" class="btn btn-outline-secondary" id="btnReply" type="button" id="button-addon2">댓글쓰기</button>
+            	</div>
+            	<hr>
+            	<table class="table mb-5 text-center">
+                	<thead>
+                	<tr>
+	                    <th class="col-md-1" scope="col">#</th>
+	                    <th class="col-md-2" scope="col">ID</th>
+	                    <th class="col-md-5" scope="col">Reply</th>
+	                    <th class="col-md-1" scope="col">Date</th>
+	                    <th class="col-md-2" scope="col"></th>
+
+                	</tr>
+                	</thead>
+                	<tbody>
+                	<c:forEach items="${replyList}" var="replyList">
+	                	<tr>
+		                    <th scope="row">${replyList.reply_code}</th>
+		                    <td>${replyList.user_code}(Writer)</td>
+		                    <td>${replyList.reply_content}</td>
+		                    <td><fmt:formatDate value="${replyList.reply_write_date}" pattern="yyyy.MM.dd"/></td>
+		                    <td>
+		                        <buttongroup>
+		                            <button type="button" class="btn-sm btn-warning d-inline-block">수정</button>
+		                            <button type="button" class="btn-sm btn-warning d-inline-block">삭제</button>
+		                        </buttongroup>
+		                    </td>
 	
-	</div>
-	
-	<div id="replyList">
-		<textarea class="reply" placeholder="댓글을 입력하세요" name="reply_content" style="resize: none;"></textarea>
-	<button type="button" id="btnReply">댓글 쓰기</button>
-	</div>
-	
-	<div id="listReply">
-	<c:forEach items="${replyList}" var="replyList">
-		<c:out value="${replyList.reply_code}"/>
-		<c:out value="${replyList.user_code}"/>
-		<c:out value="${replyList.reply_write_date}"/>
-		<hr><br>
-		<input type="text" class="reply_content" readonly value="${replyList.reply_content}">
-	</c:forEach>
-	
-	</div>
-	
-	<!-- <div id="paging" style="display : block; text-align : center;">
-		<c:if test="${paging.startPage != 1 }">
-			<a href="${pageContext.request.contextPath}/map/readPost?post_code=${post_code}&nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>	
-		</c:if>
-		<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="p">
-			<c:choose>
-				<c:when test="${ p == paging.nowPage}">
-					<b>${p}</b>
-				</c:when>
-				<c:when test="${p != paging.nowPage}">
-					<a href="${pageContext.request.contextPath}/map/readPost?post_code=${post_code}&nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
-				</c:when>
-			</c:choose>
-		</c:forEach>
-		<c:if test="${paging.endPage != paging.lastPage}">
-			<a href="${pageContext.request.contextPath}/map/readPost?post_code=${post_code}&nowPage=${paging.endPage +1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
-		</c:if>
-		<!--<img src="<c:url value="/resources/images/writeButton.png"/>" alt="글쓰기" id="writePost" style="cursor:pointer"></div>-->
-	
-	</form>
-	
-	<form method="POST" name="deleteForm">
-	<input type="hidden" name="post_code" value="${read.post_code}" id="post_code" readonly="readonly">
-	
-	</form>
-	<div id="btn">
-	<img src="<c:url value="/resources/images/modifyBtn.png"/>" alt="수정" id="modifyPost" style="cursor:pointer" class="update_btn">
-	<img src="<c:url value="/resources/images/deleteBtn.png"/>" alt="삭제" id="deletePost" style="cursor:pointer" class="delete_btn">
-	<img src="<c:url value="/resources/images/shareBtn.png"/>" alt="공유" id="sharePost" style="cursor:pointer">
-	<img src="<c:url value="/resources/images/listBtn.png"/>" alt="목록" id="listPost" style="cursor:pointer" class="allBoard_btn">
-	</div>
-	</article>
-</section>
+	                	</tr>
+                	</c:forEach>
+                	</tbody>
+            	</table>
+            	
+            	<!-- 이부분 페이지는 댓글 페이지? -->
+            
+            </form>
+            
+            <form method="POST" name="deleteForm">
+				<input type="hidden" name="post_code" value="${read.post_code}" id="post_code" readonly="readonly">
+			</form>
+            
+
+        </div>
+
+
+    </div>
+
+</div> 
+
 <script>
-
-
 	$(document).ready(function(){
 		
 		var formObj = $("form[name='deleteForm']");
@@ -331,89 +229,48 @@
 		})
 		
 	})
-	
-	
-
 </script>
 
 <script>
-
-	
-	//listReply();
-	
 	$("#btnReply").click(function(){
-	
-		var post_code = $("#post_code").val();
-		var reply_content = $(".reply").val();
-		
-	$.ajax({
-		
-		url : "${pageContext.request.contextPath}/reply/replyInsert",
-		type : "post",
-		dataType : "json",
-		data : {
-			post_code : post_code,
-			reply_content : reply_content
-			
-		},
-		
-		success: function(json){
-			alert("댓글이 등록되었습니다.");
-			if(json=="1"){
-				location.href="${pageContext.request.contextPath}/map/readPost?post_code="+post_code;
-			}	
-		
-		},
-		error:function(err){
-			console.log("에러");
-		}
-		
-		});	
-	});
-
-/*	function listReply(){
-		$.ajax({
-			type : "get", //get방식으로 전달
-			url : "${pageContext.request.contextPath}/reply/list?post_code=${read.post_code}",
-			success : function(result){ //자료를 보내는 것이 성공했을 때 출력되는 메세지
-				
-				//댓글목록을 실행한 결과를 가져온다.
-				$("#listReply").html(result);
-			}		
-		});
-	}
-	
-	function listReply2(){
-		$.ajax({
-			type: "get",
-			contentType : "application/json",
-			url : "${pageContext.request.contextPath}/reply/list_json?post_code=${read.post_code}",
-			success : function(result){
-				console.log(result);
-				var output = "<table>";
-				for(var i in result){
-					var repl = result[i].replytext;
-					repl = repl.replace(/  /gi, "&nbsp;$nbsp;");
-					repl = repl.replace(/</gi,"&lt;"); //태그문자 처리
-					repl = repl.replace(/>/gi,"&gt;");
-					repl = repl.replace(/\n/gi,"<br>"); //줄 바꿈 처리
-					
-					output += "<tr><td>" + result[i].name;
-					date = changeDate(result[i].regdate);
-					output += "("+date+")";
-					output += "<br>"+repl+"</td></tr>";
-				}
-				output+="</table>";
-				//$("#listReply").html(output);
-			}		
-		});
-		
-	}
-	
-	
-});*/
-
+		   
+	    var post_code = $("#post_code").val();
+	    var reply_content = $(".reply").val();
+	    
+	 $.ajax({
+	    
+	    url : "${pageContext.request.contextPath}/reply/replyInsert",
+	    type : "post",
+	    dataType : "json",
+	    data : {
+	       post_code : post_code,
+	       reply_content : reply_content
+	       
+	    },
+	    
+	    success: function(json){
+	       alert("댓글이 등록되었습니다.");
+	       if(json=="1"){
+	          location.href="${pageContext.request.contextPath}/map/readPost?post_code="+post_code;
+	       }   
+	    
+	    },
+	    error:function(err){
+	       console.log("에러");
+	    }
+	    
+	    });   
+	 });
 </script>
 
+<!-- 밑에 주석처리된 스크립트는 그대로? -->
+
+<!-- Optional JavaScript; choose one of the two! -->
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>-->
 </body>
 </html>
