@@ -32,8 +32,8 @@
 	</select>
 	
 	<insert id="write">
-		insert into reply (reply_code, reply_content, post_code, reply_write_date,user_code) 
-		values(#{reply_code},#{reply_content},#{post_code},sysdate,#{user_code})
+		insert into reply (reply_code, reply_content, post_code, reply_write_date, user_code) 
+		values(#{reply_code}, #{reply_content}, #{post_code}, sysdate, #{user_code})
 	</insert>
 	<!-- 댓글 수정 -->
 	<update id="update">
@@ -45,7 +45,7 @@
 	</delete>
 	
 	<select id="list" resultType="com.meta.seoul.map.vo.Reply">
-		select reply_code,reply_content,post_code,reply_write_date,reply_modi_date from reply where post_code =#{post_code} 
+		select reply_code,reply_content,post_code,reply_write_date,reply_modi_date from reply where post_code =#{post_code} order by reply_code desc 
 	</select>
 	
 	<select id="replyCount" resultType="int">
