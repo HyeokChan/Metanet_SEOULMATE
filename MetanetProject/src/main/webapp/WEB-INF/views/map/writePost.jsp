@@ -110,9 +110,8 @@
             </div>
             <hr>
             <!--board-->
-            <input type="hidden" name="post_code" value="${read.post_code}" id="post_code" readonly="readonly">
             <form action="writePost" method="POST" enctype="multipart/form-data" name="readForm">
-            		
+            	<input type="hidden" name="post_code" value="${read.post_code}" id="post_code" readonly="readonly">
             	<c:if test="${sessionScope.loginCheck eq true}">
 	            	<div class="input-group mb-3">
 	                	<span class="input-group-text" id="basic-addon2">작성자</span>
@@ -189,10 +188,7 @@
 			formObj2.submit();
 		})
 
-		 $('.selectpicker').selectpicker({
-		      style: 'btn-info',
-		      size: 2
-		  });
+	
 		
 	})
 	

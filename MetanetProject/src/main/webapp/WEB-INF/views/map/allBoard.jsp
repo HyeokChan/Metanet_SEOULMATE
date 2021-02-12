@@ -128,6 +128,7 @@
                 	<div class="row g-0">
                     	<div class="col-md-4">
                         	<img src="${pageContext.request.contextPath}/resources/images/test.png" class="img-thumbnail" alt="...">
+                        	<%-- <td ><img src="${pageContext.request.contextPath}/resources/${list.thumbImg}" id="thumbImg"></td> --%>
                     	</div>
                     	<div class="col-md-8">
                         	<div class="card-body">

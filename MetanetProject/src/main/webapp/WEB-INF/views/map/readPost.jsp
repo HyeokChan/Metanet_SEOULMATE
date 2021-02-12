@@ -95,10 +95,10 @@
                 <div class="col-md-3">
                     <h1 class="text d-inline-block">게시글 보기</h1>
                 </div>
-                <div class="col-md-1 align-self-center">
+                <div class="col-md-2 align-self-center">
                     <h3 class="text">${read.region_name}</h3>
                 </div>
-                <div class="col-md-5"></div>
+                <div class="col-md-4"></div>
                 <div class="col-md-3">
                     <buttongroup>
                         <button type="button" class="btn btn-outline-dark mb-4 update_btn" id="modifyPost" class="update_btn">수정</button>
@@ -192,7 +192,7 @@
 
     </div>
 
-</div> <!-- 삭제오류 -->
+</div> 
 
 <script>
 	$(document).ready(function(){
@@ -229,7 +229,38 @@
 		})
 		
 	})
-	
+</script>
+
+<script>
+	$("#btnReply").click(function(){
+		   
+	    var post_code = $("#post_code").val();
+	    var reply_content = $(".reply").val();
+	    
+	 $.ajax({
+	    
+	    url : "${pageContext.request.contextPath}/reply/replyInsert",
+	    type : "post",
+	    dataType : "json",
+	    data : {
+	       post_code : post_code,
+	       reply_content : reply_content
+	       
+	    },
+	    
+	    success: function(json){
+	       alert("댓글이 등록되었습니다.");
+	       if(json=="1"){
+	          location.href="${pageContext.request.contextPath}/map/readPost?post_code="+post_code;
+	       }   
+	    
+	    },
+	    error:function(err){
+	       console.log("에러");
+	    }
+	    
+	    });   
+	 });
 </script>
 
 <!-- 밑에 주석처리된 스크립트는 그대로? -->

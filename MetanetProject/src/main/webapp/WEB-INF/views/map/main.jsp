@@ -31,7 +31,7 @@
             <a class="btn btn-outline-dark" href="allBoard">리뷰 게시판 보러가기</a>
         </div>
         <div class="col-md-10">
-            <img src="${root}/resources/images/test.png">
+            <img src="${root}/resources/images/seoulmap.jpg">
         </div>
 
     </div>
