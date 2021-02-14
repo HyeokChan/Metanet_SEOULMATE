@@ -10,6 +10,7 @@ import com.meta.seoul.map.vo.Board;
 import com.meta.seoul.map.vo.LoveBoard;
 import com.meta.seoul.map.vo.Paging;
 import com.meta.seoul.map.vo.PagingRegion;
+import com.meta.seoul.map.vo.PagingSearch;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -81,6 +82,16 @@ public class BoardServiceImpl implements BoardService{
 	public LoveBoard loveYN(LoveBoard loveBoard) {
 	
 		return boardDao.loveYN(loveBoard);
+	}
+
+	@Override
+	public int countSearchBoard(String searchBoard) {
+		return boardDao.countSearchBoard(searchBoard);
+	}
+
+	@Override
+	public List<Board> listSearch(PagingSearch paging) {
+		return boardDao.listSearch(paging);
 	}
 
 }

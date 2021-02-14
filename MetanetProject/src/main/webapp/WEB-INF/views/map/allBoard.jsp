@@ -174,7 +174,7 @@
                 	</c:if>
                 	<c:if test="${paging.startPage != 1 }">
                 		<li class="page-item">
-                        	<a class="page-link" href="${pageContext.request.contextPath}/map/allBoard?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}&region_code=${region_code}" aria-disabled="false">Previous</a>
+                        	<a class="page-link" href="${pageContext.request.contextPath}/map/allBoard?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}&region_code=${region_code}&searchBoard=${searchBoard}" aria-disabled="false">Previous</a>
                     	</li>
                 	</c:if>
                 	
@@ -186,7 +186,7 @@
                     			</li>
 							</c:when>
 					        <c:when test="${p != paging.nowPage}">
-					        	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/map/allBoard?nowPage=${p}&cntPerPage=${paging.cntPerPage}&region_code=${region_code}">${p}</a></li>
+					        	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/map/allBoard?nowPage=${p}&cntPerPage=${paging.cntPerPage}&region_code=${region_code}&searchBoard=${searchBoard}">${p}</a></li>
 							</c:when>
 						</c:choose>
 					</c:forEach>
@@ -200,7 +200,7 @@
                 	</c:if>
                 	<c:if test="${paging.endPage != paging.lastPage}">
                 		<li class="page-item">
-                        	<a class="page-link" href="${pageContext.request.contextPath}/map/allBoard?nowPage=${paging.endPage +1 }&cntPerPage=${paging.cntPerPage}&region_code=${region_code}" aria-disabled="false">Next</a>
+                        	<a class="page-link" href="${pageContext.request.contextPath}/map/allBoard?nowPage=${paging.endPage +1 }&cntPerPage=${paging.cntPerPage}&region_code=${region_code}&searchBoard=${searchBoard}" aria-disabled="false">Next</a>
                     	</li>
                 	</c:if>
                     

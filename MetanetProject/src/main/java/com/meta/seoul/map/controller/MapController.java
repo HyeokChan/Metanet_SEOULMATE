@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -31,11 +32,13 @@ import com.meta.seoul.map.vo.Board;
 import com.meta.seoul.map.vo.LoveBoard;
 import com.meta.seoul.map.vo.Paging;
 import com.meta.seoul.map.vo.PagingRegion;
+import com.meta.seoul.map.vo.PagingSearch;
 import com.meta.seoul.map.vo.Reply;
 
 @Controller
 @RequestMapping("/map")
 public class MapController {
+	
 
 	@Autowired
 	BoardService boardService;
@@ -58,18 +61,25 @@ public class MapController {
 		return "/map/main";
 	}
 	//글 읽기 리스트
+	
 	@GetMapping("/allBoard")
-	public String allBoard(Model model, Paging paging, PagingRegion pagingRegion, 
+	public String allBoard(Model model, Paging paging, PagingRegion pagingRegion, PagingSearch pagingSearch,
 							@RequestParam(value="nowPage",required=false)String nowPage,
 							@RequestParam(value="cntPerPage", required=false)String	cntPerPage,
-							@RequestParam(value="region_code", required=false) Integer region_code){
+							@RequestParam(value="region_code", required=false) Integer region_code,
+							@RequestParam(value="searchBoard", required=false) String searchBoard
+							){
 		
 		if(region_code == null){
 			region_code=0;
 		}
 		int total;
-		if(region_code==0){
+		
+		if(region_code==0 && searchBoard==null){
 			total = boardService.countBoard();
+		}
+		else if(region_code==0 && searchBoard!=null){
+			total = boardService.countSearchBoard(searchBoard);
 		}
 		else{
 			total = boardService.countRegionBoard(region_code);
@@ -83,14 +93,23 @@ public class MapController {
 		}else if(cntPerPage== null){
 			cntPerPage = "3";
 		}
-		if(region_code==0){
+		if(region_code==0 && searchBoard==null){
 			paging = new Paging(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 			model.addAttribute("paging", paging);
 			model.addAttribute("list", boardService.listAll(paging));
 			model.addAttribute("region_code",0);
 			model.addAttribute("region_name","전체");
 		}
-		else{
+		else if(region_code==0 && searchBoard!=null){
+			System.out.println(searchBoard);
+			pagingSearch = new PagingSearch(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage), searchBoard);
+			model.addAttribute("paging", pagingSearch);
+			model.addAttribute("list", boardService.listSearch(pagingSearch));
+			model.addAttribute("region_code",0);
+			model.addAttribute("region_name","전체");
+			model.addAttribute("searchBoard",searchBoard);
+		}
+		else if(region_code!=0){
 			pagingRegion = new PagingRegion(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage), region_code);
 			model.addAttribute("paging", pagingRegion);
 			model.addAttribute("list", boardService.listRegion(pagingRegion));
@@ -242,6 +261,12 @@ public class MapController {
 		
 		redirect.addAttribute("post_code",post_code);
 		return "redirect:readPost";
+	}
+	
+	@RequestMapping("/searchBoard")
+	public String searchBoard(String searchBoard){
+		return "redirect:allBoard?searchBoard="+searchBoard;
+		
 	}
 	
 	
