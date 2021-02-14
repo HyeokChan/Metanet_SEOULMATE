@@ -16,7 +16,7 @@
 
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <title>Hello, world!</title>
+    <title>SeoulMate</title>
     <style>
         img { max-width: 100%; height: auto; }
         .sidebar {
@@ -36,6 +36,7 @@
             padding: 16px;
             text-decoration: none;
         }
+
 
         /* Active/current link */
         .sidebar a.active {
@@ -74,7 +75,9 @@
                 float: none;
             }
         }
-
+		#inputReply{
+		margin-left:100px;
+		}
 
     </style>
 </head>
@@ -101,8 +104,10 @@
                 <div class="col-md-4"></div>
                 <div class="col-md-3">
                     <buttongroup>
+                    	<c:if test="${sessionScope.user_code == read.user_code }">
                         <button type="button" class="btn btn-outline-dark mb-4 update_btn" id="modifyPost" class="update_btn">수정</button>
                         <button type="button" class="btn btn-outline-dark mb-4 delete_btn" id="deletePost" class="delete_btn">삭제</button>
+                        </c:if>
                         <button type="button" class="btn btn-outline-dark mb-4" id="sharePost">공유</button>
                         <button type="button" class="btn btn-outline-dark mb-4 allBoard_btn" id="listPost" class="allBoard_btn">목록</button>
                     </buttongroup>
@@ -117,7 +122,7 @@
                 	<div class="col-md-10 align-self-center">
                 		<!-- post_code, post_title 합침, id문제시 조정 필요 -->
                     	<h3 class="text" id="post_code2">No.${read.post_code} ${read.post_title}</h3> <!-- post_code, post_title 합침, id문제시 조정 필요 -->
-                    	<label class="text ms-3" id="writer">${read.user_code}(Writer)</label>
+                    	<label class="text ms-3" id="writer">${read.user_id}</label>
                     	<label class="text ms-3" id="write_date"><fmt:formatDate value="${read.write_date}" pattern="yyyy.MM.dd"/></label>
                 	</div>
 
@@ -129,10 +134,18 @@
                 	</div>
 
                 	<div class="col-md-1 align-self-center">
+                	  <c:choose>
+                		<c:when test="${love.user_code eq null}">
                     	<button type="button" class="btn btn-danger btn-lg love_btn" id="lovePost">
                         	<i class="fa fa-heart" aria-hidden="true"></i>
                         	<h5 class="text-light d-inline" id="post_love">${read.post_love}</h5>
                     	</button>
+                    	</c:when>
+                    	<c:otherwise>
+                        	<i class="fa fa-heart" aria-hidden="true"></i>
+                        	<span class="font-weight-bold">${read.post_love}</span>
+                    	</c:otherwise>
+                      </c:choose>
                 	</div>
 
             	</div>
@@ -144,7 +157,7 @@
             	</div>
 
             	<div class="input-group mb-3">
-                	<input type="text" class="form-control" id="reply_content" placeholder="댓글을 작성해주세요." aria-label="Recipient's username" aria-describedby="button-addon2">
+                	<input type="text" class="form-control" name="reply_content" id="reply" placeholder="댓글을 작성해주세요." aria-label="Recipient's username" aria-describedby="button-addon2">
                 	<button type="button" class="btn btn-outline-secondary" id="btnReply" type="button" id="button-addon2">댓글쓰기</button>
             	</div>
             	<hr>
@@ -159,18 +172,22 @@
 
                 	</tr>
                 	</thead>
-                	<tbody>
+                	<tbody class="replyContent">
                 	<c:forEach items="${replyList}" var="replyList">
 	                	<tr>
-		                    <th scope="row">${replyList.reply_code}</th>
-		                    <td>${replyList.user_code}(Writer)</td>
-		                    <td>${replyList.reply_content}</td>
+		                    <th scope="row" ><input type="hidden" value="${replyList.reply_code}" id="replyCode">${replyList.reply_code}</th>
+		                    <td>${replyList.user_id}</td>
+		                    <td id="replylist"><input type="text" readonly="readonly" value="${replyList.reply_content}" style="border:none" id="inputReply"></td>
 		                    <td><fmt:formatDate value="${replyList.reply_write_date}" pattern="yyyy.MM.dd"/></td>
 		                    <td>
+		                    	<c:if test="${sessionScope.user_code == replyList.user_code }">
+		                    	<div id="buttonGroup">
 		                        <buttongroup>
-		                            <button type="button" class="btn-sm btn-warning d-inline-block">수정</button>
-		                            <button type="button" class="btn-sm btn-warning d-inline-block">삭제</button>
+		                            <button type="button" class="btn-sm btn-warning d-inline-block" id="modifyReply">수정</button>
+		                            <button type="button" class="btn-sm btn-warning d-inline-block" id="deleteReply">삭제</button>
 		                        </buttongroup>
+		                        </div>
+		                        </c:if>
 		                    </td>
 	
 	                	</tr>
@@ -195,6 +212,7 @@
 </div> 
 
 <script>
+
 	$(document).ready(function(){
 		
 		var formObj = $("form[name='deleteForm']");
@@ -228,6 +246,7 @@
 			location.href="${pageContext.request.contextPath}/map/allBoard";
 		})
 		
+		
 	})
 </script>
 
@@ -235,7 +254,7 @@
 	$("#btnReply").click(function(){
 		   
 	    var post_code = $("#post_code").val();
-	    var reply_content = $(".reply").val();
+	    var reply_content = $("#reply").val();
 	    
 	 $.ajax({
 	    
@@ -261,6 +280,91 @@
 	    
 	    });   
 	 });
+	
+	//댓글 삭제 버튼
+	$("#deleteReply").click(function(){
+		if(confirm("댓글을 삭제하시겠습니까?")){
+			
+			//댓글 코드
+			var reply_code = $("#replyCode").val();
+			
+			var post_code = $("#post_code").val();
+			
+			$.ajax({
+				url : "${pageContext.request.contextPath}/reply/deleteReply",
+				type : "post",
+				dataType : "json",
+				data : {
+					reply_code : reply_code
+				},
+				success : function(json){
+					console.log(json);
+					if(json=="1"){
+						location.href = "${pageContext.request.contextPath}/map/readPost?post_code="+post_code;
+					}
+				},
+				error : function(err){
+					console.log("에러");
+				}
+			})
+			
+		}
+	})
+	
+	//댓글 수정 버튼
+	$("#modifyReply").click(function(){
+		
+		$("#modifyReply").remove();
+		$("#deleteReply").remove();
+		
+		var $replyInfo = $(".replyContent");
+		var $input = $("#replylist").children("input[type=text]");
+		var buttonReply = '<button type="button" id="replyUpdate">등록</button>';
+		var buttonReplyCancel = '<button type="button" id="replyUpdateCancel">취소</button>';
+		
+		$("#buttonGroup").append(buttonReply+"&nbsp;");
+		$("#buttonGroup").append(buttonReplyCancel);
+	
+		var reply_code = $("#replyCode").val();
+		var post_code = $("#post_code").val();
+		var $updateReply = $(this).next();
+		
+		$(this).css("display", "none");
+		$updateReply.css("display", "inline-block");
+		$input.attr("readonly", false).css("background","white"); 
+		$replyInfo.css("background", "rgb(252, 252, 253)").css("border", "1px solid #ddd").css("box-shadow", "0 2px 3px rgba(0,0,0,0.3)");
+		$input.focus();
+		
+		$("#replyUpdate").click(function(){
+			
+			var reply_content = $input.val();
+			
+			$.ajax({
+				url : "${pageContext.request.contextPath}/reply/updateReply",
+				type : "post",
+				dataType : "json",
+				data : {
+					reply_code : reply_code,
+					reply_content : reply_content
+				},
+				success : function(json){
+					console.log(json);
+					if(json=="1"){
+						location.href = "${pageContext.request.contextPath}/map/readPost?post_code="+post_code;
+					}
+				},
+				error : function(err){
+					console.log("에러");
+				}
+				
+			});
+		});
+		
+		$("#replyUpdateCancel").click(function(){
+			location.href="${pageContext.request.contextPath}/map/readPost?post_code="+post_code;
+		})
+	});
+	
 </script>
 
 <!-- 밑에 주석처리된 스크립트는 그대로? -->

@@ -127,8 +127,8 @@
             	<div class="card mb-3 center-block" style="max-width: 800px;">
                 	<div class="row g-0">
                     	<div class="col-md-4">
-                        	<img src="${pageContext.request.contextPath}/resources/images/test.png" class="img-thumbnail" alt="...">
-                        	<%-- <td ><img src="${pageContext.request.contextPath}/resources/${list.thumbImg}" id="thumbImg"></td> --%>
+                        	<!-- <img src="${pageContext.request.contextPath}/resources/images/test.png" class="img-thumbnail" alt="..."> -->
+                        	<img src="${pageContext.request.contextPath}/resources/${list.thumbImg}" id="thumbImg"></td>
                     	</div>
                     	<div class="col-md-8">
                         	<div class="card-body">
@@ -200,12 +200,13 @@
                 </ul>
             </nav>
             
+            <c:if test="${sessionScope.user_id != null }">
             <div class="row justify-content-end">
                 <div class="col-2">
                     <a class="btn btn-outline-dark mb-4" id="writePost" href="${pageContext.request.contextPath}/map/writePost">글작성</a>
                 </div>
             </div>
-
+			</c:if>
         </div>
 
 

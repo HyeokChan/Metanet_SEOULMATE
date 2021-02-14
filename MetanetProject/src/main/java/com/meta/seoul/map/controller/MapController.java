@@ -3,9 +3,12 @@ package com.meta.seoul.map.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +24,7 @@ import com.meta.seoul.map.service.BoardService;
 import com.meta.seoul.map.service.ReplyService;
 import com.meta.seoul.map.utils.UploadFileUtils;
 import com.meta.seoul.map.vo.Board;
+import com.meta.seoul.map.vo.LoveBoard;
 import com.meta.seoul.map.vo.Paging;
 import com.meta.seoul.map.vo.Reply;
 
@@ -95,19 +99,28 @@ public class MapController {
 		
 		boardService.writePost(board);
 		
-		return "redirect: allBoard";
+		return "redirect:allBoard";
 	}
 	
 	//글 읽기 get
 	@GetMapping("/readPost")
-	public String readPost(Model model, Board board,@RequestParam("post_code")int post_code ){
+	public String readPost(Model model, Board board,@RequestParam("post_code")int post_code,HttpSession session, LoveBoard loveBoard){
 		
-
+		int user_code = (int) session.getAttribute("user_code");
+		
+		loveBoard.setUser_code(user_code);
+		loveBoard.setPost_code(post_code);
+		
 		model.addAttribute("read",boardService.read(post_code));
 		
-		int totalReply = replyService.getReplyCount(post_code);
+		model.addAttribute("love", boardService.loveYN(loveBoard));
+		
+		System.out.println("loveYN "+boardService.loveYN(loveBoard));
+		
+		//int totalReply = replyService.getReplyCount(post_code);
 			
 		List<Reply> replyList = replyService.listReply(post_code);
+		System.out.println("replyList 호출 "+replyList);
 		
 		model.addAttribute("replyList", replyService.listReply(post_code));
 		
@@ -165,9 +178,16 @@ public class MapController {
 	}
 	
 	@GetMapping("/lovePost")
-	public String lovePost(Board board,@RequestParam("post_code")int post_code,RedirectAttributes redirect){
+	public String lovePost(Board board,@RequestParam("post_code")int post_code,RedirectAttributes redirect, HttpSession session,LoveBoard loveBoard){
+		
+		int user_code = (int) session.getAttribute("user_code");
+		
+		loveBoard.setUser_code(user_code);
+		loveBoard.setPost_code(post_code);
 		
 		boardService.updateLove(post_code);
+		//게시글 좋아요 헀을 때 삽입 게시글 좋아요 여부 테이블에 삽입
+		boardService.checkLove(loveBoard);
 		
 		redirect.addAttribute("post_code",post_code);
 		return "redirect:readPost";

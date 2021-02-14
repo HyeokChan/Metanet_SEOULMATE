@@ -27,15 +27,19 @@ public class ReplyDaoImpl implements ReplyDao{
 	}
 
 	@Override
-	public void update(Reply reply) {
+	public int update(Reply reply) {
 		
-		sqlSession.update("reply.update",reply);
+		int cnt = sqlSession.update("reply.update",reply);
+		
+		return cnt;
 	}
 
 	@Override
-	public void delete(int reply_code) {
+	public int delete(int reply_code) {
 		
-		sqlSession.delete("reply.delete",reply_code);
+		int cnt = sqlSession.delete("reply.delete",reply_code);
+		
+		return cnt;
 	}
 
 	@Override

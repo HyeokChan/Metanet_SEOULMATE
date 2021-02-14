@@ -110,8 +110,9 @@
             </div>
             <hr>
             <!--board-->
+            <input type="hidden" name="post_code" value="${read.post_code}" id="post_code" readonly="readonly">
             <form action="writePost" method="POST" enctype="multipart/form-data" name="readForm">
-            	<input type="hidden" name="post_code" value="${read.post_code}" id="post_code" readonly="readonly">
+            
             	<c:if test="${sessionScope.loginCheck eq true}">
 	            	<div class="input-group mb-3">
 	                	<span class="input-group-text" id="basic-addon2">작성자</span>
@@ -144,11 +145,12 @@
 	
 	            
 	            <!-- 업로드쪽 추가/수정 필요 -->
-	            <div class="input-group mb-3">
-	                <input type="file" class="form-control" id="inputGroupFile02">
-	                <label class="input-group-text" for="inputGroupFile02">Upload</label>
-	            </div>
-	            
+	     		 <div class="inputArea">
+					 <input type="file" id="gdsImg" name="file" />
+					<div class="select_img">
+						<img src="" style="height: 250px"/>
+					</div>
+				</div>
             </form>
             
 
@@ -169,7 +171,20 @@
 
     </div>
 </div>
-
+          <script>
+                  $("#gdsImg").change(
+                        function() {
+                           if (this.files && this.files[0]) {
+                              var reader = new FileReader;
+                              reader.onload = function(data) {
+                                 $(".select_img img").attr("src",
+                                       data.target.result).width(
+                                       500);
+                              }
+                              reader.readAsDataURL(this.files[0]);
+                           }
+                        });
+               </script>
 
 <script>
 	$(document).ready(function(){

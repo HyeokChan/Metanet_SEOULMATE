@@ -93,10 +93,28 @@ public class ReplyController {
 		return "/map/readPost";
 	}
 	
-	/*@RequestMapping("/list_json")
-	public List<Reply> list_json(@RequestParam("post_code")int post_code){
+	@ResponseBody
+	@PostMapping("/deleteReply")
+	public String deleteReply(@RequestParam int reply_code){
 		
-		return replyService.listReply(post_code);
-	}*/
+		int cnt = replyService.delete(reply_code);
+		System.out.println("댓글 삭제!!"+ cnt);
+		return cnt+"";
+	}
+	
+	@ResponseBody
+	@PostMapping("/updateReply")
+	public String updateReply(@RequestParam int reply_code, @RequestParam String reply_content){
+		
+		Reply reply = Reply.builder()
+						   .reply_code(reply_code)
+						   .reply_content(reply_content)
+						   .build();
+		
+		int cnt = replyService.update(reply);
+		
+		return cnt+"";
+	}
+	
 	
 }

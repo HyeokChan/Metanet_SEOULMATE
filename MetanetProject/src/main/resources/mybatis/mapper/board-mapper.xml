@@ -55,14 +55,17 @@
 			   post_count,
 			   write_date,
 			   modify_date,
-			   user_code,
+			   b.user_code,
 			   region_code,
 			   region_name,
 			   region_gb,
 			   boardImg,
-			   thumbImg
-		from board
-		where post_code = #{post_code}	   
+			   thumbImg,
+               user_id,
+               user_name
+		from board b
+        join member m on m.user_code = b.user_code
+		where post_code = #{post_code} 
 	</select>
 	
 	<delete id="delete" parameterType="int">
@@ -81,5 +84,12 @@
 	update board set post_love=post_love+1 where post_code=#{post_code}
 	</update>
 	
+	<insert id="checkLove" parameterType="com.meta.seoul.map.vo.LoveBoard">
+	insert into love_Board(idx,post_code,user_code,likecheck) values(love_Board_SEQ.nextval,#{post_code},#{user_code},1)
+	</insert>
+	
+	<select id="loveYN" resultType="com.meta.seoul.map.vo.LoveBoard">
+	select idx,post_code,user_code,likecheck from love_board where post_code=#{post_code} and user_code=#{user_code}
+	</select>
 	
 </mapper>
