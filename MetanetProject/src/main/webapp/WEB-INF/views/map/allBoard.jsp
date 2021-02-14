@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!doctype html>
 <html lang="en" xmlns:padding="http://www.w3.org/1999/xhtml">
 <head>
@@ -103,7 +104,7 @@
         <div class="row justify-content-center">
             <div class="row">
                 <div class="col-md-3">
-                    <h1 class="text d-inline-block">전체 게시글</h1>
+                    <h1 class="text d-inline-block">${region_name} 게시글</h1>
                 </div>
                 <div class="col-md-7"></div>
                 <div class="col-md-2 align-self-end">
@@ -127,14 +128,19 @@
             	<div class="card mb-3 center-block" style="max-width: 800px;">
                 	<div class="row g-0">
                     	<div class="col-md-4">
-                        	<img src="${pageContext.request.contextPath}/resources/images/test.png" class="img-thumbnail" alt="...">
-                        	<%-- <td ><img src="${pageContext.request.contextPath}/resources/${list.thumbImg}" id="thumbImg"></td> --%>
+                        	<%-- <img src="${pageContext.request.contextPath}/resources/images/test.png" class="img-thumbnail" alt="..."> --%>
+                        	<img src="${pageContext.request.contextPath}/resources/${list.thumbImg}" class="img-thumbnail" id="thumbImg">
                     	</div>
                     	<div class="col-md-8">
                         	<div class="card-body">
                             	<div class="row">
                                 	<div class="col-md-10">
-                                    	<h5 class="card-title"><a href="${pageContext.request.contextPath}/map/readPost?post_code=${list.post_code}">${list.post_title}</a></h5>
+                                    	<h5 class="card-title">
+                                    		<a href="${pageContext.request.contextPath}/map/readPost?post_code=${list.post_code}">${list.post_title}</a>
+                                    		<c:if test="${list.post_love >= 5}">
+												<span class="badge bg-danger ms-md-1">Hot</span>
+                                    		</c:if>
+                                    	</h5>
                                 	</div>
                                 	<div class="col-md-2">
                                     	<label class="card-title">No.${list.post_code}</label>
@@ -167,7 +173,7 @@
                 	</c:if>
                 	<c:if test="${paging.startPage != 1 }">
                 		<li class="page-item">
-                        	<a class="page-link" href="${pageContext.request.contextPath}/map/allBoard?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}" aria-disabled="false">Previous</a>
+                        	<a class="page-link" href="${pageContext.request.contextPath}/map/allBoard?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}&region_code=${region_code}" aria-disabled="false">Previous</a>
                     	</li>
                 	</c:if>
                 	
@@ -179,7 +185,7 @@
                     			</li>
 							</c:when>
 					        <c:when test="${p != paging.nowPage}">
-					        	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/map/allBoard?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a></li>
+					        	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/map/allBoard?nowPage=${p}&cntPerPage=${paging.cntPerPage}&region_code=${region_code}">${p}</a></li>
 							</c:when>
 						</c:choose>
 					</c:forEach>
@@ -193,7 +199,7 @@
                 	</c:if>
                 	<c:if test="${paging.endPage != paging.lastPage}">
                 		<li class="page-item">
-                        	<a class="page-link" href="${pageContext.request.contextPath}/map/allBoard?nowPage=${paging.endPage +1 }&cntPerPage=${paging.cntPerPage}" aria-disabled="false">Next</a>
+                        	<a class="page-link" href="${pageContext.request.contextPath}/map/allBoard?nowPage=${paging.endPage +1 }&cntPerPage=${paging.cntPerPage}&region_code=${region_code}" aria-disabled="false">Next</a>
                     	</li>
                 	</c:if>
                     

@@ -3,14 +3,18 @@ package com.meta.seoul.map.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +26,7 @@ import com.meta.seoul.map.service.ReplyService;
 import com.meta.seoul.map.utils.UploadFileUtils;
 import com.meta.seoul.map.vo.Board;
 import com.meta.seoul.map.vo.Paging;
+import com.meta.seoul.map.vo.PagingRegion;
 import com.meta.seoul.map.vo.Reply;
 
 @Controller
@@ -38,6 +43,10 @@ public class MapController {
 	@Resource(name="uploadPath")
 	private String uploadPath;
 	
+	HashMap<String,Integer> regionMap = new HashMap<String,Integer>(26){{//초기값 지정
+	    put("강남구",1); put("강동구",2); put("강서구",3); put("구로구",4); put("관악구",5); put("금천구",6); put("동작구",7); put("서초구",8); put("송파구",9); put("양천구",10); put("영등포구",11);
+	    put("강북구",12); put("광진구",13); put("노원구",14); put("도봉구",15); put("동대문구",16); put("마포구",17); put("서대문구",18); put("성동구",19); put("성북구",20); put("은평구",21); put("용산구",22); put("중구",23); put("중랑구",24); put("종로구",25);
+	}};
 	
 	//메인으로
 	@GetMapping("/main")
@@ -46,11 +55,21 @@ public class MapController {
 	}
 	//글 읽기 리스트
 	@GetMapping("/allBoard")
-	public String allBoard(Model model, Paging paging, 
+	public String allBoard(Model model, Paging paging, PagingRegion pagingRegion, 
 							@RequestParam(value="nowPage",required=false)String nowPage,
-							@RequestParam(value="cntPerPage", required=false)String	cntPerPage){
+							@RequestParam(value="cntPerPage", required=false)String	cntPerPage,
+							@RequestParam(value="region_code", required=false) Integer region_code){
 		
-		int total = boardService.countBoard();
+		if(region_code == null){
+			region_code=0;
+		}
+		int total;
+		if(region_code==0){
+			total = boardService.countBoard();
+		}
+		else{
+			total = boardService.countRegionBoard(region_code);
+		}
 		
 		if(nowPage == null && cntPerPage == null){
 			nowPage = "1";
@@ -60,15 +79,24 @@ public class MapController {
 		}else if(cntPerPage== null){
 			cntPerPage = "3";
 		}
-		
-		paging = new Paging(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
-		System.out.println("paging "+paging);
-		
-		model.addAttribute("paging", paging);
-		model.addAttribute("list", boardService.listAll(paging));
-		
+		if(region_code==0){
+			paging = new Paging(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+			model.addAttribute("paging", paging);
+			model.addAttribute("list", boardService.listAll(paging));
+			model.addAttribute("region_code",0);
+			model.addAttribute("region_name","전체");
+		}
+		else{
+			pagingRegion = new PagingRegion(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage), region_code);
+			model.addAttribute("paging", pagingRegion);
+			model.addAttribute("list", boardService.listRegion(pagingRegion));
+			model.addAttribute("region_code",region_code);
+			model.addAttribute("region_name",getKey(regionMap,region_code));
+		}
 		return "/map/allBoard";
 	}
+	
+	
 	//글 작성 get
 	@GetMapping("/writePost")
 	public String writePost(){
@@ -92,10 +120,21 @@ public class MapController {
 		board.setBoardImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
 		board.setThumbImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" +File.separator + "s_" + fileName);
 		
+		/*region_code 추가*/
+		
+		int region_code = regionMap.get(board.getRegion_name());
+		if(region_code < 12){
+			board.setRegion_gb(0);
+		}
+		else if(region_code >= 12){
+			board.setRegion_gb(1);
+		}
+		board.setRegion_code(region_code);
+		
 		
 		boardService.writePost(board);
 		
-		return "redirect: allBoard";
+		return "redirect:allBoard";
 	}
 	
 	//글 읽기 get
@@ -136,6 +175,7 @@ public class MapController {
 	public String updatePost(Model model,Board board){
 		
 		model.addAttribute("read",boardService.read(board.getPost_code()));
+
 		
 		return "/map/updatePost";
 	}
@@ -157,6 +197,17 @@ public class MapController {
 		board.setBoardImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
 		board.setThumbImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" +File.separator + "s_" + fileName);
 		
+		/*region_code 추가*/
+		int region_code = regionMap.get(board.getRegion_name());
+		if(region_code < 12){
+			board.setRegion_gb(0);
+		}
+		else if(region_code >= 12){
+			board.setRegion_gb(1);
+		}
+		board.setRegion_code(region_code);
+		
+		
 		model.addAttribute("read",boardService.read(post_code));
 		
 		boardService.updatePost(board);
@@ -173,6 +224,17 @@ public class MapController {
 		return "redirect:readPost";
 	}
 	
+	
+	// hashmap에 value 로 key 찾기
+	public static <K, V> K getKey(HashMap<K, V> map, V value) {
+	 
+	    for (K key : map.keySet()) {
+	        if (value.equals(map.get(key))) {
+	            return key;
+	        }
+	    }
+	    return null;
+	}
 	
 	
 }

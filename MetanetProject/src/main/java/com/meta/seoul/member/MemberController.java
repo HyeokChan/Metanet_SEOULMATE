@@ -74,7 +74,7 @@ public class MemberController {
 	@RequestMapping(value = "/loginStart", method = { RequestMethod.GET, RequestMethod.POST })
 	public String loginStart(MemberDTO dto, HttpServletRequest request){
 		MemberDTO result=memberService.checkLogin(dto);
-		if (result!=null && result.getUser_pwd().equals(dto.getUser_pwd())) {
+		if (result!=null) {
 			HttpSession httpSession = request.getSession();
 			httpSession.setAttribute("loginCheck",true);
 			httpSession.setAttribute("user_code", result.getUser_code());
@@ -83,6 +83,7 @@ public class MemberController {
 			httpSession.setAttribute("user_email", result.getUser_email());
 			httpSession.setAttribute("user_name", result.getUser_name());
 			httpSession.setAttribute("user_tel", result.getUser_tel());
+			httpSession.setAttribute("region_code", 0);
 			return "redirect:/map/main";
 		}
 		else{
@@ -137,11 +138,11 @@ public class MemberController {
 	}
 	
 	
-	
 	@RequestMapping(value = "/findPwdStart")
 	public String sendMail2(MemberDTO dto) {
 		String tempPwd = memberService.findPwd(dto);
-		System.out.println("찾은 비밀번호:"+tempPwd);
+		
+		memberService.updatePwd(dto);
 		
 		final MimeMessagePreparator preparator = new MimeMessagePreparator() {
 			@Override
@@ -154,13 +155,14 @@ public class MemberController {
 					helper.setText(dto.getUser_name()+"님의 비밀번호를 찾지 못했습니다.", true);
 				}
 				else{
-					helper.setText(dto.getUser_name()+"님의 비밀번호는 "+tempPwd+" 입니다.", true);
+					helper.setText(dto.getUser_name()+"님의 임시비밀번호는 "+dto.getUser_tel()+" 입니다. MyPage에서 수정해주세요.", true);
 				}
 			}
 		};
 		mailSender.send(preparator);
 		return "redirect:/member/login";
 	}
+	
 	
 	// 내 정보 수정
 	@GetMapping("/infoModiForm")

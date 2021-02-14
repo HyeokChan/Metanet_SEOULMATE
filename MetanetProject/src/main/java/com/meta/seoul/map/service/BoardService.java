@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.meta.seoul.map.vo.Board;
 import com.meta.seoul.map.vo.Paging;
+import com.meta.seoul.map.vo.PagingRegion;
 
 public interface BoardService {
 	//전체 조회
@@ -21,4 +22,7 @@ public interface BoardService {
 	//게시글 좋아요
 	public void updateLove(int post_code);
 	
+	//지역 조회 
+	public int countRegionBoard(int region_code);
+	public List<Board> listRegion(PagingRegion paging);
 }

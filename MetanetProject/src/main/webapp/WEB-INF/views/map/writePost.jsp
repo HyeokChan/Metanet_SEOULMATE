@@ -14,18 +14,18 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script>
-	jQuery('#region_gb').change(function(){
-		var state = jQuery('#region_gb option:selected').val();
-		if( state == 'option2'){
-			jQuery('#region_code').show();
-		}else{  
-			jQuery('#region_code').hide();
-		}
-	});
-	
-	
-	</script>
+   <script>
+   jQuery('#region_gb').change(function(){
+      var state = jQuery('#region_gb option:selected').val();
+      if( state == 'option2'){
+         jQuery('#region_code').show();
+      }else{  
+         jQuery('#region_code').hide();
+      }
+   });
+   
+   
+   </script>
     <title>Hello, world!</title>
     <style>
         img { max-width: 100%; height: auto; }
@@ -110,50 +110,62 @@
             </div>
             <hr>
             <!--board-->
+            <input type="hidden" name="post_code" value="${read.post_code}" id="post_code" readonly="readonly">
             <form action="writePost" method="POST" enctype="multipart/form-data" name="readForm">
-            	<input type="hidden" name="post_code" value="${read.post_code}" id="post_code" readonly="readonly">
-            	<c:if test="${sessionScope.loginCheck eq true}">
-	            	<div class="input-group mb-3">
-	                	<span class="input-group-text" id="basic-addon2">작성자</span>
-	                	<input type="text" class="form-control" value="${sessionScope.user_code}" name="user_code" readonly="readonly" placeholder="Writer" aria-label="Username" aria-describedby="basic-addon1">
-	            	</div>
-            	</c:if>
-            	<div class="input-group mb-3">
-                	<label class="input-group-text" id="local1" for="inputGroupSelect01">지역선택</label>
-                	<select class="form-select" name="region_gb" id="region_gb" onchange="categoryChange(this)" >
-                    	<option selected>Choose...</option>
-                    	<option value="0">강남</option>
-                    	<option value="1">강북</option>
-                	</select>
-            	</div>
-            	<div class="input-group mb-3">
-                	<label class="input-group-text" id="local2" for="inputGroupSelect01">지역선택</label>
-                	<select class="form-select" id="good" name="region_name">
-                    	<option selected>Choose...</option>
-                    	
-                	</select>
-            	</div>
-            	<div class="input-group mb-3">
-                	<span class="input-group-text" id="post_title">제목</span>
-                	<input type="text" class="form-control" name="post_title" id="title" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
-	            </div>
-	            <div class="input-group mb-3">
-	                <span class="input-group-text" id="post_content">내용 입력</span>
-	                <textarea class="form-control" name="post_content" id="text_area" aria-label="With textarea" style="min-height: 300px"></textarea>
-	            </div>
-	
-	            
-	            <!-- 업로드쪽 추가/수정 필요 -->
-	            <div class="input-group mb-3">
-	                <input type="file" class="form-control" id="inputGroupFile02">
-	                <label class="input-group-text" for="inputGroupFile02">Upload</label>
-	            </div>
-	            
+            
+               <c:if test="${sessionScope.loginCheck eq true}">
+                  <div class="input-group mb-3">
+                      <span class="input-group-text" id="basic-addon2">작성자</span>
+                      <input type="text" class="form-control" value="${sessionScope.user_code}" name="user_code" readonly="readonly" placeholder="Writer" aria-label="Username" aria-describedby="basic-addon1">
+                  </div>
+               </c:if>
+               <div class="input-group mb-3">
+                   <label class="input-group-text" id="local1" for="inputGroupSelect01">지역선택</label>
+                   <select class="form-select" name="region_gb" id="region_gb" onchange="categoryChange(this)" >
+                       <option selected>Choose...</option>
+                       <option value="0">강남</option>
+                       <option value="1">강북</option>
+                   </select>
+               </div>
+               <div class="input-group mb-3">
+                   <label class="input-group-text" id="local2" for="inputGroupSelect01">지역선택</label>
+                   <select class="form-select" id="good" name="region_name">
+                       <option selected>Choose...</option>
+                       
+                   </select>
+               </div>
+               <div class="input-group mb-3">
+                   <span class="input-group-text" id="post_title">제목</span>
+                   <input type="text" class="form-control" name="post_title" id="title" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
+               </div>
+               <div class="input-group mb-3">
+                   <span class="input-group-text" id="post_content">내용 입력</span>
+                   <textarea class="form-control" name="post_content" id="text_area" aria-label="With textarea" style="min-height: 300px"></textarea>
+               </div>
+   
+               
+               <!-- 업로드쪽 추가/수정 필요 -->
+               <div class="input-group mb-3">
+                   <input type="file" class="form-control" id="gdsImg" name="file">
+                   <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                   <script>
+						$("#gdsImg").change(
+								function() {
+									if (this.files && this.files[0]) {
+										var reader = new FileReader;
+										reader.onload = function(data) {
+											$(".select_img img").attr("src",
+													data.target.result).width(
+													500);
+										}
+										reader.readAsDataURL(this.files[0]);
+									}
+								});
+					</script>
+               </div>
+               
             </form>
             
-
-
-
             <div class="row justify-content-end">
                 <div class="col-2">
                     <buttongroup>
@@ -172,45 +184,49 @@
 
 
 <script>
-	$(document).ready(function(){
-		
-	var formObj2 = $("form[name='readForm']");
-		
-		$(".update_btn").on("click",function(){
-			formObj2.attr("action","${pageContext.request.contextPath}/map/writePost");
-			formObj2.attr("method","post");
-			formObj2.submit();
-		})
-		
-		$(".cancel_btn").on("click",function(){
-			formObj2.attr("action","${pageContext.request.contextPath}/map/allBoard");
-			formObj2.attr("method","get");
-			formObj2.submit();
-		})
+   $(document).ready(function(){
+	   
+      var formObj2 = $("form[name='readForm']");
+      
+      $(".update_btn").on("click",function(){
+         formObj2.attr("action","${pageContext.request.contextPath}/map/writePost");
+         formObj2.attr("method","post");
+         formObj2.submit();
+      })
+      
+      $(".cancel_btn").on("click",function(){
+         formObj2.attr("action","${pageContext.request.contextPath}/map/allBoard");
+         formObj2.attr("method","get");
+         formObj2.submit();
+      })
+      
+      $('.selectpicker').selectpicker({
+	    	style: 'btn-info',
+	      	size: 2
+	  	});
 
-	
-		
-	})
-	
-	function categoryChange(e){
-		var gangnam = ["강서구","양천구","강남구","구로구","금천구","영등포구","동작구","관악구","서초구","송파구","강동구"];
-		var gangbuk = ["마포구","용산구","성동구","광진구","서대문구","중구","동대문구","중랑구","성북구","종로구","은평구","강북구","도봉구","노원구"];
-		var target = document.getElementById("good");
-		
-		if(e.value=="0") var d = gangnam;
-		else if(e.value=="1") var d = gangbuk;
-		
-		target.options.length = 0;
-		
-		for(x in d){
-			var opt = document.createElement("option");
-			opt.value = d[x];
-			opt.innerHTML=d[x];
-			target.appendChild(opt);
-			
-		}
-	}
-	</script>
+   })
+   
+   
+   function categoryChange(e){
+      var gangnam = ["강남구","강동구","강서구","구로구","금천구","동작구","관악구","서초구","송파구","양천구","영등포구"];
+      var gangbuk = ["강북구","광진구","노원구","도봉구","동대문구","마포구","서대문구","성동구","성북구","은평구","용산구","중구","중랑구","종로구"];
+      var target = document.getElementById("good");
+      
+      if(e.value=="0") var d = gangnam;
+      else if(e.value=="1") var d = gangbuk;
+      
+      target.options.length = 0;
+      
+      for(x in d){
+         var opt = document.createElement("option");
+         opt.value = d[x];
+         opt.innerHTML=d[x];
+         target.appendChild(opt);
+         
+      }
+   }
+   </script>
 
 
 <!-- Optional JavaScript; choose one of the two! -->

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.meta.seoul.map.vo.Board;
 import com.meta.seoul.map.vo.Paging;
+import com.meta.seoul.map.vo.PagingRegion;
 
 
 public interface BoardDao {
@@ -21,6 +22,10 @@ public interface BoardDao {
 	public void updatePost(Board board);
 	//게시글 좋아요
 	public void updateLove(int post_code);
+	
+	//게시물 지역 조회
+	public int countRegionBoard(int region_code);
+	public List<Board> listRegion(PagingRegion paging);
 
 	
 }

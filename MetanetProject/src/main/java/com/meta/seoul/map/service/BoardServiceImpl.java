@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.meta.seoul.map.repository.BoardDao;
 import com.meta.seoul.map.vo.Board;
 import com.meta.seoul.map.vo.Paging;
+import com.meta.seoul.map.vo.PagingRegion;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -55,6 +56,17 @@ public class BoardServiceImpl implements BoardService{
 	public void updateLove(int post_code) {
 		
 		boardDao.updateLove(post_code);
+	}
+
+	//지역 조회
+	@Override
+	public int countRegionBoard(int region_code) {
+		return boardDao.countRegionBoard(region_code);
+	}
+
+	@Override
+	public List<Board> listRegion(PagingRegion paging) {
+		return boardDao.listRegion(paging);
 	}
 
 }

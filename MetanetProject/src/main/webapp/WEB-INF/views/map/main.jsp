@@ -29,14 +29,50 @@
     <div class="row">
         <div class="col-md-2">
             <a class="btn btn-outline-dark" href="allBoard">리뷰 게시판 보러가기</a>
+            
         </div>
         <div class="col-md-10">
-            <img src="${root}/resources/images/seoulmap.jpg">
+            <img src="${root}/resources/images/seoulmap.jpg" usemap="#regionMap">
+
+			<map id="regionMap" name="regionMap">
+				<area shape="rect" alt="강남구" coords="1808,1644,1967,1728" href="allBoard?region_code=1" target="" />
+				<area shape="rect" alt="강동구" coords="2269,1270,2433,1351" href="allBoard?region_code=2" target="" />
+				<area shape="rect" alt="강서구" coords="546,1201,757,1301" href="allBoard?region_code=3" target="" />
+				<area shape="rect" alt="구로구" coords="694,1649,849,1724" href="allBoard?region_code=4" target="" />
+				<area shape="rect" alt="관악구" coords="1224,1830,1392,1918" href="allBoard?region_code=5" target="" />
+				<area shape="rect" alt="금천구" coords="984,1882,1122,1955" href="allBoard?region_code=6" target="" />
+				<area shape="rect" alt="동작구" coords="1260,1604,1413,1682" href="allBoard?region_code=7" target="" />
+				<area shape="rect" alt="서초구" coords="1558,1737,1739,1824" href="allBoard?region_code=8" target="" />
+				<area shape="rect" alt="송파구" coords="2110,1552,2285,1638" href="allBoard?region_code=9" target="" />
+				<area shape="rect" alt="양천구" coords="731,1496,900,1577" href="allBoard?region_code=10" target="" />
+				<area shape="rect" alt="영등포구" coords="993,1489,1193,1562" href="allBoard?region_code=11" target="" />
+				
+				<area shape="rect" alt="강북구" coords="1594,749,1752,832" href="allBoard?region_code=12" target="" />
+				<area shape="rect" alt="광진구" coords="1961,1305,2115,1382" href="allBoard?region_code=13" target="" />
+				<area shape="rect" alt="노원구" coords="1890,627,2049,710" href="allBoard?region_code=14" target="" />
+				<area shape="rect" alt="도봉구" coords="1680,526,1831,605" href="allBoard?region_code=15" target="" />
+				<area shape="rect" alt="동대문구" coords="1756,1077,1961,1161" href="allBoard?region_code=16" target="" />
+				<area shape="rect" alt="마포구" coords="1030,1239,1192,1312" href="allBoard?region_code=17" target="" />
+				<area shape="rect" alt="서대문구" coords="1123,1129,1323,1201" href="allBoard?region_code=18" target="" />
+				<area shape="rect" alt="성동구" coords="1729,1271,1900,1355" href="allBoard?region_code=19" target="" />
+				<area shape="rect" alt="성북구" coords="1591,952,1762,1038" href="allBoard?region_code=20" target="" />
+				<area shape="rect" alt="은평구" coords="1126,808,1286,894" href="allBoard?region_code=21" target="" />
+				<area shape="rect" alt="용산구" coords="1410,1387,1570,1466" href="allBoard?region_code=22" target="" />
+				<area shape="rect" alt="중구" coords="1517,1224,1636,1297" href="allBoard?region_code=23" target="" />
+				<area shape="rect" alt="중랑구" coords="1983,972,2157,1051" href="allBoard?region_code=24" target="" />	
+				<area shape="rect" alt="종로구" coords="1390,1061,1542,1131" href="allBoard?region_code=25" target="" />
+				<!-- Created by Online Image Map Editor (http://www.maschek.hu/imagemap/index) -->
+			</map>
+            
         </div>
 
     </div>
 </div>
 
+<script src="${root}/resources/js/jquery.rwdImageMaps.min.js"></script>
+<script>
+	$(document).ready(function(e) { $('img[usemap]').rwdImageMaps(); });
+</script>
 
 
 <!-- Optional JavaScript; choose one of the two! -->

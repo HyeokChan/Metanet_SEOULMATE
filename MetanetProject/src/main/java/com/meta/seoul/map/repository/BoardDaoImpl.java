@@ -1,5 +1,6 @@
 package com.meta.seoul.map.repository;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.meta.seoul.map.vo.Board;
 import com.meta.seoul.map.vo.Paging;
+import com.meta.seoul.map.vo.PagingRegion;
 
 @Repository
 public class BoardDaoImpl implements BoardDao{
@@ -57,6 +59,16 @@ public class BoardDaoImpl implements BoardDao{
 	public void updateLove(int post_code) {
 		
 		sqlSession.update("board.updateLove",post_code);
+	}
+
+	@Override
+	public int countRegionBoard(int region_code) {
+		return sqlSession.selectOne("board.countRegionBoard", region_code);
+	}
+
+	@Override
+	public List<Board> listRegion(PagingRegion paging) {
+		return sqlSession.selectList("board.listRegion", paging);
 	}
 
 	

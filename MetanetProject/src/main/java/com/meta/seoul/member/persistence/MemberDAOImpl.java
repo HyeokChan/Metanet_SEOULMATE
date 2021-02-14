@@ -23,14 +23,13 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	@Override
 	public MemberDTO checkLogin(MemberDTO dto) {
-		/*String checkedPwd="";
-		try{
-			checkedPwd = 
-		}catch(Exception e){
-			checkedPwd = "";
-		}*/
 		return sqlSession.selectOne("member.checkLogin", dto); 
 	}
+	@Override
+	public MemberDTO selectPwd(MemberDTO dto) {
+		return sqlSession.selectOne("member.selectPwd", dto);
+	}
+	
 	@Override
 	public String findId(MemberDTO dto) {
 		String findedId = sqlSession.selectOne("member.findId", dto);
@@ -63,6 +62,11 @@ public class MemberDAOImpl implements MemberDAO {
 		sqlSession.delete("member.deleteMember", dto);
 		
 	}
+	@Override
+	public void updatePwd(MemberDTO dto) {
+		sqlSession.update("member.updatePwd", dto);
+	}
+	
 	
 	
 	

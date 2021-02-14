@@ -138,7 +138,7 @@
 	            
 	            <!-- 업로드쪽 추가/수정 필요 -->
 	            <div class="input-group mb-3">
-	                <input type="file" class="form-control" id="inputGroupFile02">
+	                <input type="file" class="form-control" id="gdsImg" name="file" >
 	                <label class="input-group-text" for="inputGroupFile02">Upload</label>
 	            </div>
 	            
@@ -170,44 +170,44 @@
 
 
 <script>
-$(document).ready(function(){
+	$(document).ready(function(){
 	
-	var formObj = $("form[name='deleteForm']");
+		var formObj = $("form[name='deleteForm']");
 	
-	$(".delete_btn").on("click",function(){
-		var deleteBtn = confirm("삭제하시겠습니까?");
+		$(".delete_btn").on("click",function(){
+			var deleteBtn = confirm("삭제하시겠습니까?");
 		
-		if(deleteBtn == true){
-			console.log("하이");
-			formObj.attr("action","${pageContext.request.contextPath}/map/deletePost?=${read.post_code}");
-			formObj.attr("method","post");
+			if(deleteBtn == true){
+				console.log("하이");
+				formObj.attr("action","${pageContext.request.contextPath}/map/deletePost?=${read.post_code}");
+				formObj.attr("method","post");
+				formObj.submit();
+			}
+		})
+	
+		var formObj2 = $("form[name='readForm']");
+	
+		$(".update_btn").on("click",function(){
+			formObj2.attr("action","${pageContext.request.contextPath}/map/updatePost?=${read.post_code}/");
+			formObj2.attr("method","post");
+			formObj2.submit();
+		})
+	
+		$(".cancel_btn").on("click",function(){
+			formObj.attr("action","${pageContext.request.contextPath}/map/allBoard");
+			formObj.attr("method","get");
 			formObj.submit();
-		}
-	})
-	
-	var formObj2 = $("form[name='readForm']");
-	
-	$(".update_btn").on("click",function(){
-		formObj2.attr("action","${pageContext.request.contextPath}/map/updatePost?=${read.post_code}/");
-		formObj2.attr("method","post");
-		formObj2.submit();
-	})
-	
-	$(".cancel_btn").on("click",function(){
-		formObj.attr("action","${pageContext.request.contextPath}/map/allBoard");
-		formObj.attr("method","get");
-		formObj.submit();
-	})
+		})
 
-	 $('.selectpicker').selectpicker({
-	      style: 'btn-info',
-	      size: 2
-	  });
+	 	$('.selectpicker').selectpicker({
+	    	style: 'btn-info',
+	      	size: 2
+	  	});
 	})
 	
 	function categoryChange(e){
-		var gangnam = ["강서구","양천구","강남구","구로구","금천구","영등포구","동작구","관악구","서초구","송파구","강동구"];
-		var gangbuk = ["마포구","용산구","성동구","광진구","서대문구","중구","동대문구","중랑구","성북구","종로구","은평구","강북구","도봉구","노원구"];
+		var gangnam = ["강남구","강동구","강서구","구로구","금천구","동작구","관악구","서초구","송파구","양천구","영등포구"];
+	    var gangbuk = ["강북구","광진구","노원구","도봉구","동대문구","마포구","서대문구","성동구","성북구","은평구","용산구","중구","중랑구","종로구"];
 		var target = document.getElementById("good");
 		
 		if(e.value=="0") var d = gangnam;

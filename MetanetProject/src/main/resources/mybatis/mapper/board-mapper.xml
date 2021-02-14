@@ -82,4 +82,21 @@
 	</update>
 	
 	
+	<!-- 지역게시글 조회 -->
+	<select id="countRegionBoard" parameterType="int" resultType="int">
+	select count(*) from board where region_code=#{region_code}
+	</select>
+	
+	<select id="listRegion" parameterType="com.meta.seoul.map.vo.Board" resultType="com.meta.seoul.map.vo.Board">
+    	select RN,POST_CODE,POST_TITLE,POST_CONTENT,POST_LOVE,POST_COUNT,WRITE_DATE,MODIFY_DATE,C.USER_CODE,REGION_CODE,REGION_NAME,REGION_GB,BOARDIMG,THUMBIMG,m.USER_ID,m.USER_NAME
+    from (
+        SELECT ROWNUM RN,A.POST_CODE,A.POST_TITLE,A.POST_CONTENT,A.POST_LOVE,A.POST_COUNT,A.WRITE_DATE,A.MODIFY_DATE,A.USER_CODE,A.REGION_CODE,A.REGION_NAME,A.REGION_GB,A.BOARDIMG,A.THUMBIMG
+         FROM (SELECT * FROM BOARD WHERE region_code=#{region_code}) A
+    ) c
+    join member m on c.user_code = m.user_code
+    WHERE RN BETWEEN #{start} AND #{end}
+    order by POST_CODE DESC
+	</select>
+	
+	
 </mapper>

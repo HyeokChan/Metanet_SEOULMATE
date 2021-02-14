@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+ 
 <!doctype html>
 <html lang="en" xmlns:padding="http://www.w3.org/1999/xhtml">
 <head>
@@ -76,11 +77,7 @@
 
     </style>
     <script>
-        /* $(document).ready(function(){
-            $('#writePost').click(function(){
-                location.href="${pageContext.request.contextPath}/map/writePost";
-            });
-        }); */
+        
         function selChange(){
 	        var sel = document.getElementById('cntPerPage').value;
 	        location.href = "${pageContext.request.contextPath}/map/allBoard?nowPage=${paging.nowPage}&cntPerPage="+sel;
@@ -90,40 +87,51 @@
 </head>
 <body>
 <div class="sidebar" >
-    <a class="active">전체보기</a>
-    <a data-bs-toggle="collapse" href="#gangnam">강남</a>
+    <a class="active" href="allBoard?region_code=0">전체보기</a>
+    <a data-bs-toggle="collapse" href="#gangnam" class="bg-warning">강남</a>
     <ul id="gangnam" class="list-unstyled ms-3 mt-3 collapse">
-        <li>강남구</li>
-        <li>강동구</li>
-        <li>강서구</li>
-        <li>구로구</li>
-        <li>금천구</li>
-        <li>동작구</li>
-        <li>관악구</li>
-        <li>서초구</li>
-        <li>송파구</li>
-        <li>양천구</li>
-        <li>영등포구</li>
+        <li><a href="allBoard?region_code=1">강남구</a></li>
+        <li><a href="allBoard?region_code=2">강동구</a></li>
+        <li><a href="allBoard?region_code=3">강서구</a></li>
+        <li><a href="allBoard?region_code=4">구로구</a></li>
+        <li><a href="allBoard?region_code=5">관악구</a></li>
+        <li><a href="allBoard?region_code=6">금천구</a></li>        
+        <li><a href="allBoard?region_code=7">동작구</a></li>
+        <li><a href="allBoard?region_code=8">서초구</a></li>
+        <li><a href="allBoard?region_code=9">송파구</a></li>
+        <li><a href="allBoard?region_code=10">양천구</a></li>
+        <li><a href="allBoard?region_code=11">영등포구</a></li>
     </ul>
-    <a data-bs-toggle="collapse" href="#gangbuk">강북</a>
+    <a data-bs-toggle="collapse" href="#gangbuk" class="bg-primary">강북</a>
     <ul id="gangbuk" class="list-unstyled ms-3 mt-3 collapse">
-        <li>강북구</li>
-        <li>광진구</li>
-        <li>노원구</li>
-        <li>도봉구</li>
-        <li>동대문구</li>
-        <li>마포구</li>
-        <li>서대문구</li>
-        <li>성동구</li>
-        <li>성북구</li>
-        <li>은평구</li>
-        <li>용산구</li>
-        <li>중구</li>
-        <li>중랑구</li>
-        <li>종로구</li>
+        <li><a href="allBoard?region_code=12">강북구</a></li>
+        <li><a href="allBoard?region_code=13">광진구</a></li>
+        <li><a href="allBoard?region_code=14">노원구</a></li>
+        <li><a href="allBoard?region_code=15">도봉구</a></li>
+        <li><a href="allBoard?region_code=16">동대문구</a></li>
+        <li><a href="allBoard?region_code=17">마포구</a></li>
+        <li><a href="allBoard?region_code=18">서대문구</a></li>
+        <li><a href="allBoard?region_code=19">성동구</a></li>
+        <li><a href="allBoard?region_code=20">성북구</a></li>
+        <li><a href="allBoard?region_code=21">은평구</a></li>
+        <li><a href="allBoard?region_code=22">용산구</a></li>
+        <li><a href="allBoard?region_code=23">중구</a></li>
+        <li><a href="allBoard?region_code=24">중랑구</a></li>
+        <li><a href="allBoard?region_code=25">종로구</a></li>
     </ul>
 
 </div>
+
+<script>
+	$(document).ready(function(){
+		   
+	    $("#nowan").on("click",function(){
+	    	location.href="allBoard?region_code=14";
+	    })
+	    
+	
+	 })
+</script>
 
 </body>
 </html>
