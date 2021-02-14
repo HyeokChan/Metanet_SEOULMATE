@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.meta.seoul.map.vo.Board;
+import com.meta.seoul.map.vo.LoveBoard;
 import com.meta.seoul.map.vo.Paging;
 import com.meta.seoul.map.vo.PagingRegion;
 
@@ -62,6 +63,7 @@ public class BoardDaoImpl implements BoardDao{
 	}
 
 	@Override
+<<<<<<< HEAD
 	public int countRegionBoard(int region_code) {
 		return sqlSession.selectOne("board.countRegionBoard", region_code);
 	}
@@ -69,6 +71,18 @@ public class BoardDaoImpl implements BoardDao{
 	@Override
 	public List<Board> listRegion(PagingRegion paging) {
 		return sqlSession.selectList("board.listRegion", paging);
+=======
+	public int checkLove(LoveBoard loveBoard) {
+		
+		int cnt = sqlSession.insert("board.checkLove", loveBoard); //좋아요 추가하기
+		return cnt;
+	}
+
+	@Override
+	public LoveBoard loveYN(LoveBoard loveBoard) {
+		
+		return sqlSession.selectOne("board.loveYN", loveBoard);
+>>>>>>> bcae617ff31107e1db558dbcd5aa9b460d0b7184
 	}
 
 	

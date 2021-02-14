@@ -38,7 +38,6 @@ font-style: normal;
 font-weight: bold;
 font-size: 50px;
 line-height: 70px;
-
 color: #FAFAFA;
 }
 #goMain{

@@ -37,7 +37,7 @@
 	</insert>
 	<!-- 댓글 수정 -->
 	<update id="update">
-		update reply set reply_cotent=#{reply_content}, reply_write_date=sysdate where reply_code=#{reply_code}
+		update reply set reply_content=#{reply_content}, reply_write_date=sysdate where reply_code=#{reply_code}
 	</update>
 	<!-- 댓글 삭제 -->
 	<delete id="delete">
@@ -45,7 +45,10 @@
 	</delete>
 	
 	<select id="list" resultType="com.meta.seoul.map.vo.Reply">
-		select reply_code,reply_content,post_code,reply_write_date,reply_modi_date from reply where post_code =#{post_code} order by reply_code desc 
+		    select reply_code,reply_content,post_code,reply_write_date,reply_modi_date,r.user_code,user_name,user_id
+        from reply r
+        join member m on m.user_code = r.user_code
+        where post_code =#{post_code} order by reply_code desc
 	</select>
 	
 	<select id="replyCount" resultType="int">
