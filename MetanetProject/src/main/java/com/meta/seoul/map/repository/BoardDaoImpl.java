@@ -38,8 +38,7 @@ public class BoardDaoImpl implements BoardDao{
 
 	@Override
 	public Board read(int post_code) {
-		
-		sqlSession.update("board.updateCount",post_code);
+	
 		
 		return sqlSession.selectOne("board.read", post_code);
 	}
@@ -83,6 +82,12 @@ public class BoardDaoImpl implements BoardDao{
 		
 		return sqlSession.selectOne("board.loveYN", loveBoard);
 
+	}
+
+	@Override
+	public int viewUp(int post_code) {
+	
+		return 	sqlSession.update("board.updateCount",post_code);
 	}
 
 	

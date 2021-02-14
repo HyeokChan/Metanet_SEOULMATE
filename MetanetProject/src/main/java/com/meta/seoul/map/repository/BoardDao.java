@@ -31,6 +31,8 @@ public interface BoardDao {
 	public int checkLove(LoveBoard loveBoard);
 	//게시글 좋아요 여부 체크
 	public LoveBoard loveYN(LoveBoard loveBoard);
+	//게시글 조회수 증가
+	public int viewUp(int post_code);
 
 	
 }

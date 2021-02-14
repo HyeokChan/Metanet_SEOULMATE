@@ -83,4 +83,10 @@ public class BoardServiceImpl implements BoardService{
 		return boardDao.loveYN(loveBoard);
 	}
 
+	@Override
+	public int viewUp(int post_code) {
+	
+		return boardDao.viewUp(post_code);
+	}
+
 }

@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,7 +125,7 @@ public class MapController {
 		board.setThumbImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" +File.separator + "s_" + fileName);
 		
 		/*region_code 추가*/
-		
+	
 		int region_code = regionMap.get(board.getRegion_name());
 		if(region_code < 12){
 			board.setRegion_gb(0);
@@ -143,7 +143,53 @@ public class MapController {
 	
 	//글 읽기 get
 	@GetMapping("/readPost")
-	public String readPost(Model model, Board board,@RequestParam("post_code")int post_code,HttpSession session, LoveBoard loveBoard){
+	public String readPost(Model model, Board board,@RequestParam("post_code")int post_code,HttpSession session, LoveBoard loveBoard,HttpServletRequest request, HttpServletResponse response){
+		
+		Board review = boardService.read(post_code);
+		
+		Cookie[] cookies = request.getCookies();
+		
+		Cookie viewCookie = null;
+		
+		if(cookies != null && cookies.length > 0){
+			
+			for(int i=0; i<cookies.length; i++){
+				if(cookies[i].getName().equals("cookie"+post_code)){
+					System.out.println("처음 쿠키가 생성한 뒤 들어옴.");
+					viewCookie = cookies[i];
+				}
+			}
+		}
+		
+		if(review != null){
+			if(viewCookie == null){
+				System.out.println("cookie 없음");
+			
+				//쿠키 생성(이름,값)
+				Cookie newCookie = new Cookie("cookie"+post_code,"|"+post_code+"|");
+				
+				//쿠키 추가
+				response.addCookie(newCookie);
+				
+				//쿠키를 추가 시키고 조회수 증가시킴
+				int result = boardService.viewUp(post_code);
+				
+				if(result>0){
+					System.out.println("조회수 증가");
+				}else{
+					System.out.println("조회수 증가 에러");
+				}
+			}else{
+				System.out.println("cookie 있음");
+				
+				//쿠키 값 받아옴.
+				String value = viewCookie.getValue();
+				
+				System.out.println("cookie 값 : "+value);
+			}
+			
+			
+		}
 		
 		int user_code = (int) session.getAttribute("user_code");
 		
