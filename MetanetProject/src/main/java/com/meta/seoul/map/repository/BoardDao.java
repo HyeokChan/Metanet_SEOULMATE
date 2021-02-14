@@ -23,17 +23,14 @@ public interface BoardDao {
 	public void updatePost(Board board);
 	//게시글 좋아요
 	public void updateLove(int post_code);
-<<<<<<< HEAD
 	
 	//게시물 지역 조회
 	public int countRegionBoard(int region_code);
 	public List<Board> listRegion(PagingRegion paging);
-=======
 	//게시글 좋아요 추가 체크
 	public int checkLove(LoveBoard loveBoard);
 	//게시글 좋아요 여부 체크
 	public LoveBoard loveYN(LoveBoard loveBoard);
->>>>>>> bcae617ff31107e1db558dbcd5aa9b460d0b7184
 
 	
 }

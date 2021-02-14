@@ -59,7 +59,6 @@ public class BoardServiceImpl implements BoardService{
 		boardDao.updateLove(post_code);
 	}
 
-<<<<<<< HEAD
 	//지역 조회
 	@Override
 	public int countRegionBoard(int region_code) {
@@ -69,7 +68,7 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public List<Board> listRegion(PagingRegion paging) {
 		return boardDao.listRegion(paging);
-=======
+	}
 	@Override
 	public int checkLove(LoveBoard loveBoard) {
 	
@@ -82,7 +81,6 @@ public class BoardServiceImpl implements BoardService{
 	public LoveBoard loveYN(LoveBoard loveBoard) {
 	
 		return boardDao.loveYN(loveBoard);
->>>>>>> bcae617ff31107e1db558dbcd5aa9b460d0b7184
 	}
 
 }
