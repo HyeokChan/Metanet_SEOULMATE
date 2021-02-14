@@ -8,10 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-<<<<<<< HEAD
+
 import javax.servlet.http.HttpServletRequest;
-=======
->>>>>>> bcae617ff31107e1db558dbcd5aa9b460d0b7184
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;

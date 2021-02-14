@@ -63,7 +63,7 @@ public class BoardDaoImpl implements BoardDao{
 	}
 
 	@Override
-<<<<<<< HEAD
+
 	public int countRegionBoard(int region_code) {
 		return sqlSession.selectOne("board.countRegionBoard", region_code);
 	}
@@ -71,7 +71,7 @@ public class BoardDaoImpl implements BoardDao{
 	@Override
 	public List<Board> listRegion(PagingRegion paging) {
 		return sqlSession.selectList("board.listRegion", paging);
-=======
+	}
 	public int checkLove(LoveBoard loveBoard) {
 		
 		int cnt = sqlSession.insert("board.checkLove", loveBoard); //좋아요 추가하기
@@ -82,7 +82,7 @@ public class BoardDaoImpl implements BoardDao{
 	public LoveBoard loveYN(LoveBoard loveBoard) {
 		
 		return sqlSession.selectOne("board.loveYN", loveBoard);
->>>>>>> bcae617ff31107e1db558dbcd5aa9b460d0b7184
+
 	}
 
 	

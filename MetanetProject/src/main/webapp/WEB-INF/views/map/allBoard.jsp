@@ -128,13 +128,9 @@
             	<div class="card mb-3 center-block" style="max-width: 800px;">
                 	<div class="row g-0">
                     	<div class="col-md-4">
-<<<<<<< HEAD
                         	<%-- <img src="${pageContext.request.contextPath}/resources/images/test.png" class="img-thumbnail" alt="..."> --%>
                         	<img src="${pageContext.request.contextPath}/resources/${list.thumbImg}" class="img-thumbnail" id="thumbImg">
-=======
-                        	<!-- <img src="${pageContext.request.contextPath}/resources/images/test.png" class="img-thumbnail" alt="..."> -->
-                        	<img src="${pageContext.request.contextPath}/resources/${list.thumbImg}" id="thumbImg"></td>
->>>>>>> bcae617ff31107e1db558dbcd5aa9b460d0b7184
+
                     	</div>
                     	<div class="col-md-8">
                         	<div class="card-body">
