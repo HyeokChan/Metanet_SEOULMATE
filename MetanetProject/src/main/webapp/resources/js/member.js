@@ -156,15 +156,7 @@ $(function(){
 		$("#findPwdForm").submit();
 	})
 	
-	/*map/main*/
-	$("#logout_btn").on("click", function(){
-		
-		location.href="../member/logoutStart";
-	})
 	
-	$("#info_modi_btn").on("click", function(){
-		location.href="../member/infoModiForm"
-	})
 	
 	/*내정보 수정*/
 	$("#infoModiForm_btn").on('click', function(){

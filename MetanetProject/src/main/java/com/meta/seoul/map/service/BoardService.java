@@ -3,6 +3,7 @@ package com.meta.seoul.map.service;
 import java.util.List;
 
 import com.meta.seoul.map.vo.Board;
+import com.meta.seoul.map.vo.LoveBoard;
 import com.meta.seoul.map.vo.Paging;
 
 public interface BoardService {
@@ -20,5 +21,9 @@ public interface BoardService {
 	public void updatePost(Board board);
 	//게시글 좋아요
 	public void updateLove(int post_code);
+	//게시글 좋아요 추가 체크
+	public int checkLove(LoveBoard loveBoard);
+	//게시글 좋아요 여부 체크
+	public LoveBoard loveYN(LoveBoard loveBoard);
 	
 }

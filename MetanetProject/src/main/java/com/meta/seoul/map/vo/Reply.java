@@ -19,5 +19,7 @@ public class Reply {
 	private Date reply_write_date;
 	private Date reply_modi_date;
 	private int user_code;
+	private String user_id;
+	private String user_name;
 	
 }

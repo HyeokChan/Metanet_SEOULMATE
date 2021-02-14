@@ -57,7 +57,6 @@ public class MemberController {
 	}
 
 	// 회원가입 기능
-	// post 사용하기위함
 	@PostMapping("/register")
 	public String register(MemberDTO dto) {
 		memberService.insertMember(dto);
@@ -73,9 +72,10 @@ public class MemberController {
 
 	// 로그인 기능
 	@RequestMapping(value = "/loginStart", method = { RequestMethod.GET, RequestMethod.POST })
-	public String loginStart(MemberDTO dto, HttpSession httpSession){
+	public String loginStart(MemberDTO dto, HttpServletRequest request){
 		MemberDTO result=memberService.checkLogin(dto);
 		if (result!=null && result.getUser_pwd().equals(dto.getUser_pwd())) {
+			HttpSession httpSession = request.getSession();
 			httpSession.setAttribute("loginCheck",true);
 			httpSession.setAttribute("user_code", result.getUser_code());
 			httpSession.setAttribute("user_id", result.getUser_id());
@@ -92,14 +92,9 @@ public class MemberController {
 	
 	// 로그아웃 기능
 	@RequestMapping("/logoutStart")
-	public String logoutStart(HttpSession httpSession){
-		httpSession.setAttribute("loginCheck",null);
-		httpSession.setAttribute("user_code", null);
-		httpSession.setAttribute("user_id", null);
-		httpSession.setAttribute("user_pwd", null);
-		httpSession.setAttribute("user_email", null);
-		httpSession.setAttribute("user_name", null);
-		httpSession.setAttribute("user_tel", null);
+	public String logoutStart(HttpServletRequest request){
+		HttpSession httpSession = request.getSession();
+		httpSession.invalidate();
 		
 		return "redirect:/member/login";
 	}
@@ -161,7 +156,6 @@ public class MemberController {
 				else{
 					helper.setText(dto.getUser_name()+"님의 비밀번호는 "+tempPwd+" 입니다.", true);
 				}
-				
 			}
 		};
 		mailSender.send(preparator);
@@ -175,30 +169,19 @@ public class MemberController {
 	}
 	
 	@PostMapping("/infoModi")
-	public String infoModi(MemberDTO dto, HttpSession httpSession) {
+	public String infoModi(MemberDTO dto, HttpServletRequest request) {
 		memberService.updateMember(dto);
-		httpSession.setAttribute("loginCheck",null);
-		httpSession.setAttribute("user_code", null);
-		httpSession.setAttribute("user_id", null);
-		httpSession.setAttribute("user_pwd", null);
-		httpSession.setAttribute("user_email", null);
-		httpSession.setAttribute("user_name", null);
-		httpSession.setAttribute("user_tel", null);
+		HttpSession httpSession = request.getSession();
+		httpSession.invalidate();
 		
 		return "redirect:/member/login";
 	}
 	
 	@PostMapping("/infoDel")
-	public String infoDel(MemberDTO dto, HttpSession httpSession) {
+	public String infoDel(MemberDTO dto, HttpServletRequest request) {
 		memberService.deleteMember(dto);
-		httpSession.setAttribute("loginCheck",null);
-		httpSession.setAttribute("user_code", null);
-		httpSession.setAttribute("user_id", null);
-		httpSession.setAttribute("user_pwd", null);
-		httpSession.setAttribute("user_email", null);
-		httpSession.setAttribute("user_name", null);
-		httpSession.setAttribute("user_tel", null);
-		
+		HttpSession httpSession = request.getSession();
+		httpSession.invalidate();		
 		return "redirect:/member/login";
 	}
 	

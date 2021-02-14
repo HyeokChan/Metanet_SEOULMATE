@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.meta.seoul.map.repository.BoardDao;
 import com.meta.seoul.map.vo.Board;
+import com.meta.seoul.map.vo.LoveBoard;
 import com.meta.seoul.map.vo.Paging;
 
 @Service
@@ -55,6 +56,20 @@ public class BoardServiceImpl implements BoardService{
 	public void updateLove(int post_code) {
 		
 		boardDao.updateLove(post_code);
+	}
+
+	@Override
+	public int checkLove(LoveBoard loveBoard) {
+	
+		int cnt = boardDao.checkLove(loveBoard);
+		
+		return cnt;
+	}
+
+	@Override
+	public LoveBoard loveYN(LoveBoard loveBoard) {
+	
+		return boardDao.loveYN(loveBoard);
 	}
 
 }
