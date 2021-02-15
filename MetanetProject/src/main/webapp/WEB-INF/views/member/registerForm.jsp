@@ -16,7 +16,7 @@
     <title>Hello, world!</title>
 
 </head>
-<body class="bg-info">
+<body class="bg-success">
 <!--nav-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
@@ -86,6 +86,7 @@
     </div>
 
 </div>
+
 
 
 

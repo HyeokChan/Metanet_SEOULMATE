@@ -3,6 +3,8 @@ package com.meta.seoul.map.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -311,7 +313,14 @@ public class MapController {
 	
 	@RequestMapping("/searchBoard")
 	public String searchBoard(String searchBoard){
-		return "redirect:allBoard?searchBoard="+searchBoard;
+		String encoded="";
+		try {
+			encoded = URLEncoder.encode(searchBoard, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		System.out.println("enco:"+encoded);
+		return "redirect:allBoard?searchBoard="+encoded;
 		
 	}
 	

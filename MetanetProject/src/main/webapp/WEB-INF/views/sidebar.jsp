@@ -122,16 +122,6 @@
 
 </div>
 
-<script>
-	$(document).ready(function(){
-		   
-	    $("#nowan").on("click",function(){
-	    	location.href="allBoard?region_code=14";
-	    })
-	    
-	
-	 })
-</script>
 
 </body>
 </html>

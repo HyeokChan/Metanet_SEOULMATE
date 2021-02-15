@@ -46,7 +46,6 @@
 				<area shape="rect" alt="송파구" coords="2110,1552,2285,1638" href="allBoard?region_code=9" target="" />
 				<area shape="rect" alt="양천구" coords="731,1496,900,1577" href="allBoard?region_code=10" target="" />
 				<area shape="rect" alt="영등포구" coords="993,1489,1193,1562" href="allBoard?region_code=11" target="" />
-				
 				<area shape="rect" alt="강북구" coords="1594,749,1752,832" href="allBoard?region_code=12" target="" />
 				<area shape="rect" alt="광진구" coords="1961,1305,2115,1382" href="allBoard?region_code=13" target="" />
 				<area shape="rect" alt="노원구" coords="1890,627,2049,710" href="allBoard?region_code=14" target="" />

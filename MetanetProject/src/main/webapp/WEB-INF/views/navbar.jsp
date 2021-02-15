@@ -40,7 +40,7 @@
                     
                 </li>
             </ul>
-            <form action="searchBoard" class="d-flex">
+            <form action="searchBoard" method="post" class="d-flex">
                 <input class="form-control me-2" type="search" id="searchBoard" name="searchBoard" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>

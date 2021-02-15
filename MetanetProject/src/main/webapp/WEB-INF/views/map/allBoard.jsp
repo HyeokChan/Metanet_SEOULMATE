@@ -82,12 +82,10 @@
                 location.href="${pageContext.request.contextPath}/map/writePost";
             });
         }); */
-        /* function selChange(){
+        function selChangeTest(){
 	        var sel = document.getElementById('cntPerPage').value;
-
-	        
-	        location.href = "${pageContext.request.contextPath}/map/allBoard?+region_code=14&nowPage=${paging.nowPage}&cntPerPage="+sel;
-	    } */
+	        location.href = "${pageContext.request.contextPath}/map/allBoard?region_code=${region_code}&searchBoard=${searchBoard}&nowPage=1&cntPerPage="+sel;
+	    }
 
 
     </script>
@@ -112,26 +110,23 @@
                 </div>
                 <div class="col-md-7"></div>
                 <div class="col-md-2 align-self-end">
-                    <!--<div class="dropdown">
+                    <%-- <div class="dropdown">
                         <button class="btn btn-success btn-secondary dropdown-toggle mb-2" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                          	 게시물보기 옵션
+                          	 ${paging.cntPerPage}줄 보기
                         </button>
-                        <!--<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" >
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" >
                             <li value="3"><a class="dropdown-item" href="#">3줄보기</a></li>
                             <li value="10"><a class="dropdown-item" href="#">10줄보기</a></li>
                             <li value="15"><a class="dropdown-item" href="#">15줄보기</a></li>
                             <li value="20"><a class="dropdown-item" href="#">20줄보기</a></li>
-                        </ul> -->
-                     <c:if test="${region_code == 0}">
-                     <select class="form-select" id="cntPerPage" name="sel" onchange="selChange()" >
+                        </ul>
+                	</div> --%>
+                	<select class="form-select" id="cntPerPage" name="sel" onchange="selChangeTest()" >
                     	<option value="3"  <c:if test="${paging.cntPerPage == 3 }">selected</c:if>>3줄 보기</option>
                     	<option value="10" <c:if test="${paging.cntPerPage == 10 }">selected</c:if>>10줄 보기</option>
                     	<option value="15" <c:if test="${paging.cntPerPage == 15 }">selected</c:if>>15줄 보기</option>
                 		<option value="20" <c:if test="${paging.cntPerPage == 20 }">selected</c:if>>20줄 보기</option>
                 	</select>
-
-                	</c:if>
-                    <!--</div>-->
 
                 </div>
             </div>
