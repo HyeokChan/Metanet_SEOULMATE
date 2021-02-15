@@ -142,13 +142,19 @@
 	                <textarea class="form-control" name="post_content" id="text_area" aria-label="With textarea" style="min-height: 300px"></textarea>
 	            </div>
 	
+	            <!-- <div class="input-group mb-3">
+	                <input type="file" class="form-control" id="gdsImg" name="file" >
+	                <label class="input-group-text" for="inputGroupFile02">Upload</label>
+	            </div> -->
 	            
 	            <!-- 업로드쪽 추가/수정 필요 -->
-	     		 <div class="inputArea">
-					 <input type="file" id="gdsImg" name="file" />
-					<div class="select_img">
-						<img src="" style="height: 250px"/>
-					</div>
+	     		 <div class="inputArea input-group mb-3">
+					 <input class="form-control" type="file" id="gdsImg" name="file" />
+					 <label class="input-group-text" for="inputGroupFile02">Upload</label>
+					
+				</div>
+				<div class="select_img">
+					<img src="" style="height: 250px"/>
 				</div>
             </form>
             
