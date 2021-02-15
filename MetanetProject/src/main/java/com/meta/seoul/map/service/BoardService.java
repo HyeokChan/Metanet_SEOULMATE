@@ -31,6 +31,8 @@ public interface BoardService {
 	//지역 조회 
 	public int countRegionBoard(int region_code);
 	public List<Board> listRegion(PagingRegion paging);
+	//조회수 증가
+	public int viewUp(int post_code);
 	
 	//검색 조회
 	public int countSearchBoard(String searchBoard);

@@ -37,10 +37,10 @@
     from (
         SELECT ROWNUM RN,A.POST_CODE,A.POST_TITLE,A.POST_CONTENT,A.POST_LOVE,A.POST_COUNT,A.WRITE_DATE,A.MODIFY_DATE,A.USER_CODE,A.REGION_CODE,A.REGION_NAME,A.REGION_GB,A.BOARDIMG,A.THUMBIMG
          FROM (SELECT * FROM BOARD) A
+         order by POST_CODE DESC
     ) c
     join member m on c.user_code = m.user_code
     WHERE RN BETWEEN #{start} AND #{end}
-    order by POST_CODE DESC
 	</select>
 	
 	<insert id="write" parameterType="com.meta.seoul.map.vo.Board">

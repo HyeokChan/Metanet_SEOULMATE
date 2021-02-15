@@ -115,7 +115,9 @@
             	<c:if test="${sessionScope.loginCheck eq true}">
 	            	<div class="input-group mb-3">
 	                	<span class="input-group-text" id="basic-addon2">작성자</span>
-	                	<input type="text" class="form-control" value="${sessionScope.user_code}" name="user_code" readonly="readonly" placeholder="Writer" aria-label="Username" aria-describedby="basic-addon1">
+	                	<input type="hidden" class="form-control" value="${sessionScope.user_code}" name="user_code" readonly="readonly" placeholder="Writer" aria-label="Username" aria-describedby="basic-addon1">
+	            		<input type="text" class="form-control" value="${sessionScope.user_id}" name="user_id" readonly="readonly" placeholder="Writer" aria-label="Username" aria-describedby="basic-addon1">
+	            		
 	            	</div>
             	</c:if>
             	<div class="input-group mb-3">
