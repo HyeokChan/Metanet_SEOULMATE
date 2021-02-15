@@ -117,16 +117,6 @@
             <hr>
             <!--board-->
             <form method="POST" name="readForm">
-<<<<<<< HEAD
-               <input type="hidden" name="post_code" value="${read.post_code}" id="post_code" readonly="readonly">
-               <div class="row bg-light" style="height: 100px">
-                   <div class="col-md-10 align-self-center">
-                      <!-- post_code, post_title 합침, id문제시 조정 필요 -->
-                       <h3 class="text" id="post_code2">No.${read.post_code} ${read.post_title}</h3> <!-- post_code, post_title 합침, id문제시 조정 필요 -->
-                       <label class="text ms-3" id="writer">${read.user_code}(Writer)</label>
-                       <label class="text ms-3" id="write_date"><fmt:formatDate value="${read.write_date}" pattern="yyyy.MM.dd"/></label>
-                   </div>
-=======
             	<input type="hidden" name="post_code" value="${read.post_code}" id="post_code" readonly="readonly">
             	<div class="row bg-light" style="height: 100px">
                 	<div class="col-md-10 align-self-center">
@@ -135,7 +125,6 @@
                     	<label class="text ms-3" id="writer">${read.user_id}</label>
                     	<label class="text ms-3" id="write_date"><fmt:formatDate value="${read.write_date}" pattern="yyyy.MM.dd"/></label>
                 	</div>
->>>>>>> bcae617ff31107e1db558dbcd5aa9b460d0b7184
 
                    <div class="col-md-1 align-self-center">
                        <button type="button" class="btn btn-success btn-lg disabled">
@@ -143,15 +132,6 @@
                            <h5 class="text-light d-inline" id="post_count">${read.post_count}</h5>
                        </button>
                    </div>
-
-<<<<<<< HEAD
-                   <div class="col-md-1 align-self-center">
-                       <button type="button" class="btn btn-danger btn-lg love_btn" id="lovePost">
-                           <i class="fa fa-heart" aria-hidden="true"></i>
-                           <h5 class="text-light d-inline" id="post_love">${read.post_love}</h5>
-                       </button>
-                   </div>
-=======
                 	<div class="col-md-1 align-self-center">
                 	  <c:choose>
                 		<c:when test="${love.user_code eq null}">
@@ -166,8 +146,6 @@
                     	</c:otherwise>
                       </c:choose>
                 	</div>
->>>>>>> bcae617ff31107e1db558dbcd5aa9b460d0b7184
-
                </div>
                <div class="row">
                    <%-- <img src="${pageContext.request.contextPath}/resources/images/test.png" class="mb-5 mt-3" style="max-height: 500px; width: auto"> <!-- 이미지수정필요 --> --%>
@@ -176,45 +154,6 @@
                <div class="row mb-5 ms-3" id="post_content">
                    ${read.post_content}
                </div>
-
-<<<<<<< HEAD
-               <div class="input-group mb-3">
-                   <input type="text" class="form-control" name="reply_content" id="reply" placeholder="댓글을 작성해주세요." aria-label="Recipient's username" aria-describedby="button-addon2">
-                   <button type="button" class="btn btn-outline-secondary" id="btnReply" type="button" id="button-addon2">댓글쓰기</button>
-               </div>
-               <hr>
-               <table class="table mb-5 text-center">
-                   <thead>
-                   <tr>
-                       <th class="col-md-1" scope="col">#</th>
-                       <th class="col-md-2" scope="col">ID</th>
-                       <th class="col-md-5" scope="col">Reply</th>
-                       <th class="col-md-1" scope="col">Date</th>
-                       <th class="col-md-2" scope="col"></th>
-
-                   </tr>
-                   </thead>
-                   <tbody>
-                   <c:forEach items="${replyList}" var="replyList">
-                      <tr>
-                          <th scope="row">${replyList.reply_code}</th>
-                          <td>${replyList.user_code}(Writer)</td>
-                          <td>${replyList.reply_content}</td>
-                          <td><fmt:formatDate value="${replyList.reply_write_date}" pattern="yyyy.MM.dd"/></td>
-                          <td>
-                              <buttongroup>
-                                  <button type="button" class="btn-sm btn-warning d-inline-block">수정</button>
-                                  <button type="button" class="btn-sm btn-warning d-inline-block">삭제</button>
-                              </buttongroup>
-                          </td>
-   
-                      </tr>
-                   </c:forEach>
-                   </tbody>
-               </table>
-               
-               <!-- 이부분 페이지는 댓글 페이지? -->
-=======
             	<div class="input-group mb-3">
                 	<input type="text" class="form-control" name="reply_content" id="reply" placeholder="댓글을 작성해주세요." aria-label="Recipient's username" aria-describedby="button-addon2">
                 	<button type="button" class="btn btn-outline-secondary" id="btnReply" type="button" id="button-addon2">댓글쓰기</button>
@@ -255,7 +194,6 @@
             	</table>
             	
             	<!-- 이부분 페이지는 댓글 페이지? -->
->>>>>>> bcae617ff31107e1db558dbcd5aa9b460d0b7184
             
             </form>
             
@@ -273,74 +211,6 @@
 
 <script>
 
-<<<<<<< HEAD
-   $(document).ready(function(){
-      
-      var formObj = $("form[name='deleteForm']");
-      
-      $(".delete_btn").on("click",function(){
-         var deleteBtn = confirm("삭제하시겠습니까?");
-         
-         if(deleteBtn == true){
-            console.log("하이");
-            formObj.attr("action","${pageContext.request.contextPath}/map/deletePost?=${read.post_code}");
-            formObj.attr("method","post");
-            formObj.submit();
-         }
-      })
-      
-      var formObj2 = $("form[name='readForm']");
-      
-      $(".update_btn").on("click",function(){
-         formObj2.attr("action","${pageContext.request.contextPath}/map/updatePost");
-         formObj2.attr("method","get");
-         formObj2.submit();
-      })
-      
-      $(".love_btn").on("click",function(){
-         formObj2.attr("action","${pageContext.request.contextPath}/map/lovePost");
-         formObj2.attr("method","get");
-         formObj2.submit();
-      })
-      
-      $(".allBoard_btn").on("click",function(){
-         location.href="${pageContext.request.contextPath}/map/allBoard";
-      })
-      
-   })
-</script>
-
-<script>
-   $("#btnReply").click(function(){
-         
-       var post_code = $("#post_code").val();
-       var reply_content = $("#reply").val();
-       
-    $.ajax({
-       
-       url : "${pageContext.request.contextPath}/reply/replyInsert",
-       type : "post",
-       dataType : "json",
-       data : {
-          post_code : post_code,
-          reply_content : reply_content
-          
-       },
-       
-       success: function(json){
-          alert("댓글이 등록되었습니다.");
-          if(json=="1"){
-             location.href="${pageContext.request.contextPath}/map/readPost?post_code="+post_code;
-          }   
-       
-       },
-       error:function(err){
-          console.log("에러");
-       }
-       
-       });   
-    });
-=======
 	$(document).ready(function(){
 		
 		var formObj = $("form[name='deleteForm']");
@@ -493,7 +363,6 @@
 		})
 	});
 	
->>>>>>> bcae617ff31107e1db558dbcd5aa9b460d0b7184
 </script>
 
 <!-- 밑에 주석처리된 스크립트는 그대로? -->

@@ -84,7 +84,7 @@
         }); */
         function selChange(){
 	        var sel = document.getElementById('cntPerPage').value;
-	        location.href = "${pageContext.request.contextPath}/map/allBoard?nowPage=${paging.nowPage}&cntPerPage="+sel;
+	        location.href = "${pageContext.request.contextPath}/map/allBoard?region_code=5&nowPage=${paging.nowPage}&cntPerPage="+sel;
 	    }
     </script>
     
@@ -108,17 +108,25 @@
                 </div>
                 <div class="col-md-7"></div>
                 <div class="col-md-2 align-self-end">
-                    <div class="dropdown">
+                    <!--<div class="dropdown">
                         <button class="btn btn-success btn-secondary dropdown-toggle mb-2" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                           	 게시물보기 옵션
                         </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="#">3줄보기</a></li>
-                            <li><a class="dropdown-item" href="#">10줄보기</a></li>
-                            <li><a class="dropdown-item" href="#">15줄보기</a></li>
-                            <li><a class="dropdown-item" href="#">20줄보기</a></li>
-                        </ul>
-                    </div>
+                        <!--<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" >
+                            <li value="3"><a class="dropdown-item" href="#">3줄보기</a></li>
+                            <li value="10"><a class="dropdown-item" href="#">10줄보기</a></li>
+                            <li value="15"><a class="dropdown-item" href="#">15줄보기</a></li>
+                            <li value="20"><a class="dropdown-item" href="#">20줄보기</a></li>
+                        </ul> -->
+                     <c:if test="${region_code == 0}">
+                     <select class="form-select" id="cntPerPage" name="sel" onchange="selChange()" >
+                    	<option value="3"  <c:if test="${paging.cntPerPage == 3 }">selected</c:if>>3줄 보기</option>
+                    	<option value="10" <c:if test="${paging.cntPerPage == 10 }">selected</c:if>>10줄 보기</option>
+                    	<option value="15" <c:if test="${paging.cntPerPage == 15 }">selected</c:if>>15줄 보기</option>
+                		<option value="20" <c:if test="${paging.cntPerPage == 20 }">selected</c:if>>20줄 보기</option>
+                	</select>
+                	</c:if>
+                    <!--</div>-->
                 </div>
             </div>
             <hr>
@@ -128,13 +136,9 @@
             	<div class="card mb-3 center-block" style="max-width: 800px;">
                 	<div class="row g-0">
                     	<div class="col-md-4">
-<<<<<<< HEAD
                         	<%-- <img src="${pageContext.request.contextPath}/resources/images/test.png" class="img-thumbnail" alt="..."> --%>
                         	<img src="${pageContext.request.contextPath}/resources/${list.thumbImg}" class="img-thumbnail" id="thumbImg">
-=======
-                        	<!-- <img src="${pageContext.request.contextPath}/resources/images/test.png" class="img-thumbnail" alt="..."> -->
-                        	<img src="${pageContext.request.contextPath}/resources/${list.thumbImg}" id="thumbImg"></td>
->>>>>>> bcae617ff31107e1db558dbcd5aa9b460d0b7184
+
                     	</div>
                     	<div class="col-md-8">
                         	<div class="card-body">
@@ -223,7 +227,6 @@
 
     </div>
 </div>
-
 
 
 

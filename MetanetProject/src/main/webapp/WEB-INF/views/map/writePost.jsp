@@ -112,64 +112,12 @@
             <!--board-->
             <input type="hidden" name="post_code" value="${read.post_code}" id="post_code" readonly="readonly">
             <form action="writePost" method="POST" enctype="multipart/form-data" name="readForm">
-            
-<<<<<<< HEAD
-               <c:if test="${sessionScope.loginCheck eq true}">
-                  <div class="input-group mb-3">
-                      <span class="input-group-text" id="basic-addon2">작성자</span>
-                      <input type="text" class="form-control" value="${sessionScope.user_code}" name="user_code" readonly="readonly" placeholder="Writer" aria-label="Username" aria-describedby="basic-addon1">
-                  </div>
-               </c:if>
-               <div class="input-group mb-3">
-                   <label class="input-group-text" id="local1" for="inputGroupSelect01">지역선택</label>
-                   <select class="form-select" name="region_gb" id="region_gb" onchange="categoryChange(this)" >
-                       <option selected>Choose...</option>
-                       <option value="0">강남</option>
-                       <option value="1">강북</option>
-                   </select>
-               </div>
-               <div class="input-group mb-3">
-                   <label class="input-group-text" id="local2" for="inputGroupSelect01">지역선택</label>
-                   <select class="form-select" id="good" name="region_name">
-                       <option selected>Choose...</option>
-                       
-                   </select>
-               </div>
-               <div class="input-group mb-3">
-                   <span class="input-group-text" id="post_title">제목</span>
-                   <input type="text" class="form-control" name="post_title" id="title" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
-               </div>
-               <div class="input-group mb-3">
-                   <span class="input-group-text" id="post_content">내용 입력</span>
-                   <textarea class="form-control" name="post_content" id="text_area" aria-label="With textarea" style="min-height: 300px"></textarea>
-               </div>
-   
-               
-               <!-- 업로드쪽 추가/수정 필요 -->
-               <div class="input-group mb-3">
-                   <input type="file" class="form-control" id="gdsImg" name="file">
-                   <label class="input-group-text" for="inputGroupFile02">Upload</label>
-                   <script>
-						$("#gdsImg").change(
-								function() {
-									if (this.files && this.files[0]) {
-										var reader = new FileReader;
-										reader.onload = function(data) {
-											$(".select_img img").attr("src",
-													data.target.result).width(
-													500);
-										}
-										reader.readAsDataURL(this.files[0]);
-									}
-								});
-					</script>
-               </div>
-               
-=======
             	<c:if test="${sessionScope.loginCheck eq true}">
 	            	<div class="input-group mb-3">
 	                	<span class="input-group-text" id="basic-addon2">작성자</span>
-	                	<input type="text" class="form-control" value="${sessionScope.user_code}" name="user_code" readonly="readonly" placeholder="Writer" aria-label="Username" aria-describedby="basic-addon1">
+	                	<input type="hidden" class="form-control" value="${sessionScope.user_code}" name="user_code" readonly="readonly" placeholder="Writer" aria-label="Username" aria-describedby="basic-addon1">
+	            		<input type="text" class="form-control" value="${sessionScope.user_id}" name="user_id" readonly="readonly" placeholder="Writer" aria-label="Username" aria-describedby="basic-addon1">
+	            		
 	            	</div>
             	</c:if>
             	<div class="input-group mb-3">
@@ -204,7 +152,6 @@
 						<img src="" style="height: 250px"/>
 					</div>
 				</div>
->>>>>>> bcae617ff31107e1db558dbcd5aa9b460d0b7184
             </form>
             
             <div class="row justify-content-end">
@@ -218,24 +165,23 @@
             </div>
 
         </div>
-
-
     </div>
 </div>
-          <script>
-                  $("#gdsImg").change(
-                        function() {
-                           if (this.files && this.files[0]) {
-                              var reader = new FileReader;
-                              reader.onload = function(data) {
-                                 $(".select_img img").attr("src",
-                                       data.target.result).width(
-                                       500);
-                              }
-                              reader.readAsDataURL(this.files[0]);
-                           }
-                        });
-               </script>
+<script>
+	
+    $("#gdsImg").change(
+    	
+        function() {
+        	if (this.files && this.files[0]) {
+            	var reader = new FileReader;
+                reader.onload = function(data) {
+                	$(".select_img img").attr("src",
+                    	data.target.result).width(500);
+                    }
+                    reader.readAsDataURL(this.files[0]);
+			}
+		});
+</script>
 
 <script>
    $(document).ready(function(){

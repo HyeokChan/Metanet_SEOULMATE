@@ -1,8 +1,5 @@
 package com.meta.seoul.map.controller;
 
-
-
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
