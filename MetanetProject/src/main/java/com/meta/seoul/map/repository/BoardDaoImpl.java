@@ -86,11 +86,10 @@ public class BoardDaoImpl implements BoardDao{
 	}
 
 	@Override
-<<<<<<< HEAD
 	public int viewUp(int post_code) {
 	
 		return 	sqlSession.update("board.updateCount",post_code);
-=======
+	}
 	public int countSearchBoard(String searchBoard) {
 		return sqlSession.selectOne("board.countSearchBoard", searchBoard);
 	}
@@ -98,7 +97,6 @@ public class BoardDaoImpl implements BoardDao{
 	@Override
 	public List<Board> listSearch(PagingSearch paging) {
 		return sqlSession.selectList("board.listSearch", paging);
->>>>>>> HyeokChan
 	}
 
 	

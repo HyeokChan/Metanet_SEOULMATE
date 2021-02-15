@@ -85,19 +85,16 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-<<<<<<< HEAD
 	public int viewUp(int post_code) {
 	
 		return boardDao.viewUp(post_code);
-=======
+	}
 	public int countSearchBoard(String searchBoard) {
 		return boardDao.countSearchBoard(searchBoard);
 	}
 
-	@Override
 	public List<Board> listSearch(PagingSearch paging) {
 		return boardDao.listSearch(paging);
->>>>>>> HyeokChan
 	}
 
 }
