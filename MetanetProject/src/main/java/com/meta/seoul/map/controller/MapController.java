@@ -59,7 +59,9 @@ public class MapController {
 	
 	//메인으로
 	@GetMapping("/main")
-	public String main(){
+	public String main(Model model){
+		model.addAttribute("topThree", boardService.topThree());
+		System.out.println("탑쓰리"+ boardService.topThree());
 		return "/map/main";
 	}
 	//글 읽기 리스트

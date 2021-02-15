@@ -37,5 +37,5 @@ public interface BoardService {
 	//검색 조회
 	public int countSearchBoard(String searchBoard);
 	public List<Board> listSearch(PagingSearch paging);
-	
+	public List<Board> topThree();
 }

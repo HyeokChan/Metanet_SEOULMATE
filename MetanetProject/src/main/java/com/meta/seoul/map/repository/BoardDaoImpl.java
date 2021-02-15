@@ -99,6 +99,11 @@ public class BoardDaoImpl implements BoardDao{
 		return sqlSession.selectList("board.listSearch", paging);
 	}
 
-	
+	@Override
+	public List<Board> topThree() {
+		
+		return sqlSession.selectList("board.topThree");
+	}
+
 
 }

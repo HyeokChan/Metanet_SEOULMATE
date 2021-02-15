@@ -96,5 +96,10 @@ public class BoardServiceImpl implements BoardService{
 	public List<Board> listSearch(PagingSearch paging) {
 		return boardDao.listSearch(paging);
 	}
+	@Override
+	public List<Board> topThree() {
+		
+		return boardDao.topThree();
+	}
 
 }

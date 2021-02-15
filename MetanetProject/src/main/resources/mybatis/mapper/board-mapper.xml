@@ -124,5 +124,8 @@
     order by POST_CODE DESC
 	</select>
 	
+	<select id="topThree" resultType="com.meta.seoul.map.vo.Board">
+	<![CDATA[select * from (select post_code,post_title,post_love,region_name,region_code,region_gb, rank() over (order by post_love desc) as rank from board) where rownum<=3]]>
+	</select>
 	
 </mapper>
