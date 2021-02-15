@@ -11,6 +11,7 @@ import com.meta.seoul.map.vo.Board;
 import com.meta.seoul.map.vo.LoveBoard;
 import com.meta.seoul.map.vo.Paging;
 import com.meta.seoul.map.vo.PagingRegion;
+import com.meta.seoul.map.vo.PagingSearch;
 
 @Repository
 public class BoardDaoImpl implements BoardDao{
@@ -85,9 +86,19 @@ public class BoardDaoImpl implements BoardDao{
 	}
 
 	@Override
+<<<<<<< HEAD
 	public int viewUp(int post_code) {
 	
 		return 	sqlSession.update("board.updateCount",post_code);
+=======
+	public int countSearchBoard(String searchBoard) {
+		return sqlSession.selectOne("board.countSearchBoard", searchBoard);
+	}
+
+	@Override
+	public List<Board> listSearch(PagingSearch paging) {
+		return sqlSession.selectList("board.listSearch", paging);
+>>>>>>> HyeokChan
 	}
 
 	

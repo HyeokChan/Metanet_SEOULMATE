@@ -33,7 +33,6 @@ public class MemberServiceImpl implements MemberService {
 		String rawPw = dto.getUser_pwd(); // 입력한 비밀번호
 		
 		if(passwordEncoder.matches(rawPw, pw)) { // 같으면 
-            System.out.println("비밀번호 일치");
             return memberDAO.checkLogin(dto); // 아이디로 나머지 member정보 가져온다.
         }
 		else{

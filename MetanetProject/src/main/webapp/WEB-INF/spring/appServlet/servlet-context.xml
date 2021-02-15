@@ -24,7 +24,14 @@
 	<!-- 업로드 패스 설정 -->
 	<beans:bean class="java.lang.String" id="uploadPath">
 	  <beans:constructor-arg value="C:\Users\JMKIM\Documents\workspace-final\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MetanetProject\resources"/>
+<<<<<<< HEAD
 	  <!--<beans:constructor-arg value="C:\OOPSW\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\MetanetProject\resources"/> -->
+=======
+	  <!-- <beans:constructor-arg value="C:\OOPSW\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\MetanetProject\resources"/> -->
+	  
+	  <!-- <beans:constructor-arg value="/usr/local/tomcat8.5/webapps/MetanetProject/uploadImages"/> -->
+	  
+>>>>>>> HyeokChan
 	</beans:bean>
 	
 	<!-- 일반 파일 업로드 경로 -->

@@ -6,6 +6,7 @@ import com.meta.seoul.map.vo.Board;
 import com.meta.seoul.map.vo.LoveBoard;
 import com.meta.seoul.map.vo.Paging;
 import com.meta.seoul.map.vo.PagingRegion;
+import com.meta.seoul.map.vo.PagingSearch;
 
 public interface BoardService {
 	//전체 조회
@@ -30,6 +31,14 @@ public interface BoardService {
 	//지역 조회 
 	public int countRegionBoard(int region_code);
 	public List<Board> listRegion(PagingRegion paging);
+<<<<<<< HEAD
 	//조회수 증가
 	public int viewUp(int post_code);
+=======
+	
+	//검색 조회
+	public int countSearchBoard(String searchBoard);
+	public List<Board> listSearch(PagingSearch paging);
+	
+>>>>>>> HyeokChan
 }

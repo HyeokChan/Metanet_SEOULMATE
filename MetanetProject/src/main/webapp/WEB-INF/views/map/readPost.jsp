@@ -141,8 +141,10 @@
                     	</button>
                     	</c:when>
                     	<c:otherwise>
-                        	<i class="fa fa-heart" aria-hidden="true"></i>
-                        	<span class="font-weight-bold">${read.post_love}</span>
+                    		<button type="button" class="btn btn-danger btn-lg love_btn disabled" id="lovePost">
+	                        	<i class="fa fa-heart" aria-hidden="true"></i>
+	                        	<span class="font-weight-bold">${read.post_love}</span>
+	                        </button>
                     	</c:otherwise>
                       </c:choose>
                 	</div>
@@ -317,8 +319,8 @@
 		
 		var $replyInfo = $(".replyContent");
 		var $input = $("#replylist").children("input[type=text]");
-		var buttonReply = '<button type="button" id="replyUpdate">등록</button>';
-		var buttonReplyCancel = '<button type="button" id="replyUpdateCancel">취소</button>';
+		var buttonReply = '<button type="button" class="btn-sm btn-warning d-inline-block" id="replyUpdate">등록</button>';
+		var buttonReplyCancel = '<button type="button" class="btn-sm btn-warning d-inline-block" id="replyUpdateCancel">취소</button>';
 		
 		$("#buttonGroup").append(buttonReply+"&nbsp;");
 		$("#buttonGroup").append(buttonReplyCancel);
